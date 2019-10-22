@@ -35,18 +35,14 @@
 >
 > **[3- Actividad 3](#3):**
 
-
-
-
-
-
-
-
-
+</br>
+</br>
+</br>
+</br>
 
 <a name="1"></a>
 # ACTIVIDAD 1
-*<b>TÍTULO:</b>*
+**<b>TÍTULO:</b>**
 
 ### ATCS: Atención a clientes
 
