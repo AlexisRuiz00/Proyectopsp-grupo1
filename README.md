@@ -1,3 +1,7 @@
+# Proyecto PSP
+## ATCS: Atención a clientes
+
+<img src="/img/img1.jpg" height="800" width="600"/>
 
 
 
@@ -13,14 +17,29 @@
 
 
 
+#### Author
+
+&nbsp;&nbsp;&nbsp;  Este material ha sido producido por David Camacho y Alexis Ruiz bajo licencia Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
 
 
 
 
 
 
+# Índice:
+
+> **[1- Actividad 1](#1):**
+>
+> **[2- Actividad 2](#2)**
+>
+> **[3- Actividad 3](#3):**
+
+
+
+<a name="1"></a>
 # ACTIVIDAD 1
 ## <b> TÍTULO: </b>
+
 ### ATCS: Atención a clientes
 
 ## <b> RESUMEN: </b>
@@ -33,6 +52,8 @@ Este programa estará compuesto y envolverá las siguientes funcionalidades a re
 3. Dispondremos de <b>protocolos</b> estándares como TCP para utilizar el correo corporativo como posible medio de comunicación.
 4. Implementaremos <b>seguridad</b>, acceso y roles distintos para los tipos de administradores.
 5. Desarrollaremos <b>microservicios</b> en la nube, para poder recopilar y almacenar la información de nuestros clientes, así como realizar encuestas para conocer la opinión de los mismos.
+
+
 
 La idea del proyecto es:
 
