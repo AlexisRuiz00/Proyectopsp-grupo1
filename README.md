@@ -1,4 +1,4 @@
-# Proyecto PSP
+# <p align="center">Proyecto PSP</p>
 ## ATCS: Atención a clientes
 
 <p align="center">
