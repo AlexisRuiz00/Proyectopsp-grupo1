@@ -20,9 +20,6 @@
 # <p align="center">Índice:</p>
 > **[1- Actividad 1](#1):**
 >
-[> **[2- Actividad 2](#2)**]
->
-[> **[3- Actividad 3](#3):**]
 
 </br>
 </br>
