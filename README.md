@@ -42,7 +42,7 @@
 
 <a name="1"></a>
 # ACTIVIDAD 1
-###<b>TÍTULO:</b>
+### <b>TÍTULO:</b>
 *ATCS: Atención a clientes*
 
 ### <b> RESUMEN: </b>
