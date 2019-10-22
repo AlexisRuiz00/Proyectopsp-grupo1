@@ -7,7 +7,7 @@
 
 
 #### Author
-&nbsp;&nbsp;  Este material ha sido producido por David Camacho y Alexis Ruiz bajo licencia Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
+&nbsp;&nbsp;&nbsp;  Este material ha sido producido por David Camacho y Alexis Ruiz bajo licencia Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
 
 </br>
 </br>
