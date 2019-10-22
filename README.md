@@ -19,8 +19,8 @@
 
 
 
-#ACTIVIDAD 1#
-##<b> TÍTULO: </b>
+# ACTIVIDAD 1
+## <b> TÍTULO: </b>
 ### ATCS: Atención a clientes
 
 ##<b> RESUMEN: </b>
