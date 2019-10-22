@@ -1,5 +1,5 @@
-# <p align="center">Proyecto PSP</p>
-## ATCS: Atención a clientes
+# <p align="center">PROYECTO PSP</p>
+### <p align="center">ATCS: Atención a clientes</p>
 
 <p align="center">
 <img src="/img/img1.jpg" height="600" width="800"/>
