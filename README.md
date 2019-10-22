@@ -18,7 +18,6 @@
 </br>
 
 # <p align="center">Índice:</p>
-
 > **[1- Actividad 1](#1):**
 >
 > **[2- Actividad 2](#2)**
@@ -29,6 +28,9 @@
 </br>
 </br>
 </br>
+</br>
+</br>
+
 
 <a name="1"></a>
 # ACTIVIDAD 1
