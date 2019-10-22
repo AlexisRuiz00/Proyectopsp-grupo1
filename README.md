@@ -1,8 +1,9 @@
 # Proyecto PSP
 ## ATCS: Atención a clientes
 
-<img src="/img/img1.jpg" height="800" width="600"/>
-
+<p align="center">
+<img src="/img/img1.jpg" height="800" width="1200"/>
+</p>
 
 
 
@@ -37,9 +38,10 @@
 
 
 <a name="1"></a>
+<p>
 # ACTIVIDAD 1
 ## <b> TÍTULO: </b>
-
+</p>
 ### ATCS: Atención a clientes
 
 ## <b> RESUMEN: </b>
