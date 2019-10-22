@@ -38,10 +38,10 @@
 
 
 <a name="1"></a>
-<p>
+
 # ACTIVIDAD 1
-## <b> TÍTULO: </b>
-</p>
+* <b> TÍTULO: </b>*
+
 ### ATCS: Atención a clientes
 
 ## <b> RESUMEN: </b>
