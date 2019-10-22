@@ -2,7 +2,7 @@
 ## ATCS: Atención a clientes
 
 <p align="center">
-<img src="/img/img1.jpg" height="800" width="800"/>
+<img src="/img/img1.jpg" height="600" width="800"/>
 </p>
 
 
