@@ -37,7 +37,7 @@
 *ATCS: Atención a clientes*
 
 ### <b> RESUMEN: </b>
-Nuestro idea se basa en desarrollar un programa que permite a X clientes solicitar cualquier tipo de información que este requiera.
+Nuestra idea se basa en desarrollar un programa que permite a X clientes solicitar cualquier tipo de información que este requiera.
 
 Este programa estará compuesto y envolverá las siguientes funcionalidades a realizar durante el período del curso:
 
