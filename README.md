@@ -1,5 +1,5 @@
 # <p align="center">PROYECTO PSP</p>
-### <p align="center">ATCS: Atención a clientes</p>
+### <p align="center">ATCS, Atención a clientes</p>
 
 <p align="center">
 <img src="/img/img1.jpg" height="600" width="800"/>
@@ -34,7 +34,7 @@
 <a name="1"></a>
 # ACTIVIDAD 1
 ### <b>TÍTULO:</b>
-*ATCS: Atención a clientes*
+*ATCS, Atención a clientes*
 
 ### <b> RESUMEN: </b>
 Nuestra idea se basa en desarrollar un programa que permite a X clientes solicitar cualquier tipo de información que este requiera.
