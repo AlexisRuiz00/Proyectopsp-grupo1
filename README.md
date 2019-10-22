@@ -60,3 +60,5 @@ Una vez el administrador gestione la consulta del cliente, esta se envía de nue
 No todas las consultas, las podrá resolver un administrador, se trata de implementar “roles” donde cada administrador podrá visualizar X tipo de consulta y de X rango.
 
 Una vez el administrador haya enviado la información necesaria al servidor y este lo haya modificado en la base de datos, se le notificará al cliente el resultado de su consulta, así como a poder ser enviar un formulario de satisfacción al correo que proporciona el mismo cliente.
+
+Por último, todo esto se almacenará en la nube, para poder realizar informes semanales en un futuro.
