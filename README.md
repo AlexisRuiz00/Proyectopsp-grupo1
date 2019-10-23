@@ -1,5 +1,5 @@
 # <p align="center">PROYECTO PSP</p>
-### <p align="center">ATCS: Atención a clientes</p>
+### <p align="center">ATCS, Atención a clientes</p>
 
 <p align="center">
 <img src="/img/img1.jpg" height="600" width="800"/>
@@ -7,7 +7,7 @@
 
 
 #### Author
-&nbsp;&nbsp;&nbsp;  Este material ha sido producido por David Camacho y Alexis Ruiz bajo licencia Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
+&nbsp;&nbsp;&nbsp;  Este material ha sido producido por <b>David Camacho</b> y <b>Alexis Ruiz</b> bajo licencia Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
 
 </br>
 </br>
@@ -20,9 +20,6 @@
 # <p align="center">Índice:</p>
 > **[1- Actividad 1](#1):**
 >
-> **[2- Actividad 2](#2)**
->
-> **[3- Actividad 3](#3):**
 
 </br>
 </br>
@@ -37,10 +34,10 @@
 <a name="1"></a>
 # ACTIVIDAD 1
 ### <b>TÍTULO:</b>
-*ATCS: Atención a clientes*
+*ATCS, Atención a clientes*
 
 ### <b> RESUMEN: </b>
-Nuestro idea se basa en desarrollar un programa que permite a X clientes solicitar cualquier tipo de información que este requiera.
+Nuestra idea se basa en desarrollar un programa que permite a X clientes solicitar cualquier tipo de información que este requiera.
 
 Este programa estará compuesto y envolverá las siguientes funcionalidades a realizar durante el período del curso:
 
@@ -63,3 +60,5 @@ Una vez el administrador gestione la consulta del cliente, esta se envía de nue
 No todas las consultas, las podrá resolver un administrador, se trata de implementar “roles” donde cada administrador podrá visualizar X tipo de consulta y de X rango.
 
 Una vez el administrador haya enviado la información necesaria al servidor y este lo haya modificado en la base de datos, se le notificará al cliente el resultado de su consulta, así como a poder ser enviar un formulario de satisfacción al correo que proporciona el mismo cliente.
+
+Por último, todo esto se almacenará en la nube, para poder realizar informes semanales en un futuro.
