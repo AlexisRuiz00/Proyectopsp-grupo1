@@ -20,7 +20,7 @@
 # <p align="center">Índice:</p>
 > **[1- Actividad 1](#1):**
 >
-> **[2- Actividad 2](#1):**
+> **[2- Actividad 2](#2):**
 
 </br>
 </br>
@@ -77,6 +77,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 </br>
 </br>
+
 ### Diagrama de casos de usos
 <p align="center">
 <img src="/img/diagramaUso.jpg" height="600" width="800"/>
