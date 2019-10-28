@@ -80,7 +80,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 ### Diagrama de casos de usos
 <p align="center">
-<img src="/img/diagramaUso.jpg" height="600" width="800"/>
+<img src="/img/diagramaUso.jpg" height="800" width="1200"/>
 </p>
 
 </br>
