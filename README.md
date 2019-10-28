@@ -20,6 +20,7 @@
 # <p align="center">Índice:</p>
 > **[1- Actividad 1](#1):**
 >
+> **[2- Actividad 2](#1):**
 
 </br>
 </br>
@@ -62,3 +63,35 @@ No todas las consultas, las podrá resolver un administrador, se trata de implem
 Una vez el administrador haya enviado la información necesaria al servidor y este lo haya modificado en la base de datos, se le notificará al cliente el resultado de su consulta, así como a poder ser enviar un formulario de satisfacción al correo que proporciona el mismo cliente.
 
 Por último, todo esto se almacenará en la nube, para poder realizar informes semanales en un futuro.
+
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<a name="2"></a>
+# ACTIVIDAD 2
+
+</br>
+</br>
+### Diagrama de caso de usos
+<p align="center">
+<img src="/img/diagramaUso.jpg" height="600" width="800"/>
+</p>
+
+</br>
+</br>
+### Descripcion de casos de usos
+<p align="center">
+  <img src="/img/descripcion1.jpg" height="600" width="800"/>
+  </br>
+  <img src="/img/descripcion2.jpg" height="600" width="800"/>
+  </br>
+  <img src="/img/descripcion3.jpg" height="600" width="800"/>
+</p>
+
+
+
