@@ -77,7 +77,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 </br>
 </br>
-&nbsp; ###<p>Diagrama de casos de usos</p>
+### Diagrama de casos de usos
 <p align="center">
 <img src="/img/diagramaUso.jpg" height="600" width="800"/>
 </p>
