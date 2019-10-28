@@ -86,7 +86,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-### Descripcion de casos de usos<
+### Descripcion de casos de usos
 <p align="center">
   <img src="/img/descripcion1.jpg" height="600" width="800"/>
   </br>
