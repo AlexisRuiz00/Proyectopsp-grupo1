@@ -18,9 +18,9 @@
 </br>
 
 # <p align="center">Índice:</p>
-> **[1- Actividad 1](#1):**
+> **[1- Actividad 1 y 2](#1):**
 >
-> **[2- Actividad 2](#2):**
+> **[2- Actividad 3](#2):**
 
 </br>
 </br>
@@ -33,7 +33,7 @@
 
 
 <a name="1"></a>
-# ACTIVIDAD 1
+# ACTIVIDAD 1 y 2
 ### <b>TÍTULO:</b>
 *ATCS, Atención a clientes*
 
@@ -73,7 +73,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 <a name="2"></a>
-# ACTIVIDAD 2
+# ACTIVIDAD 3
 
 </br>
 </br>
