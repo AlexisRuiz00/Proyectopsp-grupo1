@@ -117,7 +117,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 ### Diagrama Entidad-Relacion
 
 <p align="center">
-  <img src="/img/entidad.jpg" height="500" width="800"/>
+  <img src="/img/entidad.jpg" height="400" width="800"/>
   </br>
   </br>
   </br>
