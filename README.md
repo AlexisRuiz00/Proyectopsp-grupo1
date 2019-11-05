@@ -18,11 +18,11 @@
 </br>
 
 # <p align="center">Índice:</p>
-> **[1- Actividad 1 y 2](#1):**
+> **[1- Actividad 1 y 2](#1)**
 >
-> **[2- Actividad 3](#2):**
+> **[2- Actividad 3](#2)**
 >
-> **[3- Actividad 4](#3):**
+> **[3- Actividad 4](#3)**
 
 </br>
 </br>
