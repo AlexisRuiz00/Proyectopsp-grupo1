@@ -111,14 +111,20 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-<a name="2"></a>
+<a name="3"></a>
 # ACTIVIDAD 4
+
+### Diagrama Entidad-Relacion
+
 <p align="center">
   <img src="/img/entidad.jpg" height="600" width="800"/>
   </br>
   </br>
   </br>
   </br>
+  
+### Diagrama de Clases
+
   <img src="/img/clases.jpg" height="500" width="800"/>
 </p>
 
