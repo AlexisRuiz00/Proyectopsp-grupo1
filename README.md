@@ -21,6 +21,8 @@
 > **[1- Actividad 1 y 2](#1):**
 >
 > **[2- Actividad 3](#2):**
+>
+> **[3- Actividad 4](#3):**
 
 </br>
 </br>
@@ -102,4 +104,21 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </p>
 
 
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<a name="2"></a>
+# ACTIVIDAD 4
+<p align="center">
+  <img src="/img/entidad.jpg" height="600" width="800"/>
+  </br>
+  </br>
+  </br>
+  </br>
+  <img src="/img/clases.jpg" height="500" width="800"/>
+</p>
 
