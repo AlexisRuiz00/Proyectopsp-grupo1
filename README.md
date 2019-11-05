@@ -18,7 +18,7 @@
 </br>
 
 # <p align="center">Índice:</p>
-> **[1- Actividad 1 y 2](#1)**
+> **[1- Actividad 1 y 2 (Definición y Requisitos)](#1)**
 >
 > **[2- Actividad 3](#2)**
 >
@@ -35,7 +35,7 @@
 
 
 <a name="1"></a>
-# ACTIVIDAD 1 y 2
+# ACTIVIDAD 1 y 2, Definición y Requisitos
 ### <b>TÍTULO:</b>
 *ATCS, Atención a clientes*
 
