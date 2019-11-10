@@ -18,11 +18,11 @@
 </br>
 
 # <p align="center">Índice:</p>
-> **[1- Actividad 1 y 2 (Definición y Requisitos)](#1)**
+> **[1- Actividad 1 y 2: Definición y Requisitos.](#1)**
 >
-> **[2- Actividad 3](#2)**
+> **[2- Actividad 3: Análisis de requisitos funcionales.](#2)**
 >
-> **[3- Actividad 4](#3)**
+> **[3- Actividad 4: Modelo de objeto de negocios.](#3)**
 
 </br>
 </br>
@@ -112,7 +112,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 <a name="3"></a>
-# ACTIVIDAD 4
+# ACTIVIDAD 4: Modelo de objetos de negocio.
 
 ### Diagrama Entidad-Relacion
 
