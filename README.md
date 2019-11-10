@@ -56,7 +56,7 @@ La idea del proyecto es:
 
 Existen 3 posturas (Cliente, Servidor, Administrador) donde nuestros clientes, abrirán una serie de consultas y estas serán enviadas a través de hilos al servidor, que será el encargado de almacenarlas en una base de datos.
 
-Una vez almacenadas en la base de datos, el servidor se encarga de comunicarse con los distintos administradores, los cuales, serán los encargados de solucionar el problema del cliente. De esta forma, podremos utilizar la técnica de “Producto Consumidor” donde nuestro producto serán los clientes, la cola el servidor y nuestros consumidores los administradores.
+Una vez almacenadas en la base de datos, el servidor se encarga de comunicarse con los distintos administradores, los cuales, serán los encargados de solucionar el problema del cliente. De esta forma, podremos utilizar la técnica de “Productor-Consumidor” donde nuestro producto serán los clientes, la cola el servidor y nuestros consumidores los administradores.
 
 Una vez el administrador gestione la consulta del cliente, esta se envía de nuevo al servidor, donde se encarga de realizar las modificaciones oportunas en la base de datos, como por ejemplo, (consulta cerrada, consulta pendiente, a la espera de administrador). 
 
@@ -75,7 +75,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 <a name="2"></a>
-# ACTIVIDAD 3
+# ACTIVIDAD 3: Análisis de requisitos funcionales.
 
 </br>
 </br>
