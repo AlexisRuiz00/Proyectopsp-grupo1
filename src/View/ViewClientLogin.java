@@ -1,11 +1,12 @@
 package View;
 
 
+import Controller.MainController;
+
 /**
  * @author usuario
  */
 public class ViewClientLogin extends javax.swing.JFrame {
-
 
     public ViewClientLogin() {
         setResizable(false);
@@ -26,10 +27,9 @@ public class ViewClientLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Mail:");
-
         jButton1.setText("New");
-
         jButton2.setText("My incidences");
+
     }
 
     public void chargeLayout() {

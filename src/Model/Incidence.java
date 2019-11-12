@@ -4,9 +4,9 @@ public class Incidence {
 
     private int id;
     private IncidenceAdmin name;
-    private Client mail;
+    private String mail;
 
-    public Incidence(int id, IncidenceAdmin name, Client mail) {
+    public Incidence(int id, IncidenceAdmin name, String mail) {
         this.id = id;
         this.name = name;
         this.mail = mail;
@@ -16,7 +16,7 @@ public class Incidence {
         return id;
     }
 
-    public Client getMail() {
+    public String getMail() {
         return mail;
     }
 
