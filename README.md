@@ -517,23 +517,181 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 </table>
 
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU3.1</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>Client</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Client Login</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Nothing</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. System shows the login view.</p>
+		     <p>2. Client insert an e-mail.</p>
+		     <p>3. System validates the email.</p>
+		     <p>4. Client clicks one of the menu options.</p>
+		     <p>    1. Create a new incidence.</p>	
+		     <p>    2. View created incidences.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>System open and shows the view of the option selected.</td>
+ 	</tr>
+	<tr>
+  		<td>
+		     <p><b>Alternative 1:</b></p>
+		     <p>Client inserts a non valid e-mail</p>
+		</td>
+		<td>
+		    <p>3. Client inserts the e-mail.</p>
+		    <p>4. System alerts that the e-mail is not valid.</p>
+		    <p>5. Written email is removed.</p>
+		</td>
+ 	</tr>
+
+</table>
+
+
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU3.2</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>Client</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Client creates a new incidence.</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Client is logged in the system</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. The client inserts detail of incidence.</p>
+		     <p>2. The client clicks in send incidence.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>Incidence is sended</td>
+ 	</tr>
+	<tr>
+  		<td>
+		     <p><b>Alternatives</b></p>
+		</td>
+		<td>
+		     <p>None</p>
+		</td>
+ 	</tr>
+</table>
+
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU3.3</td>
+ 	</tr>	<tr>
+		<td><b>Actors:</b></td>
+		<td>Client</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Client reads an incidence.</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Client is logged in the system</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. The system consult for the incidences related the client email.</p>
+		     <p>2. The system shows a list with the incidence.</p>
+		     <p>3. The client click on an incidence.</p>
+		     <p>4. The system shows all details from this incidence.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>System shows information of an incidence.</td>
+ 	</tr>
+	<tr>
+  		<td>
+		     <p><b>Alternatives</b></p>
+		</td>
+		<td>
+		     <p>None</p>
+		</td>
+ 	</tr>
+</table>
+
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU3.4</td>
+ 	</tr>	<tr>
+		<td><b>Actors:</b></td>
+		<td>Client</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Client aswer an incidence</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Client is logged in the system</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. The system consult for the incidences related the client email.</p>
+		     <p>2. The system shows a list with the incidence.</p>
+		     <p>3. The client click on an incidence.</p>
+		     <p>4. The system shows all details from this incidence.</p>
+		     <p>5. The client writes an aswer and send it.</p>		
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>The answer writen by the client is saved.</td>
+ 	</tr>
+	<tr>
+  		<td>
+		     <p><b>Alternatives</b></p>
+		</td>
+		<td>
+		     <p>None</p>
+		</td>
+ 	</tr>
+</table>
+
+
+
 </p>
-
-
-<p align="center">
-  </br>
-  </br>
-  </br>
-  </br>
-  <img src="/img/descripcion2.jpg" height="500" width="800"/>
-  </br>
-  </br>
-  </br>
-  </br>
-  <img src="/img/descripcion3.jpg" height="500" width="800"/>
-</p>
-
-
 </br>
 </br>
 </br>
