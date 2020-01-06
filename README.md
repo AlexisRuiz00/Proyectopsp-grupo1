@@ -82,26 +82,24 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 ### Diagrama de casos de usos
 <p align="center">
-<img src="/img/diagramaUso.jpg" height="700" width="1200"/>
+  <p>Client</p>
+  <img src="/img/CasoDeUsoCliente.jpg" height="600" width="800"/>
+  </br>
+  </br>
+  </br>
+  <p>System Administrator</p>
+  <img src="/img/CasoDeUsoSysAdmin.jpg" height="600" width="800"/>
+  </br>
+  </br>
+  </br>
+  <p>Incidence Administrator</p>
+  <img src="/img/CasoDeUsoIncidenceAdmin.jpg" height="600" width="800"/></p>
 </p>
-
 </br>
 </br>
 
 ### Descripcion de casos de usos
 <p align="center">
-  <p>Cliente</p>
-  <img src="/img/CasoDeUsoCliente.png" height="600" width="800"/>
-  </br>
-  </br>
-  </br>
-  <p>Cliente</p>
-  <img src="/img/CasoDeUsoSysAdmin.png" height="600" width="800"/>
-  </br>
-  </br>
-  </br>
-  <p>Cliente</p>
-  <img src="/img/CasoDeUsoIncidenceAdmin.png" height="600" width="800"/>
   </br>
   </br>
   </br>
