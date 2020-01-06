@@ -90,7 +90,18 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 ### Descripcion de casos de usos
 <p align="center">
-  <img src="/img/descripcion1.png" height="600" width="800"/>
+  <p>Cliente</p>
+  <img src="/img/CasoDeUsoCliente.png" height="600" width="800"/>
+  </br>
+  </br>
+  </br>
+  <p>Cliente</p>
+  <img src="/img/CasoDeUsoSysAdmin.png" height="600" width="800"/>
+  </br>
+  </br>
+  </br>
+  <p>Cliente</p>
+  <img src="/img/CasoDeUsoIncidenceAdmin.png" height="600" width="800"/>
   </br>
   </br>
   </br>
