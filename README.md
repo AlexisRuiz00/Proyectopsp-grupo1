@@ -133,8 +133,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
    		<td>none</td>
  	</tr>
 </table>
-					
 
+<br>
+<br>
 
 <table>
 	<tr>
@@ -155,56 +156,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. Admin clicks in "Delete Database."</p>
-		     <p>2. System asks for database name.</p>
-		     <p>3. Admin inserts the name.</p>
-		     <p>4. System deletes the database.</p> 
-		</td>
- 	</tr>
-	<tr>
-  		<td><b>Postcondition:</b></td>
-   		<td>Nothing</td>
- 	</tr>
-	<tr>
-  		<td>
-		    <p><b>Alternative 1</b></p>
-		    <p>Database doesn't exists</p>
-		</td>
-		<td><p>4. Systems alerts that database doesn't exists.</p>
-		    <p>5. System returns to main menu.</p>
-		</td>
- 	</tr>
-	<tr>
-  		<td>
-		    <p><b>Alternative 2</b></p>
-		    <p>Admin press cancel.</p>
-		</td>
-		<td><p>3. Admin press cancel.</p>
-		    <p>4. System returns to main menu.</p>
-		</td>
- 	</tr>
-</table>
-					
-<table>
-	<tr>
-		<td><b>Identifier:</b></td>
-		<td>CU1.2</td>
- 	</tr>
-	<tr>
-		<td><b>Actors:</b></td>
-		<td>System administrator</td>
- 	</tr>
-	<tr>
-		<td><b>Descripction:</b></td>
-		<td>System administrator deletes a database</td>
- 	</tr>
- 	<tr>
-  		<td><b>Precondition:</b></td>
-   		<td>Admin is logged in the system as system administrator</td>
- 	</tr>
-	<tr>
-  		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. Admin clicks in "Delete Database."</p>
+		<td> <p>1. Admin clicks in "Delete Database".</p>
 		     <p>2. System asks for database name.</p>
 		     <p>3. Admin inserts the name.</p>
 		     <p>4. System deletes the database.</p> 
@@ -234,8 +186,336 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 </table>
 
+<br>
+<br>
+					
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU1.3</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>System administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>System administrator creates a new table in the database</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as system administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. Admin clicks in "Create Table".</p>
+		     <p>2. System asks for a name.</p>
+		     <p>3. Admin inserts the name.</p>
+		     <p>4. System shows a view to configure the table</p>
+		     <p>5. Admin configure the table and press Accept for creating it.</p>
+		     <p>6. System creates the table and returns to main menu.</p>	
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>Nothing</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 1</b></p>
+		    <p>Table already exist.</p>
+		</td>
+		<td><p>5. System alerts that table already exists</p>
+		    <p>6. System returns to main menu.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 2</b></p>
+		    <p>Admin press cancel.</p>
+		</td>
+		<td><p>3. Admin press cancel.</p>
+		    <p>4. System returns to main menu.</p>
+		</td>
+ 	</tr>
+</table>
 
+<br>
+<br>
+					
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU1.4</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>System administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>System administrator creates a new incidence administrator</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as system administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. Admin clicks in "Create Incidence Admin".</p>
+		     <p>2. System ask for a name.</p>
+		     <p>3. Admin inserts a name.</p>
+		     <p>4. System ask for a password.</p>
+		     <p>5. Admin inserts a password.</p>
+		     <p>  6. System creates a new Incidence admin with the given credentials.</p>	
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>Nothing</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 1</b></p>
+		    <p>Incidence admin already exist.</p>
+		</td>
+		<td><p>5. System alerts that Incidence Admin already exists</p>
+		    <p>6. System returns to main menu.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 2</b></p>
+		    <p>Admin press cancel.</p>
+		</td>
+		<td><p>3. Admin press cancel.</p>
+		    <p>4. System returns to main menu.</p>
+		</td>
+ 	</tr>
+</table>
 
+<br>
+<br>
+					
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU1.5</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>System administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>System administrator deletes an Incidence administrator</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as system administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. Admin clicks in "Delete Incidence Admin".</p>
+		     <p>2. System asks for admin name.</p>
+		     <p>3. Admin inserts the name.</p>
+		     <p>4. System deletes the incidence admin.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>Nothing</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 1</b></p>
+		    <p>Incidence Admin doesn't exist.</p>
+		</td>
+		<td><p>5. System alerts that Incidence Admin doesn't exist</p>
+		    <p>6. System returns to main menu.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 2</b></p>
+		    <p>Admin press cancel.</p>
+		</td>
+		<td><p>3. Admin press cancel.</p>
+		    <p>4. System returns to main menu.</p>
+		</td>
+ 	</tr>
+</table>
+
+<br>
+<br>
+					
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU2.1</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>Incidence administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Incidence Administrator reads an incidence</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as incidence administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. The system show all incidences that are open and not resolved.</p>
+		     <p>2. The incidence administrator choose an incidence.</p>
+		     <p>3. The application show all the incidence details.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>System shows information of an incidence</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternatives:</b></p>
+		</td>
+		<td>
+		    <p>None</p>
+		</td>
+ 	</tr>
+
+</table>
+
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU2.2</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>Incidence administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Incidence Administrator close an incidence</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as incidence administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. The system show all incidences that are open and not resolved.</p>
+		     <p>2. The incidence administrator choose an incidence.</p>
+		     <p>3. The application show all the incidence details.</p>
+		     <p>4. Admin close the selected incidence.</p>	
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>The incidence is set as closed.</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternatives:</b></p>
+		</td>
+		<td>
+		    <p>None</p>
+		</td>
+ 	</tr>
+
+</table>
+
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU2.3</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>Incidence administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Incidence Administrator assign an incidence to another incidence administrator</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as incidence administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. The system show all incidences that are open and not resolved.</p>
+		     <p>2. The incidence administrator choose an incidence.</p>
+		     <p>3. The application show all the incidence details.</p>
+		     <p>4. Incidence admin assign the incidence to the another administrator.</p>	
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>The incidence administrator assigned to the selected incidence is changed to the new admin selected.</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternatives:</b></p>
+		</td>
+		<td>
+		    <p>None</p>
+		</td>
+ 	</tr>
+
+</table>
+
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU2.4</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>Incidence administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Incidence Administrator marks an incidence as pending</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as incidence administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. The system show all incidences that are open and not resolved.</p>
+		     <p>2. The incidence administrator choose an incidence.</p>
+		     <p>3. The application show all the incidence details.</p>
+		     <p>4. The administrator mark the selected incidence as pending.</p>	
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>The system sets the selected incidence as pending</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternatives:</b></p>
+		</td>
+		<td>
+		    <p>None</p>
+		</td>
+ 	</tr>
+
+</table>
 
 </p>
 
