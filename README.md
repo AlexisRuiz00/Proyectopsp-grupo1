@@ -103,29 +103,56 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 <table>
 	<tr>
-		<td>Descripction:</td>
-		<td>Savings</td>
+		<td><b>Descripction:</b></td>
+		<td>System administrator deletes a database</td>
  	</tr>
  	<tr>
-  		<td>Precondition:</td>
-   		<td>$100</td>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as system administrator</td>
  	</tr>
 	<tr>
-  		<td>Normal Sequence:</td>
-   		<td>$750</td>
+  		<td><b>Normal Sequence:</b></td>
+   		<td>  1. Admin clicks in "Delete Database"
+		      2. System asks for database name
+		      3. Admin inserts the name
+		      4. System deletes the database 
+		</td>
  	</tr>
 	<tr>
-  		<td>Postcondition:</td>
-   		<td>$250</td>
+  		<td><b>Postcondition:</b></td>
+   		<td>Nothing</td>
  	</tr>
 	<tr>
-  		<td>Alternative 1</td>
+  		<td><b>Alternative 1</b></td>
    		<td>$400</td>
  	</tr>
 </table>
 					
 
 
+<table>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Savings</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>$100</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+   		<td>$750</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>$250</td>
+ 	</tr>
+	<tr>
+  		<td><b>Alternative 1</b></td>
+   		<td>$400</td>
+ 	</tr>
+</table>
+					
 
 
 
