@@ -112,10 +112,10 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-   		<td>  1. Admin clicks in "Delete Database"
-		      2. System asks for database name
-		      3. Admin inserts the name
-		      4. System deletes the database 
+		<td> <p>1. Admin clicks in "Delete Database."</p>
+		     <p>2. System asks for database name.</p>
+		     <p>3. Admin inserts the name.</p>
+		     <p>4. System deletes the database.</p> 
 		</td>
  	</tr>
 	<tr>
