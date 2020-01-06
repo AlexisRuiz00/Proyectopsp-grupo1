@@ -99,6 +99,24 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 ### Descripcion de casos de usos
+
+
+|Descripction:|Savings|
+|Precondition:|$100|
+|Normal Sequence:|$750|
+|Postcondition:|$250|
+|Alternative 1|$400|
+
+
+
+
+
+
+
+
+
+
+
 <p align="center">
   </br>
   </br>
