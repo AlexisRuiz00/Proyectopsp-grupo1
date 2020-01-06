@@ -101,12 +101,29 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 ### Descripcion de casos de usos
 
 
-|Descripction:|Savings|
-|Precondition:|$100|
-|Normal Sequence:|$750|
-|Postcondition:|$250|
-|Alternative 1|$400|
-
+<table>
+	<tr>
+		<td>Descripction:</td>
+		<td>Savings</td>
+ 	</tr>
+ 	<tr>
+  		<td>Precondition:</td>
+   		<td>$100</td>
+ 	</tr>
+	<tr>
+  		<td>Normal Sequence:</td>
+   		<td>$750</td>
+ 	</tr>
+	<tr>
+  		<td>Postcondition:</td>
+   		<td>$250</td>
+ 	</tr>
+	<tr>
+  		<td>Alternative 1</td>
+   		<td>$400</td>
+ 	</tr>
+</table>
+					
 
 
 
