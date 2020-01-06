@@ -99,9 +99,52 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 ### Descripcion de casos de usos
+<p align="center">
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU1.1</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>System administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>System administrator inserts a sql query</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Admin is logged in the system as system administrator</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. Admin inserts sql query.</p>
+		     <p>2. System interprets the query and returns true or false if its been suscesfully executed or not</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>Nothing</td>
+ 	</tr>
+	<tr>
+  		<td><b>Alternatives:</b></td>
+   		<td>none</td>
+ 	</tr>
+</table>
+					
 
 
 <table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU1.2</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>System administrator</td>
+ 	</tr>
 	<tr>
 		<td><b>Descripction:</b></td>
 		<td>System administrator deletes a database</td>
@@ -123,42 +166,78 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
    		<td>Nothing</td>
  	</tr>
 	<tr>
-  		<td><b>Alternative 1</b></td>
-   		<td>$400</td>
+  		<td>
+		    <p><b>Alternative 1</b></p>
+		    <p>Database doesn't exists</p>
+		</td>
+		<td><p>4. Systems alerts that database doesn't exists.</p>
+		    <p>5. System returns to main menu.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 2</b></p>
+		    <p>Admin press cancel.</p>
+		</td>
+		<td><p>3. Admin press cancel.</p>
+		    <p>4. System returns to main menu.</p>
+		</td>
  	</tr>
 </table>
 					
-
-
 <table>
 	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU1.2</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>System administrator</td>
+ 	</tr>
+	<tr>
 		<td><b>Descripction:</b></td>
-		<td>Savings</td>
+		<td>System administrator deletes a database</td>
  	</tr>
  	<tr>
   		<td><b>Precondition:</b></td>
-   		<td>$100</td>
+   		<td>Admin is logged in the system as system administrator</td>
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-   		<td>$750</td>
+		<td> <p>1. Admin clicks in "Delete Database."</p>
+		     <p>2. System asks for database name.</p>
+		     <p>3. Admin inserts the name.</p>
+		     <p>4. System deletes the database.</p> 
+		</td>
  	</tr>
 	<tr>
   		<td><b>Postcondition:</b></td>
-   		<td>$250</td>
+   		<td>Nothing</td>
  	</tr>
 	<tr>
-  		<td><b>Alternative 1</b></td>
-   		<td>$400</td>
+  		<td>
+		    <p><b>Alternative 1</b></p>
+		    <p>Database doesn't exists</p>
+		</td>
+		<td><p>4. Systems alerts that database doesn't exists.</p>
+		    <p>5. System returns to main menu.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td>
+		    <p><b>Alternative 2</b></p>
+		    <p>Admin press cancel.</p>
+		</td>
+		<td><p>3. Admin press cancel.</p>
+		    <p>4. System returns to main menu.</p>
+		</td>
  	</tr>
 </table>
-					
 
 
 
 
-
-
+</p>
 
 
 <p align="center">
