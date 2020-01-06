@@ -100,6 +100,52 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 ### Descripcion de casos de usos
 <p align="center">
+	
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU1.0</td>
+ 	</tr>
+	<tr>
+		<td><b>Actors:</b></td>
+		<td>Administrator</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Administrator logs into the system</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>None</td>
+ 	 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> <p>1. System shows the login view.</p>
+		     <p>2. Admin inserts credentials.</p>
+		     <p>3. System validates the credentials.</p>
+		     <p>4. System recognize the role of admin and opens the view that corresponds.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>System open and shows the view of the rol logged.</td>
+ 	</tr>
+	<tr>
+  		<td>
+		     <p><b>Alternative 1:</b></p>
+		     <p>Admin inserts a non valid credentials</p>
+		</td>
+		<td>
+		    <p>3. Admin inserts the credentials.</p>
+		    <p>4. System alerts that the credentials are not valid.</p>
+		    <p>5. Written credentials are removed.</p>
+		</td>
+ 	</tr>
+
+</table>
+
+<br>
+<br>
 
 <table>
 	<tr>
@@ -689,9 +735,8 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 </table>
 
-
-
 </p>
+
 </br>
 </br>
 </br>
