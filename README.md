@@ -588,14 +588,12 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		<td> <p>1. System shows the login view.</p>
 		     <p>2. Client insert an e-mail.</p>
 		     <p>3. System validates the email.</p>
-		     <p>4. Client clicks one of the menu options.</p>
-		     <p>    1. Create a new incidence.</p>	
-		     <p>    2. View created incidences.</p>
+		     <p>4. System shows main view.</p>
 		</td>
  	</tr>
 	<tr>
   		<td><b>Postcondition:</b></td>
-   		<td>System open and shows the view of the option selected.</td>
+   		<td>System open and shows the main view.</td>
  	</tr>
 	<tr>
   		<td>
