@@ -120,10 +120,12 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	 	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. System shows the login view.</p>
-		     <p>2. Admin inserts credentials.</p>
-		     <p>3. System validates the credentials.</p>
-		     <p>4. System recognize the role of admin and opens the view that corresponds.</p>
+			<td> <p>1. System shows the login view.</p>
+		     	<p>2. Admin inserts credentials.</p>
+		     	<p>3. System validates the credentials.</p>
+		     	<p>4. System recognize the role of admin and opens the view that corresponds.</p>
+			<p>5. System creates a socket and sends a byte to the server with the admin rol</p>		
+			<p>6. Server interprets the byte recieved</p>
 		</td>
  	</tr>
 	<tr>
