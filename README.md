@@ -804,7 +804,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Postcondition:</b></td>
-   		<td>Notgin.</td>
+   		<td>Nothing.</td>
  	</tr>
 	<tr>
   		<td>
