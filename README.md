@@ -122,7 +122,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   		<td><b>Normal Sequence:</b></td>
 			<td> 	<p>1. System shows the login view.</p>
 		     		<p>2. Admin inserts credentials.</p>
-				<p>3. System sends a byte with value 2</p>
+				<p>3. System sends a byte with value 10</p>
 				<p>4. Server prepares to recieve admin credentials</p>
 				<p>5. Server validates credentials and recognize admin rol</p>
 		     		<p>6. Server sends back administrator's rol.</p>
@@ -146,11 +146,6 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		     <p>Admin inserts a non valid credentials</p>
 		</td>
 		<td>
-		    	<p>3. Admin inserts the credentials.</p>
-		  	<p>4. System sends a byte with value 2</p>
-			<p>5. Server prepares to recieve admin credentials</p>
-			<p>6. System sends credentials.</p>
-			<p>7. Server validates credentials and recognize admin rol</p>
 			<p>8. Server doesn't find any administrator whith the recieved credentials</p>
 		     	<p>9. Server sends back an empty String</p>
 		</td>
@@ -181,7 +176,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 	<tr>
   		<td><b>Normal Sequence:</b></td>
 		<td>	<p>1. Admin inserts sql query.</p>
-			<p>2. System sends a byte with value 1.</p>
+			<p>2. System sends a byte with value 11.</p>
 			<p>3. Server interprets the the byte value.</p>
 			<p>4. Server prepares to read the sql statement.</p>
 			<p>5. System sends the sql statement</p>
@@ -223,7 +218,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		<td> 	<p>1. Admin clicks in "Delete Database".</p>
 		     	<p>2. System asks for database name.</p>
 		     	<p>3. Admin inserts the name.</p>
-		   	<p>4. System sends to server a byte with value 2.</p>
+		   	<p>4. System sends to server a byte with value 12.</p>
 			<p>5. Server interprets the the byte value.</p>
 			<p>6. Server prepares to read the database to delete.</p>
 			<p>7. System sends the database name.</p>
@@ -282,7 +277,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		<td> 	<p>1. Admin clicks in "Create Table".</p>
 		     	<p>2. System asks for a name.</p>
 		    	<p>3. Admin inserts the name.</p>
-		  	<p>4. System sends to server a byte with value 3.</p>
+		  	<p>4. System sends to server a byte with value 13.</p>
 			<p>5. Server interprets the the byte value.</p>
 			<p>6. Server prepares to read the table name.</p>
 			<p>7. System sends the table name.</p>
@@ -343,7 +338,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		     	<p>3. Admin inserts a name.</p>
 		     	<p>4. System ask for a password.</p>
 		     	<p>5. Admin inserts a password.</p>
-		     	<p>6. System sends to server a byte with value 4.</p>
+		     	<p>6. System sends to server a byte with value 14.</p>
 			<p>7. Server interprets the the byte value.</p>
 			<p>8. Server prepares to read the credentials.</p>
 			<p>9. System sends the credentials.</p>
@@ -400,7 +395,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		<td> 	<p>1. Admin clicks in "Delete Incidence Admin".</p>
 		     	<p>2. System asks for admin name.</p>
 		     	<p>3. Admin inserts the name.</p>
-		  	<p>4. System sends to server a byte with value 5.</p>
+		  	<p>4. System sends to server a byte with value 15.</p>
 			<p>5. Server interprets the the byte value.</p>
 			<p>6. Server prepares to read administrator's name.</p>
 			<p>7. System sends the name.</p>
@@ -625,7 +620,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		<td>	<p>1. System shows the login view.</p>
 		    	<p>2. Client insert an e-mail.</p>
 		   	<p>3. System validates the email.</p>
-			<p>4. System sends a byte with value 1</p>
+			<p>4. System sends a byte with value 31</p>
 			<p>5. Server prepares to recieve client email</p>
 			<p>6. System sends client's email.
 			<p>7. Server sends back an arraylist with all the linked incidences</p>
@@ -799,7 +794,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 	<tr>
   		<td><b>Normal Sequence:</b></td>
 		<td> 	<p>1. Client opens support chat.</p>
-			<p>2. System sends a byte to the server with value 3.</p>
+			<p>2. System sends a byte to the server with value 35.</p>
 			<p>3. System starts a thread waiting for the server answer.</p>
 			<p>4. Server interpretes the byte value.</p>
 			<p>5. Server a multicast socket for the chat.</p>
