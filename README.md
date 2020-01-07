@@ -777,6 +777,58 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 </table>
 
+<br>
+<br>
+
+<table>
+	<tr>
+		<td><b>Identifier:</b></td>
+		<td>CU3.5</td>
+ 	</tr>	<tr>
+		<td><b>Actors:</b></td>
+		<td>Client</td>
+ 	</tr>
+	<tr>
+		<td><b>Descripction:</b></td>
+		<td>Client opnes support chat</td>
+ 	</tr>
+ 	<tr>
+  		<td><b>Precondition:</b></td>
+   		<td>Client is logged in the system</td>
+ 	</tr>
+	<tr>
+  		<td><b>Normal Sequence:</b></td>
+		<td> 	<p>1. Client opens support chat.</p>
+			<p>2. System sends a byte to the server with value 3.</p>
+			<p>3. System starts a thread waiting for the server answer.</p>
+			<p>4. Server interpretes the byte value.</p>
+			<p>5. Server a multicast socket for the chat.</p>
+			<p>6. Server sends back the multicast socket object.</p>
+			<p>7. System use the multicast socket recieved to comunicate.</p>
+		</td>
+ 	</tr>
+	<tr>
+  		<td><b>Postcondition:</b></td>
+   		<td>Notgin.</td>
+ 	</tr>
+	<tr>
+  		<td>
+		     <p><b>Alternatives</b></p>
+		</td>
+		<td>
+		     <p>None</p>
+		</td>
+ 	</tr>
+</table>
+
+
+
+
+
+
+
+
+
 </p>
 
 </br>
