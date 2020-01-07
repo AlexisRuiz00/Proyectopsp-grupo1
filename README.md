@@ -168,8 +168,12 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. Admin inserts sql query.</p>
-		     <p>2. System interprets the query and returns true or false if its been suscesfully executed or not</p>
+		<td>	<p>1. Admin inserts sql query.</p>
+			<p>2. System sends a byte with value 1.</p>
+			<p>3. Server interprets the the byte value.</p>
+			<p>4. Server prepares to read the sql statement.</p>
+			<p>5. System sends the sql statement</p>
+		     	<p>6. Server interprets the query and returns true or false if its been suscesfully executed or not</p>
 		</td>
  	</tr>
 	<tr>
@@ -204,10 +208,15 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. Admin clicks in "Delete Database".</p>
-		     <p>2. System asks for database name.</p>
-		     <p>3. Admin inserts the name.</p>
-		     <p>4. System deletes the database.</p> 
+		<td> 	<p>1. Admin clicks in "Delete Database".</p>
+		     	<p>2. System asks for database name.</p>
+		     	<p>3. Admin inserts the name.</p>
+		   	<p>4. System sends to server a byte with value 2.</p>
+			<p>5. Server interprets the the byte value.</p>
+			<p>6. Server prepares to read the database to delete.</p>
+			<p>7. System sends the database name.</p>
+			<p>8. Server recieves the name and deletes it.</p>
+			<p>9. Server sends back a message "Database deleted"</p>
 		</td>
  	</tr>
 	<tr>
@@ -219,8 +228,10 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		    <p><b>Alternative 1</b></p>
 		    <p>Database doesn't exists</p>
 		</td>
-		<td><p>4. Systems alerts that database doesn't exists.</p>
-		    <p>5. System returns to main menu.</p>
+		<td>
+		    <p>8. Server sends back a message "Database doesn't exist"</p>
+		    <p>9. Systems shows the message.</p>
+		    <p>10. System returns to main menu.</p>
 		</td>
  	</tr>
 	<tr>
@@ -256,12 +267,15 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. Admin clicks in "Create Table".</p>
-		     <p>2. System asks for a name.</p>
-		     <p>3. Admin inserts the name.</p>
-		     <p>4. System shows a view to configure the table</p>
-		     <p>5. Admin configure the table and press Accept for creating it.</p>
-		     <p>6. System creates the table and returns to main menu.</p>	
+		<td> 	<p>1. Admin clicks in "Create Table".</p>
+		     	<p>2. System asks for a name.</p>
+		    	<p>3. Admin inserts the name.</p>
+		  	<p>4. System sends to server a byte with value 3.</p>
+			<p>5. Server interprets the the byte value.</p>
+			<p>6. Server prepares to read the table name.</p>
+			<p>7. System sends the table name.</p>
+			<p>8. Server recieves the name and creates it.</p>
+			<p>9. Server sends back a message "Table created"</p>	
 		</td>
  	</tr>
 	<tr>
@@ -270,11 +284,13 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td>
-		    <p><b>Alternative 1</b></p>
-		    <p>Table already exist.</p>
+		    	<p><b>Alternative 1</b></p>
+		    	<p>Table already exist.</p>
 		</td>
-		<td><p>5. System alerts that table already exists</p>
-		    <p>6. System returns to main menu.</p>
+		<td>
+		 	<p>8. Server sends back a message "Table already exists"</p>
+		    	<p>9. Systems shows the message.</p>
+		    	<p>10. System returns to main menu.</p>
 		</td>
  	</tr>
 	<tr>
@@ -310,12 +326,16 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. Admin clicks in "Create Incidence Admin".</p>
-		     <p>2. System ask for a name.</p>
-		     <p>3. Admin inserts a name.</p>
-		     <p>4. System ask for a password.</p>
-		     <p>5. Admin inserts a password.</p>
-		     <p>  6. System creates a new Incidence admin with the given credentials.</p>	
+		<td> 	<p>1. Admin clicks in "Create Incidence Admin".</p>
+		     	<p>2. System ask for a name.</p>
+		     	<p>3. Admin inserts a name.</p>
+		     	<p>4. System ask for a password.</p>
+		     	<p>5. Admin inserts a password.</p>
+		     	<p>6. System sends to server a byte with value 4.</p>
+			<p>7. Server interprets the the byte value.</p>
+			<p>8. Server prepares to read the credentials.</p>
+			<p>9. System sends the credentials.</p>
+			<p>10. Server recieves the credentias, creates administrator and sends back a message "Adminstrator created"</p>
 		</td>
  	</tr>
 	<tr>
@@ -327,8 +347,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		    <p><b>Alternative 1</b></p>
 		    <p>Incidence admin already exist.</p>
 		</td>
-		<td><p>5. System alerts that Incidence Admin already exists</p>
-		    <p>6. System returns to main menu.</p>
+		<td>	<p>10. Server recieves the credentias and sends back a message "Adminstrator already exist".</p>
+			<p>11. System shows message.</p>
+			<p>12. System returns to main menu.</p>
 		</td>
  	</tr>
 	<tr>
