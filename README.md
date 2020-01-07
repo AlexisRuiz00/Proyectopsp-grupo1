@@ -120,12 +120,20 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	 	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-			<td> <p>1. System shows the login view.</p>
-		     	<p>2. Admin inserts credentials.</p>
-		     	<p>3. System validates the credentials.</p>
-		     	<p>4. System recognize the role of admin and opens the view that corresponds.</p>
-			<p>5. System creates a socket and sends a byte to the server with the admin rol</p>		
-			<p>6. Server interprets the byte recieved</p>
+			<td> 	<p>1. System shows the login view.</p>
+		     		<p>2. Admin inserts credentials.</p>
+				<p>3. System sends a byte with value 2</p>
+				<p>4. Server prepares to recieve admin credentials</p>
+				<p>5. Server validates credentials and recognize admin rol</p>
+		     		<p>6. Server sends back administrator's rol.</p>
+		     		<p>7. System recognize the role of admin and opens the view that corresponds.</p>
+				<p>8. System creates a socket and sends a byte to the server with the admin rol</p>		
+				<p>9. Server interprets the byte recieved</p>
+				<p>	if rol==Incidence Admin</p>
+				<p>	9.1. Server sends an arraylist with all the linked incidences</p>
+				<p>10. System shows the view of the rol logged</p>
+				<p>	if rol==Incidence Admin</p>
+				<p>	10.1. System charge all the incidences linked</p>
 		</td>
  	</tr>
 	<tr>
@@ -138,9 +146,13 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		     <p>Admin inserts a non valid credentials</p>
 		</td>
 		<td>
-		    <p>3. Admin inserts the credentials.</p>
-		    <p>4. System alerts that the credentials are not valid.</p>
-		    <p>5. Written credentials are removed.</p>
+		    	<p>3. Admin inserts the credentials.</p>
+		  	<p>4. System sends a byte with value 2</p>
+			<p>5. Server prepares to recieve admin credentials</p>
+			<p>6. System sends credentials.</p>
+			<p>7. Server validates credentials and recognize admin rol</p>
+			<p>8. Server doesn't find any administrator whith the recieved credentials</p>
+		     	<p>9. Server sends back an empty String</p>
 		</td>
  	</tr>
 
@@ -385,10 +397,14 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. Admin clicks in "Delete Incidence Admin".</p>
-		     <p>2. System asks for admin name.</p>
-		     <p>3. Admin inserts the name.</p>
-		     <p>4. System deletes the incidence admin.</p>
+		<td> 	<p>1. Admin clicks in "Delete Incidence Admin".</p>
+		     	<p>2. System asks for admin name.</p>
+		     	<p>3. Admin inserts the name.</p>
+		  	<p>4. System sends to server a byte with value 5.</p>
+			<p>5. Server interprets the the byte value.</p>
+			<p>6. Server prepares to read administrator's name.</p>
+			<p>7. System sends the name.</p>
+			<p>8. Server recieves the credentias, deletes administrator and sends back a message "Adminstrator created".</p>
 		</td>
  	</tr>
 	<tr>
@@ -400,8 +416,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		    <p><b>Alternative 1</b></p>
 		    <p>Incidence Admin doesn't exist.</p>
 		</td>
-		<td><p>5. System alerts that Incidence Admin doesn't exist</p>
-		    <p>6. System returns to main menu.</p>
+		<td>	<p>8. Server recieves the credentias and sends back a message "Adminstrator doesn't exist".</p>
+			<p>9. System shows message.</p>
+			<p>10. System returns to main menu</p>
 		</td>
  	</tr>
 	<tr>
@@ -437,9 +454,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The system show all incidences that are open and not resolved.</p>
-		     <p>2. The incidence administrator choose an incidence.</p>
-		     <p>3. The application show all the incidence details.</p>
+		<td> 	
+		     	<p>1. The incidence administrator choose an incidence.</p>
+		     	<p>2. The application show all the incidence details.</p>
 		</td>
  	</tr>
 	<tr>
@@ -479,10 +496,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The system show all incidences that are open and not resolved.</p>
-		     <p>2. The incidence administrator choose an incidence.</p>
-		     <p>3. The application show all the incidence details.</p>
-		     <p>4. Admin close the selected incidence.</p>	
+		<td> <p>1. The incidence administrator choose an incidence.</p>
+		     <p>2. The application show all the incidence details.</p>
+		     <p>3. Admin close the selected incidence.</p>	
 		</td>
  	</tr>
 	<tr>
@@ -522,10 +538,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The system show all incidences that are open and not resolved.</p>
-		     <p>2. The incidence administrator choose an incidence.</p>
-		     <p>3. The application show all the incidence details.</p>
-		     <p>4. Incidence admin assign the incidence to the another administrator.</p>	
+		<td> <p>1. The incidence administrator choose an incidence.</p>
+		     <p>2. The application show all the incidence details.</p>
+		     <p>3. Incidence admin assign the incidence to the another administrator.</p>	
 		</td>
  	</tr>
 	<tr>
@@ -565,10 +580,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The system show all incidences that are open and not resolved.</p>
-		     <p>2. The incidence administrator choose an incidence.</p>
-		     <p>3. The application show all the incidence details.</p>
-		     <p>4. The administrator mark the selected incidence as pending.</p>	
+		<td> <p>1. The incidence administrator choose an incidence.</p>
+		     <p>2. The application show all the incidence details.</p>
+		     <p>3. The administrator mark the selected incidence as pending.</p>	
 		</td>
  	</tr>
 	<tr>
@@ -608,10 +622,15 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. System shows the login view.</p>
-		     <p>2. Client insert an e-mail.</p>
-		     <p>3. System validates the email.</p>
-		     <p>4. System shows main view.</p>
+		<td>	<p>1. System shows the login view.</p>
+		    	<p>2. Client insert an e-mail.</p>
+		   	<p>3. System validates the email.</p>
+			<p>4. System sends a byte with value 1</p>
+			<p>5. Server prepares to recieve client email</p>
+			<p>6. System sends client's email.
+			<p>7. Server sends back an arraylist with all the linked incidences</p>
+			<p>8. System shows the view of client</p>
+			<p>9. System charge all the incidences linked</p>
 		</td>
  	</tr>
 	<tr>
@@ -655,8 +674,10 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The client inserts detail of incidence.</p>
-		     <p>2. The client clicks in send incidence.</p>
+		<td> 	<p>1. The client inserts detail of incidence.</p>
+			<p>2. The client clicks in send incidence.</p>
+			<p>3. System sends an object incidence of type new</p>
+			<p>4. Server recognize incidence's type and save the incidence in database.</p>
 		</td>
  	</tr>
 	<tr>
@@ -694,10 +715,8 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The system consult for the incidences related the client email.</p>
-		     <p>2. The system shows a list with the incidence.</p>
-		     <p>3. The client click on an incidence.</p>
-		     <p>4. The system shows all details from this incidence.</p>
+		<td> <p>1. The client click on an incidence.</p>
+		     <p>2. The system shows all details from this incidence.</p>
 		</td>
  	</tr>
 	<tr>
@@ -735,16 +754,18 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The system consult for the incidences related the client email.</p>
-		     <p>2. The system shows a list with the incidence.</p>
-		     <p>3. The client click on an incidence.</p>
-		     <p>4. The system shows all details from this incidence.</p>
-		     <p>5. The client writes an aswer and send it.</p>		
+		<td> 	<p>1. The client click on an incidence.</p>
+		     	<p>2. The system shows all details from this incidence.</p>
+		     	<p>3. The client writes an aswer and send it.</p>
+			<p>4. System sends an object incidence of type answer</p>
+			<p>5. Server recognize incidence's type</p>
+			<p>6. Server find incidence in database by its id</p>
+			<p>7. Server concats answer to the incidence's text</p>
 		</td>
  	</tr>
 	<tr>
   		<td><b>Postcondition:</b></td>
-   		<td>The answer writen by the client is saved.</td>
+   		<td>The answer writen by the client is concatenated.</td>
  	</tr>
 	<tr>
   		<td>
