@@ -23,6 +23,10 @@
 > **[2- Actividad 3: Análisis de requisitos funcionales.](#2)**
 >
 > **[3- Actividad 4: Modelo de objeto de negocios.](#3)**
+>
+> **[4- Actividad 5: Interfaz de la aplicación.](#3)**
+>
+> **[5- Actividad 6: Hilos.](#3)**
 
 </br>
 </br>
@@ -849,4 +853,29 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
   <img src="/img/clases.jpg" height="500" width="800"/>
 </p>
+
+
+
+
+
+
+
+
+</br>
+</br>
+</br>
+<a name="3"></a>
+# ACTIVIDAD 6: Hilos
+
+<p>Admin Aplication</p>
+<p>Threads:</>
+ol>
+  <li>hiloChat</li>
+</ol>
+
+
+
+
+
+
 
