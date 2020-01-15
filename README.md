@@ -24,9 +24,9 @@
 >
 > **[3- Actividad 4: Modelo de objeto de negocios.](#3)**
 >
-> **[4- Actividad 5: Interfaz de la aplicación.](#3)**
+> **[4- Actividad 5: Interfaz de la aplicación.](#4)**
 >
-> **[5- Actividad 6: Hilos.](#3)**
+> **[5- Actividad 6: Hilos.](#5)**
 
 </br>
 </br>
