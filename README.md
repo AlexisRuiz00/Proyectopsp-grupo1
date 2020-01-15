@@ -864,7 +864,8 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 </br>
-<a name="3"></a>
+<a name="5"></a>
+
 # ACTIVIDAD 6: Hilos
 
 <p>Admin Aplication</p>
