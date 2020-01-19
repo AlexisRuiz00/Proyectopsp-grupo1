@@ -787,27 +787,27 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 <p>Admin Aplication</p>
 <p>Threads:</>
-<ol>
+<ul>
   <li>hiloChat</li>
   <li>  This thread will be receiving messages from the chat</li>
-</ol>
+</ul>
 
 </br>
 </br>
 
 <p>Client Aplication</p>
 <p>Threads:</>
-<ol>
+<ul>
   <li>hiloChat</li>
   <li>  This thread will be receiving messages from the chat</li>
-</ol>
+</ul>
 
 </br>
 </br>
 
 <p>Client Aplication</p>
 <p>Threads:</>
-<ol>
+<ul>
   <li>ThreadCliente</li>
   <li>  This thread will be receiving messages from the chat</li>
   
@@ -822,7 +822,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   
   <li>ThreadSystemAdmin</li>
   <li></li>
-</ol>
+</ul>
 
 
 </br>
