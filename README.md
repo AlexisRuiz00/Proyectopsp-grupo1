@@ -250,15 +250,6 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		    	<p>9. System returns to main menu.</p>
 		</td>
  	</tr>
-	<tr>
-  		<td>
-		    <p><b>Alternative 2</b></p>
-		    <p>Admin press cancel.</p>
-		</td>
-		<td><p>3. Admin press cancel.</p>
-		    <p>4. System returns to main menu.</p>
-		</td>
- 	</tr>
 </table>
 
 <br>
@@ -283,16 +274,14 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> 	<p>1. Admin clicks in "Create Incidence Admin".</p>
-		     	<p>2. System ask for a name.</p>
-		     	<p>3. Admin inserts a name.</p>
-		     	<p>4. System ask for a password.</p>
-		     	<p>5. Admin inserts a password.</p>
-		     	<p>6. System sends to server a byte with value 13.</p>
-			<p>7. Server interprets the the byte value.</p>
-			<p>8. Server prepares to read the credentials.</p>
-			<p>9. System sends the credentials.</p>
-			<p>10. Server recieves the credentias, creates administrator and sends back a message "Adminstrator created"</p>
+		<td> 	<p>1. Admin clicks in "New".</p>
+		     	<p>2. System creates a new item Incidence Admin in the list.</p>
+		     	<p>3. Admin inserts Incidence Admin details.</p>
+		     	<p>4. System sends to server a byte with value 13.</p>
+			<p>5. Server interprets the the byte value.</p>
+			<p>6. Server prepares to read the Incidence admin Object.</p>
+			<p>7. System sends the object.</p>
+			<p>8. Server recieves the object, creates administrator and sends back a message "Adminstrator created"</p>
 		</td>
  	</tr>
 	<tr>
@@ -307,15 +296,6 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		<td>	<p>10. Server recieves the credentias and sends back a message "Adminstrator already exist".</p>
 			<p>11. System shows message.</p>
 			<p>12. System returns to main menu.</p>
-		</td>
- 	</tr>
-	<tr>
-  		<td>
-		    <p><b>Alternative 2</b></p>
-		    <p>Admin press cancel.</p>
-		</td>
-		<td><p>3. Admin press cancel.</p>
-		    <p>4. System returns to main menu.</p>
 		</td>
  	</tr>
 </table>
@@ -342,14 +322,13 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> 	<p>1. Admin clicks in "Delete Incidence Admin".</p>
-		     	<p>2. System asks for admin name.</p>
-		     	<p>3. Admin inserts the name.</p>
-		  	<p>4. System sends to server a byte with value 14.</p>
-			<p>5. Server interprets the the byte value.</p>
-			<p>6. Server prepares to read administrator's name.</p>
-			<p>7. System sends the name.</p>
-			<p>8. Server recieves the credentias, deletes administrator and sends back a message "Adminstrator created".</p>
+		<td> 	<p>1. Admin selects an Incidence admin from the list</p>
+			<p>2. Admin clicks in "Delete".</p>
+		  	<p>3. System sends to server a byte with value 14.</p>
+			<p>4. Server interprets the the byte value.</p>
+			<p>5. Server prepares to read administrator's name.</p>
+			<p>6. System sends the name.</p>
+			<p>7. Server recieves the credentias, deletes administrator and sends back a message "Adminstrator created".</p>
 		</td>
  	</tr>
 	<tr>
@@ -358,21 +337,10 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td>
-		    <p><b>Alternative 1</b></p>
-		    <p>Incidence Admin doesn't exist.</p>
+		    <p><b>Alternatives</b></p>
 		</td>
-		<td>	<p>8. Server recieves the credentias and sends back a message "Adminstrator doesn't exist".</p>
-			<p>9. System shows message.</p>
-			<p>10. System returns to main menu</p>
-		</td>
- 	</tr>
-	<tr>
-  		<td>
-		    <p><b>Alternative 2</b></p>
-		    <p>Admin press cancel.</p>
-		</td>
-		<td><p>3. Admin press cancel.</p>
-		    <p>4. System returns to main menu.</p>
+		<td>	
+			<p>None</p>
 		</td>
  	</tr>
 </table>
