@@ -225,15 +225,14 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> 	<p>1. Admin clicks in "Create Table".</p>
-		     	<p>2. System asks for a name.</p>
-		    	<p>3. Admin inserts the name.</p>
-		  	<p>4. System sends to server a byte with value 13.</p>
-			<p>5. Server interprets the the byte value.</p>
-			<p>6. Server prepares to read the table name.</p>
-			<p>7. System sends the table name.</p>
-			<p>8. Server recieves the name and creates it.</p>
-			<p>9. Server sends back a message "Table created"</p>	
+		<td> 	<p>1. Admin inserts table name</p>
+			<p>2. Admin clicks in "Create Table".</p>
+		  	<p>3. System sends to server a byte with value 12.</p>
+			<p>4. Server interprets the the byte value.</p>
+			<p>5. Server prepares to read the table name.</p>
+			<p>6. System sends the table name.</p>
+			<p>7. Server recieves the name and creates it.</p>
+			<p>8. Server sends back a message "Table created"</p>	
 		</td>
  	</tr>
 	<tr>
@@ -246,9 +245,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		    	<p>Table already exist.</p>
 		</td>
 		<td>
-		 	<p>8. Server sends back a message "Table already exists"</p>
-		    	<p>9. Systems shows the message.</p>
-		    	<p>10. System returns to main menu.</p>
+		 	<p>7. Server sends back a message "Table already exists"</p>
+		    	<p>8. Systems shows the message.</p>
+		    	<p>9. System returns to main menu.</p>
 		</td>
  	</tr>
 	<tr>
@@ -289,7 +288,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		     	<p>3. Admin inserts a name.</p>
 		     	<p>4. System ask for a password.</p>
 		     	<p>5. Admin inserts a password.</p>
-		     	<p>6. System sends to server a byte with value 14.</p>
+		     	<p>6. System sends to server a byte with value 13.</p>
 			<p>7. Server interprets the the byte value.</p>
 			<p>8. Server prepares to read the credentials.</p>
 			<p>9. System sends the credentials.</p>
@@ -346,7 +345,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		<td> 	<p>1. Admin clicks in "Delete Incidence Admin".</p>
 		     	<p>2. System asks for admin name.</p>
 		     	<p>3. Admin inserts the name.</p>
-		  	<p>4. System sends to server a byte with value 15.</p>
+		  	<p>4. System sends to server a byte with value 14.</p>
 			<p>5. Server interprets the the byte value.</p>
 			<p>6. Server prepares to read administrator's name.</p>
 			<p>7. System sends the name.</p>
