@@ -898,3 +898,12 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <p align="center"
   <img src="/img/secuencia/client/3.1.jpg" height="500" width="800"/>
 </p>
+
+</br>
+
+### Creates New Incidence CU 3.2
+
+</br>
+<p align="center"
+  <img src="/img/secuencia/client/3.2.jpg" height="500" width="800"/>
+</p>
