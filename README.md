@@ -798,8 +798,10 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <p>Client Aplication</p>
 <p>Threads:</>
 <ul>
-  <li>hiloChat</li>
-  <li>  This thread will be receiving messages from the chat</li>
+  <li>
+	<p>hiloChat</p>
+  	<p>This thread will be receiving messages from the chat</p>
+  </li>
 </ul>
 
 </br>
@@ -808,20 +810,30 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <p>Client Aplication</p>
 <p>Threads:</>
 <ul>
-  <li>ThreadCliente</li>
-  <li>  This thread will be receiving messages from the chat</li>
+  <li>
+	<p>ThreadCliente</p>
+  	<p>This thread will be receiving messages from the chat</p>
+</li>
   
-  <li>ThreadAdminLogin</li>
-  <li></li>
+  <li>
+	<p>ThreadAdminLogin
+  	<p></p>
+</li>
   
-  <li>ThreadConfChat</li>
-  <li></li>
+  <li>
+	<p>ThreadConfChat</p>
+	<p></p>
+</li>
   
-  <li>ThreadIncidenceAdmin</li>
-  <li></li>
+  <li>
+	<p>ThreadIncidenceAdmin</p>
+	<p></p>
+  </li>
   
-  <li>ThreadSystemAdmin</li>
-  <li></li>
+  <li>
+	<p>ThreadSystemAdmin</p>
+  	<p></p>
+  </li>
 </ul>
 
 
