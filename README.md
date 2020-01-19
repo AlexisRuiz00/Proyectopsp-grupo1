@@ -322,13 +322,13 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> 	<p>1. Admin selects an Incidence admin from the list</p>
+		<td> 	<p>1. Admin selects an Incidence admin from the list.</p>
 			<p>2. Admin clicks in "Delete".</p>
 		  	<p>3. System sends to server a byte with value 14.</p>
 			<p>4. Server interprets the the byte value.</p>
 			<p>5. Server prepares to read administrator's name.</p>
 			<p>6. System sends the name.</p>
-			<p>7. Server recieves the credentias, deletes administrator and sends back a message "Adminstrator created".</p>
+			<p>7. Server recieves the credentials, deletes administrator and sends back a message "Adminstrator created".</p>
 		</td>
  	</tr>
 	<tr>
