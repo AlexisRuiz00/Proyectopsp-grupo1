@@ -27,6 +27,9 @@
 > **[4- Actividad 5: Interfaz de la aplicación.](#4)**
 >
 > **[5- Actividad 6: Hilos.](#5)**
+>
+> **[6- Actividad 7: Diagramas de secuencia.](#6)**
+
 
 </br>
 </br>
@@ -784,13 +787,75 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 <p>Admin Aplication</p>
 <p>Threads:</>
-ol>
+<ol>
   <li>hiloChat</li>
 </ol>
 
 
 
 
+</br>
+</br>
+</br>
+</br>
+<a name="6"></a>
+
+# ACTIVIDAD 7: Diagramas de secuencia
+</br>
+</br>
+
+## Admin
+</br>
+</br>
+
+
+### AdminLogin CU 1.0
+</br>
+<p align="center"
+  <img src="/img/secuencia/adminLogin.jpg" height="500" width="800"/>
+</p>
+
+</br>
+</br>
+
+##System Admin
+
+</br>
+### AdminLogin CU 1.1
+<p align="center"
+  <img src="/img/secuencia/sysAdmin/1.1.jpg" height="500" width="800"/>
+</p>
+
+</br>
+### AdminLogin CU 1.2
+<p align="center"
+  <img src="/img/secuencia/sysAdmin/1.2.jpg" height="500" width="800"/>
+</p>
+
+</br>
+### AdminLogin CU 1.3
+<p align="center"
+  <img src="/img/secuencia/sysAdmin/1.3.jpg" height="500" width="800"/>
+</p>
+
+</br>
+### AdminLogin CU 1.4
+<p align="center"
+  <img src="/img/secuencia/sysAdmin/1.4.jpg" height="500" width="800"/>
+</p>
 
 
 
+
+
+</br>
+</br>
+
+##Client
+</br>
+</br>
+### ClientLogin CU 3.1
+</br>
+<p align="center"
+  <img src="/img/secuencia/client/3.1.jpg" height="500" width="800"/>
+</p>
