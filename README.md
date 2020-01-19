@@ -788,8 +788,10 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <p>Admin Aplication</p>
 <p>Threads:</>
 <ul>
-  <li>hiloChat</li>
-  <li>  This thread will be receiving messages from the chat</li>
+  <li>
+	<p>hiloChat</p>
+  	<p>This thread will be receiving messages from the chat</p>
+  </li>
 </ul>
 
 </br>
