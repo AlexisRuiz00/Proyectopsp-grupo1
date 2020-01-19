@@ -134,10 +134,15 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 				<p>8. System creates a socket and sends a byte to the server with the admin rol</p>		
 				<p>9. Server interprets the byte recieved</p>
 				<p>	if rol==Incidence Admin</p>
-				<p>	9.1. Server sends an arraylist with all the linked incidences</p>
-				<p>10. System shows the view of the rol logged</p>
-				<p>	if rol==Incidence Admin</p>
-				<p>	10.1. System charge all the incidences linked</p>
+				<p>	   9.1. Server sends an arraylist with all the linked incidences</p>
+				<p>        10. System creates an IncidenceAdminView</p>
+				<p>	   11. System charge incidences.
+				<p>	   12. System shows view.</p>
+				<p>	if rol==System Admin</p>
+				<p>	   9.1.  Server sends an arraylist with all the Incidence Admins</p>
+				<p>	   10. System creates a SystemAdminView.</p>
+				<p>	   11. System charge Incidence Admins.
+				<p>	   12. System shows view.</p>
 		</td>
  	</tr>
 	<tr>
