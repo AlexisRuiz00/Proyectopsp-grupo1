@@ -789,9 +789,40 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <p>Threads:</>
 <ol>
   <li>hiloChat</li>
+  <li>  This thread will be receiving messages from the chat</li>
 </ol>
 
+</br>
+</br>
 
+<p>Client Aplication</p>
+<p>Threads:</>
+<ol>
+  <li>hiloChat</li>
+  <li>  This thread will be receiving messages from the chat</li>
+</ol>
+
+</br>
+</br>
+
+<p>Client Aplication</p>
+<p>Threads:</>
+<ol>
+  <li>ThreadCliente</li>
+  <li>  This thread will be receiving messages from the chat</li>
+  
+  <li>ThreadAdminLogin</li>
+  <li></li>
+  
+  <li>ThreadConfChat</li>
+  <li></li>
+  
+  <li>ThreadIncidenceAdmin</li>
+  <li></li>
+  
+  <li>ThreadSystemAdmin</li>
+  <li></li>
+</ol>
 
 
 </br>
@@ -823,28 +854,28 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 </br>
 
-### AdminLogin CU 1.1
+### Insterts SQL Statement CU 1.1
 <p align="center">
   <img src="/img/secuencia/sysAdmin/1.1.jpg" height="500" width="800"/>
 </p>
 
 </br>
 
-### AdminLogin CU 1.2
+### Creates Table CU 1.2
 <p align="center">
   <img src="/img/secuencia/sysAdmin/1.2.jpg" height="500" width="800"/>
 </p>
 
 </br>
 
-### AdminLogin CU 1.3
+### Creates New Incidence Admin CU 1.3
 <p align="center">
   <img src="/img/secuencia/sysAdmin/1.3.jpg" height="500" width="800"/>
 </p>
 
 </br>
 
-### AdminLogin CU 1.4
+### Deletes Incidence Admin CU 1.4
 <p align="center">
   <img src="/img/secuencia/sysAdmin/1.4.jpg" height="500" width="800"/>
 </p>
@@ -856,7 +887,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-##Client
+## Client
 
 </br>
 </br>
