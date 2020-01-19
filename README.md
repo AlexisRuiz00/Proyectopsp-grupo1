@@ -809,7 +809,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-<p>Client Aplication</p>
+<p>Server Aplication</p>
 <p>Threads:</>
 <ul>
   <li>
