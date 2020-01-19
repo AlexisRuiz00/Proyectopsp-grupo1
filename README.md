@@ -205,70 +205,11 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 <br>
 <br>
-
+		
 <table>
 	<tr>
 		<td><b>Identifier:</b></td>
 		<td>CU1.2</td>
- 	</tr>
-	<tr>
-		<td><b>Actors:</b></td>
-		<td>System administrator</td>
- 	</tr>
-	<tr>
-		<td><b>Descripction:</b></td>
-		<td>System administrator deletes a database</td>
- 	</tr>
- 	<tr>
-  		<td><b>Precondition:</b></td>
-   		<td>Admin is logged in the system as system administrator</td>
- 	</tr>
-	<tr>
-  		<td><b>Normal Sequence:</b></td>
-		<td> 	<p>1. Admin clicks in "Delete Database".</p>
-		     	<p>2. System asks for database name.</p>
-		     	<p>3. Admin inserts the name.</p>
-		   	<p>4. System sends to server a byte with value 12.</p>
-			<p>5. Server interprets the the byte value.</p>
-			<p>6. Server prepares to read the database to delete.</p>
-			<p>7. System sends the database name.</p>
-			<p>8. Server recieves the name and deletes it.</p>
-			<p>9. Server sends back a message "Database deleted"</p>
-		</td>
- 	</tr>
-	<tr>
-  		<td><b>Postcondition:</b></td>
-   		<td>Nothing</td>
- 	</tr>
-	<tr>
-  		<td>
-		    <p><b>Alternative 1</b></p>
-		    <p>Database doesn't exists</p>
-		</td>
-		<td>
-		    <p>8. Server sends back a message "Database doesn't exist"</p>
-		    <p>9. Systems shows the message.</p>
-		    <p>10. System returns to main menu.</p>
-		</td>
- 	</tr>
-	<tr>
-  		<td>
-		    <p><b>Alternative 2</b></p>
-		    <p>Admin press cancel.</p>
-		</td>
-		<td><p>3. Admin press cancel.</p>
-		    <p>4. System returns to main menu.</p>
-		</td>
- 	</tr>
-</table>
-
-<br>
-<br>
-					
-<table>
-	<tr>
-		<td><b>Identifier:</b></td>
-		<td>CU1.3</td>
  	</tr>
 	<tr>
 		<td><b>Actors:</b></td>
@@ -327,7 +268,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <table>
 	<tr>
 		<td><b>Identifier:</b></td>
-		<td>CU1.4</td>
+		<td>CU1.3</td>
  	</tr>
 	<tr>
 		<td><b>Actors:</b></td>
@@ -386,7 +327,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <table>
 	<tr>
 		<td><b>Identifier:</b></td>
-		<td>CU1.5</td>
+		<td>CU1.4</td>
  	</tr>
 	<tr>
 		<td><b>Actors:</b></td>
