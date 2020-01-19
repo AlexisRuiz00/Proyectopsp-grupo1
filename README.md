@@ -155,8 +155,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		     <p>Admin inserts a non valid credentials</p>
 		</td>
 		<td>
-			<p>8. Server doesn't find any administrator whith the recieved credentials</p>
-		     	<p>9. Server sends back an empty String</p>
+			<p>5. Server doesn't find any administrator whith the recieved credentials</p>
+		     	<p>6. Server sends back an empty String</p>
+			<p>7. System shows a message "User/Password is wrong"
 		</td>
  	</tr>
 
