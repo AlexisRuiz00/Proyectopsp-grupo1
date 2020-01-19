@@ -811,40 +811,41 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 ### AdminLogin CU 1.0
 </br>
-<p align="center"
+
+<p align="center">
   <img src="/img/secuencia/adminLogin.jpg" height="500" width="800"/>
 </p>
 
 </br>
 </br>
 
-##System Admin
+## System Admin
 
 </br>
 
 ### AdminLogin CU 1.1
-<p align="center"
+<p align="center">
   <img src="/img/secuencia/sysAdmin/1.1.jpg" height="500" width="800"/>
 </p>
 
 </br>
 
 ### AdminLogin CU 1.2
-<p align="center"
+<p align="center">
   <img src="/img/secuencia/sysAdmin/1.2.jpg" height="500" width="800"/>
 </p>
 
 </br>
 
 ### AdminLogin CU 1.3
-<p align="center"
+<p align="center">
   <img src="/img/secuencia/sysAdmin/1.3.jpg" height="500" width="800"/>
 </p>
 
 </br>
 
 ### AdminLogin CU 1.4
-<p align="center"
+<p align="center">
   <img src="/img/secuencia/sysAdmin/1.4.jpg" height="500" width="800"/>
 </p>
 
