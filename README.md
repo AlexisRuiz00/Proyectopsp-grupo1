@@ -504,9 +504,13 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
  	</tr>
 	<tr>
   		<td><b>Normal Sequence:</b></td>
-		<td> <p>1. The incidence administrator choose an incidence.</p>
-		     <p>2. The application show all the incidence details.</p>
-		     <p>3. The administrator mark the selected incidence as pending.</p>	
+		<td>	<p>1. The incidence administrator choose an incidence.</p>
+		    	<p>2. The application show all the incidence details.</p>
+		    	<p>3. The administrator mark the selected incidence as pending.</p>
+			<p>4. System sends a byte to the server with value 24</p>
+			<p>5. Server prepares to recieve an Incidence Object</p>
+			<p>6. System sends incidence changed.</p>
+			<p>7. Server updates Incidence recieved.</p> 
 		</td>
  	</tr>
 	<tr>
