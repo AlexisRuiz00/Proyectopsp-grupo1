@@ -818,14 +818,19 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </li>
   
   <li>
-	<p>ThreadAdminLogin
-  	<p></p>
+	<p>ThreadAdminLogin</p>
+  	<p>
+		This thread is created when an admin tries to</br>
+		make a login, the thread will execute the method</br>
+		findUser() from the server and sends back the admin</br>
+		rol to the application.
+	</p>
 </li>
   
   <li>
 	<p>ThreadConfChat</p>
-	<p>Configure the multicast socket and send
-	   it to the client and administrator who
+	<p>Configure the multicast socket and send</br>
+	   it to the client and administrator who</br>
 	   will communicate through the chat
 	</p>
 </li>
