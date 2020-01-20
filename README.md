@@ -785,7 +785,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 # ACTIVIDAD 6: Hilos
 
-<p>Admin Aplication</p>
+### <p>Admin Aplication</p>
 <p>Threads:</>
 <ul>
   <li>
@@ -797,7 +797,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-<p>Client Aplication</p>
+### <p>Client Aplication</p>
 <p>Threads:</>
 <ul>
   <li>
@@ -808,8 +808,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 </br>
 </br>
+</br>
 
-<p>Server Aplication</p>
+### <p>Server Aplication</p>
 <p>Threads:</>
 <ul>
   <li>
@@ -826,16 +827,16 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 		rol to the application.
 	</p>
 </li>
-  
-  <li>
+</br>
+<li>
 	<p>ThreadConfChat</p>
 	<p>Configure the multicast socket and send</br>
 	   it to the client and administrator who</br>
 	   will communicate through the chat
 	</p>
 </li>
-  
-  <li>
+</br>  
+<li>
 	<p>ThreadIncidenceAdmin</p>
 	<p>This Thread will be created every time an Incidence</br>
 	   admin connects to the server and will act as</br>
@@ -844,7 +845,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 	   make depending on the byte recieved.</br>
 	</p>
   </li>
-  
+  </br>
   <li>
 	<p>ThreadSystemAdmin</p>
   	<p>This Thread will be created every time a System</br>
@@ -852,7 +853,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 	   controller of that conection. The thread has a</br>
 	   switch in its which will decide what operation</br>
 	   make depending on the byte recieved</p>
-  </li>
+</li>
 </ul>
 
 
