@@ -824,17 +824,29 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   
   <li>
 	<p>ThreadConfChat</p>
-	<p></p>
+	<p>Configure the multicast socket and send
+	   it to the client and administrator who
+	   will communicate through the chat
+	</p>
 </li>
   
   <li>
 	<p>ThreadIncidenceAdmin</p>
-	<p></p>
+	<p>This Thread will be created every time an Incidence</br>
+	   admin connects to the server and will act as</br>
+	   controller of that conection. The thread has a</br> 
+	   switch in its which will decide what operation</br>
+	   make depending on the byte recieved.</br>
+	</p>
   </li>
   
   <li>
 	<p>ThreadSystemAdmin</p>
-  	<p></p>
+  	<p>This Thread will be created every time a System</br>
+	   admin connects to the server and will act as</br>
+	   controller of that conection. The thread has a</br>
+	   switch in its which will decide what operation</br>
+	   make depending on the byte recieved</p>
   </li>
 </ul>
 
