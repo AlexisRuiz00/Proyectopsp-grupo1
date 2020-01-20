@@ -793,7 +793,6 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   	<p>This thread will be receiving messages from the chat</p>
   </li>
 </ul>
-
 </br>
 </br>
 
@@ -805,8 +804,6 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   	<p>This thread will be receiving messages from the chat</p>
   </li>
 </ul>
-
-</br>
 </br>
 </br>
 
@@ -821,7 +818,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 	   which will decide what operation make depending</br>
 	   on the byte recieved.</p>
 </li>
-  </b>
+  </br>
   <li>
 	<p>ThreadAdminLogin</p>
   	<p>
