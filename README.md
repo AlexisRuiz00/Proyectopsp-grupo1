@@ -786,7 +786,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 # ACTIVIDAD 6: Hilos
 
 ### <p>Admin Aplication</p>
-<p>Threads:</>
+<p><b>Threads:</b></p>
 <ul>
   <li>
 	<p>hiloChat</p>
@@ -798,7 +798,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 ### <p>Client Aplication</p>
-<p>Threads:</>
+<p></b>Threads:</b><p/>
 <ul>
   <li>
 	<p>hiloChat</p>
@@ -811,7 +811,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 ### <p>Server Aplication</p>
-<p>Threads:</>
+<p></b>Threads:</b></p>
 <ul>
   <li>
 	<p>ThreadCliente</p>
