@@ -815,9 +815,13 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 <ul>
   <li>
 	<p>ThreadCliente</p>
-  	<p>This thread will be receiving messages from the chat</p>
+  	<p>This Thread will be created every time a client</br>
+	   connects to the server and will act as controller</br> 
+	   of that conection. The thread has a switch in its</br>
+	   which will decide what operation make depending</br>
+	   on the byte recieved.</p>
 </li>
-  
+  </b>
   <li>
 	<p>ThreadAdminLogin</p>
   	<p>
