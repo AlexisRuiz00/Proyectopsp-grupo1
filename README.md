@@ -414,11 +414,11 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   		<td><b>Normal Sequence:</b></td>
 		<td>	<p>1. The incidence administrator choose an incidence.</p>
 		    	<p>2. The application show all the incidence details.</p>
-		    	<p>3. Admin close the selected incidence.</p>
-			<p>4. System sends to the server a byte with value 22</p>
-			<p>5. Server prepares to recieve the incidence id that is going to be closed</p>
-			<p>6. System sends incidence's id.</p>
-			<p>7. Server recieve inciden's id and deletes it.</p>
+		    	<p>3. The administrator mark the selected incidence as close.</p>
+			<p>4. System sends a byte to the server with value 22</p>
+			<p>5. Server prepares to recieve an Incidence Object</p>
+			<p>6. System sends incidence changed.</p>
+			<p>7. Server updates Incidence recieved.</p> 
 		</td>
  	</tr>
 	<tr>
