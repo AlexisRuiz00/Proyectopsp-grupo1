@@ -926,8 +926,40 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </p>
 
 
+</br>
+</br>
 
+## Incidence Admin
 
+</br>
+
+### Reads an Incidence CU 2.1
+<p align="center">
+  <img src="/img/secuencia/incidenceAdmin/2.1.jpg" height="500" width="800"/>
+</p>
+
+</br>
+
+### Close an Incidence CU 2.2
+<p align="center">
+  <img src="/img/secuencia/incidenceAdmin/2.2.jpg" height="500" width="800"/>
+</p>
+
+</br>
+
+### Assing an Incidence to Another Admin CU 2.3
+<p align="center">
+  <img src="/img/secuencia/incidenceAdmin/2.3.jpg" height="500" width="800"/>
+</p>
+
+</br>
+
+### Marks an Incidence as Pending CU 2.4
+<p align="center">
+  <img src="/img/secuencia/incidenceAdmin/2.4.jpg" height="500" width="800"/>
+</p>
+
+</br>
 
 </br>
 </br>
@@ -951,4 +983,25 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 <p align="center">
   <img src="/img/secuencia/client/3.2.jpg" height="500" width="800"/>
+</p>
+
+### Reads an Incidence. CU 3.3
+
+</br>
+<p align="center">
+  <img src="/img/secuencia/client/3.3.jpg" height="500" width="800"/>
+</p>
+
+### Answer an Incidence CU 3.4
+
+</br>
+<p align="center">
+  <img src="/img/secuencia/client/3.4.jpg" height="500" width="800"/>
+</p>
+
+### Opens Support Chat CU 3.5
+
+</br>
+<p align="center">
+  <img src="/img/secuencia/client/3.5.jpg" height="500" width="800"/>
 </p>
