@@ -75,14 +75,27 @@ public class MainCliente implements ActionListener {
             Incidence incidence = new Incidence("p@hotmail.com","Consult");
             oop.writeObject(incidence);
 
-
             try {
 
                 ObjectInputStream finput = new ObjectInputStream(s.getInputStream());
-                incidences =  (ArrayList<Incidence>)finput.readObject();
-                viewClient = new ViewClient(incidences);
-                viewClientLogin.dispose();
-                viewClient.show();
+
+                try {
+                    incidences = (ArrayList<Incidence>) finput.readObject();
+                    if (!(incidences == null)) {
+
+                        viewClient = new ViewClient(incidences);
+                        System.out.println(incidences.get(0).getType());
+                        viewClientLogin.dispose();
+                        viewClient.show();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "EL EMAIL INTRODUCIDO YA ESTÁ CONECTADO AL SERVIDOR\nPRUEBE A CONECTARSE MÁS TARDE\n",
+                                "<<MENSAJE DE ERROR:2>>", JOptionPane.ERROR_MESSAGE);
+                    }
+                }catch (NullPointerException e){
+                    JOptionPane.showMessageDialog(null, "EL EMAIL INTRODUCIDO YA ESTÁ CONECTADO AL SERVIDOR\nPRUEBE A CONECTARSE MÁS TARDE\n" + e.getMessage(),
+                            "<<MENSAJE DE ERROR:2>>", JOptionPane.ERROR_MESSAGE);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
