@@ -1,10 +1,17 @@
 package View;
 
+import Controller.MainCliente;
 
 /**
  * @author usuario
  */
 public class ViewClientLogin extends javax.swing.JFrame {
+
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
+
 
     public ViewClientLogin() {
         setResizable(false);
@@ -20,13 +27,14 @@ public class ViewClientLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Mail:");
-        jButton1.setText("New");
-        jButton2.setText("My incidences");
+        jButton1.setText("Enter");
+
+        jButton1.setActionCommand("Enter");
+        jButton1.addActionListener(MainCliente.getClientController());
 
     }
 
@@ -43,8 +51,7 @@ public class ViewClientLogin extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jTextField1))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addGap(0, 138, Short.MAX_VALUE)
-                                                .addComponent(jButton2)
+                                                .addGap(0, 158, Short.MAX_VALUE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jButton1)))
                                 .addContainerGap())
@@ -59,9 +66,7 @@ public class ViewClientLogin extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jButton1)
-                                        .addComponent(jButton2))
-                                .addContainerGap(28, Short.MAX_VALUE))
-        );
+                                )));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,10 +110,6 @@ public class ViewClientLogin extends javax.swing.JFrame {
         });
     }
 
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+
 }
 

@@ -1,6 +1,6 @@
 package Controller;
 
-import Model_Admin.Incidence;
+import Model.Incidence;
 
 import java.io.*;
 import java.net.Socket;

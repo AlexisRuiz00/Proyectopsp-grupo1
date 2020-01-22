@@ -1,16 +1,26 @@
-package Model_Client;
+package Model;
 
-    public class Incidence {
+import java.io.Serializable;
 
+public class Incidence implements Serializable {
+
+    static final long serialVersionUID = 42L;
     private int id;
-    private String IncidenceAdmin;
+    private String incidenceAdmin;
     private String mail;
     private String type;
     private String body;
 
-    public Incidence(int id, String IncidenceAdmin, String mail,String type,String body) {
+    public Incidence(String mail, String type) {
+        this.mail = mail;
+        this.type = type;
+    }
+
+
+
+        public Incidence(int id, String IncidenceAdmin, String mail, String type, String body) {
         this.id = id;
-        this.IncidenceAdmin = IncidenceAdmin;
+        this.incidenceAdmin = IncidenceAdmin;
         this.mail = mail;
         this.type = type;
         this.body = body;
@@ -23,7 +33,7 @@ package Model_Client;
         return mail;
     }
     public String getName() {
-        return IncidenceAdmin;
+        return incidenceAdmin;
     }
     public String getType() {
         return type;
@@ -36,5 +46,11 @@ package Model_Client;
     }
     public void setBody(String body) {
         this.body = body;
+    }
+
+
+    @Override
+    public String toString() {
+        return ""+this.id;
     }
 }

@@ -1,5 +1,8 @@
 package Controller;
 
+
+import Model.Incidence;
+
 import javax.swing.*;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -33,11 +36,11 @@ public class Server extends JFrame {
 
 
     private void initComponents() {
-        panel1 = new javax.swing.JPanel();
-        scrollPane1 = new javax.swing.JScrollPane();
-        logArea = new javax.swing.JTextArea();
+        panel1 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        logArea = new JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         logArea.setEditable(false);
         logArea.setColumns(20);
@@ -45,26 +48,26 @@ public class Server extends JFrame {
         scrollPane1.setViewportView(logArea);
     }
     public void chargeLayout() {
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        GroupLayout panel1Layout = new GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
-                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
-                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -129,17 +132,13 @@ public class Server extends JFrame {
         s.admins = new ArrayList<>();
 
 
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        String hora = dateFormat.format(date);
-
         s.setVisible(true);
-        s.getLogArea().append(hora + " - Servidor iniciado. \n");
+        s.getLogArea().append(s.getHour() + " - Servidor iniciado. \n");
         Thread.sleep(1000);
-        s.getLogArea().append(hora + " - Esperando respuesta... \n");
+        s.getLogArea().append(s.getHour() + " - Esperando respuesta... \n");
 
         //SE CREA EL SOCKET PARA RECIVIR LAS INCIDENCIAS
-        ServerSocket socket = new ServerSocket(1300);
+        ServerSocket socket = new ServerSocket(13300);
 
         while (true) {
             Socket recieve = socket.accept();
@@ -150,23 +149,27 @@ public class Server extends JFrame {
             //INCIDENCE ADMIN, SI ES UNA CONEXIÓN, O CIERRE DE CONEXIÓN PORQUE
             // HAY QUE QUITARLOS DEL ARRAYLIST ADMIN.
 
-            Byte rol = read.readByte();
+            System.out.println("Entra");
+            int rol = read.readInt();
+            System.out.println("Entra2 "+rol);
             switch (rol){
+
                 //Entra cliente
-                case 1:      ThreadCliente ThreadCliente = new ThreadCliente(recieve);
+                case 1:
+                             s.getLogArea().append(s.getHour()+" - Conectando cliente...\n");
+                             ThreadCliente ThreadCliente = new ThreadCliente(recieve);
                              ThreadCliente.start();
-                             s.getLogArea().append("Conectando cliente...\n");
                              break;
 
                 //Se abre chat
                 case 2:      ThreadConfChat tcc = new ThreadConfChat(recieve);
                              tcc.start();
-                             s.getLogArea().append("Configurando chat...\n");
+                             s.getLogArea().append(" - Configurando chat...\n");
                              break;
 
                 //Entra IncidenceAdmin
                 case 3:      s.admins.add(recieve);
-                             s.getLogArea().append("Conectando Administrador de Incidencias...\n");
+                             s.getLogArea().append(" - Conectando Administrador de Incidencias...\n");
                              ThreadIncidenceAdmin threadIncidenceAdmin = new ThreadIncidenceAdmin(recieve);
                              threadIncidenceAdmin.start();
                              break;
@@ -174,15 +177,16 @@ public class Server extends JFrame {
                 //Cierra IncidenceAdmin
                 case 4:      s.removeAdmin(recieve.getInetAddress());
                              s.direcciones.remove(recieve.getInetAddress().getHostName());
-                             s.getLogArea().append("Desconectando Administrador de Incidencias...\n");
+                             s.getLogArea().append(" - Desconectando Administrador de Incidencias...\n");
                              break;
 
                 //Entra SysAdmin
-                case 5:     s.getLogArea().append("Conectando Administrador de Sistema...\n");
+                case 5:     s.getLogArea().append(" - Conectando Administrador de Sistema...\n");
                             ThreadSystemAdmin threadSystemAdmin = new ThreadSystemAdmin(recieve);
                             threadSystemAdmin.start();
 
-                default:    break;
+                default:
+                    System.out.println(" - Sale");  break;
             }
         }
     }
@@ -199,8 +203,39 @@ public class Server extends JFrame {
         this.logArea = logArea;
     }
 
-    private javax.swing.JPanel panel1;
-    private javax.swing.JScrollPane scrollPane1;
-    private javax.swing.JTextArea logArea;
+    private JPanel panel1;
+    private JScrollPane scrollPane1;
+    private JTextArea logArea;
+
+
+
+
+    public synchronized ArrayList<Incidence> get() {
+        ArrayList<Incidence> incidences = new ArrayList<>();
+        incidences.add(new Incidence(1,"Juan","E@hotmail.com","Consult","PRUEBA"));
+
+        // CONSULTA DE LA BASE DE DATOS PARA LLENAR LA LISTA DE INCIDENCIAS
+        return incidences;
+    }
+    public synchronized void put(Incidence i) {
+
+
+        // INSERTA CONSULTA EN BASE DE DATOS
+    }
+
+
+
+
+
+
+
+    public String getHour(){
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Date date = new Date();
+        String hora = dateFormat.format(date);
+        return hora;
+    }
+
+
 
 }

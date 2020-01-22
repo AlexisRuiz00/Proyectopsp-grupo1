@@ -1,4 +1,4 @@
-package Model_Server;
+package Model;
 
 public class ATCSJDBC {
 }

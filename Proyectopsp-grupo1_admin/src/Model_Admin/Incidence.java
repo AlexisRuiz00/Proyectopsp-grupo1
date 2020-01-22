@@ -3,14 +3,14 @@ package Model_Admin;
 public class Incidence {
 
     private int id;
-    private IncidenceAdmin name;
+    private String incidenceAdmin;
     private String mail;
     private String type;
     private String body;
 
-    public Incidence(int id, IncidenceAdmin name, String mail,String type,String body) {
+    public Incidence(int id, String incidenceAdmin, String mail, String type, String body) {
         this.id = id;
-        this.name = name;
+        this.incidenceAdmin = incidenceAdmin;
         this.mail = mail;
         this.type = type;
         this.body = body;
@@ -22,8 +22,8 @@ public class Incidence {
     public String getMail() {
         return mail;
     }
-    public IncidenceAdmin getName() {
-        return name;
+    public String getIncidenceAdmin() {
+        return incidenceAdmin;
     }
     public String getType() {
         return type;
