@@ -212,7 +212,7 @@ public class Server extends JFrame {
 
     public synchronized ArrayList<Incidence> get() {
         ArrayList<Incidence> incidences = new ArrayList<>();
-        incidences.add(new Incidence(1,"Juan","E@hotmail.com","Consult","PRUEBA"));
+        incidences.add(new Incidence(1,"Juan","E@hotmail.com","Consult","PRUEBA\nMASCOSAS\nES UNA GRAN PRUEABA\nSI"));
 
         // CONSULTA DE LA BASE DE DATOS PARA LLENAR LA LISTA DE INCIDENCIAS
         return incidences;
@@ -236,6 +236,10 @@ public class Server extends JFrame {
         return hora;
     }
 
+
+    public void writeCloseClient(){
+        s.getLogArea().append(getHour()+" - Cliente desconectado\n");
+    }
 
 
 }

@@ -14,12 +14,10 @@ public class ThreadCliente extends Thread{
     private Incidence i;
     private Socket socket;
     private boolean running;
-    boolean newThread;
-
+    private String email;
 
     public ThreadCliente(Socket socket) {
         this.socket = socket;
-        newThread = true;
         s = Server.getServer();
 
 
@@ -53,6 +51,7 @@ public class ThreadCliente extends Thread{
             else {
                 // Añadimos el email a la cola
                 s.getCola().add(i.getMail());
+                this.email = i.getMail();
 
                 while (running) {
 
@@ -61,6 +60,8 @@ public class ThreadCliente extends Thread{
                     if (i.getType().equals("-1")) {
                         socket.close();
                         running = false;
+                        s.getCola().remove(email);
+                        s.writeCloseClient();
 
                     } else {
                         //SI LA INCIDENCIA SE MARCA COMO SONSULTA
@@ -79,9 +80,10 @@ public class ThreadCliente extends Thread{
                         } else if (i.getType().equals("Nuevo")) {
                             s.put(i); // Da de alta la consulta que recibe en la base de datos
                         }
+                        i = (Incidence) entradaIncidencia.readObject();
                     }
 
-                    i = (Incidence) entradaIncidencia.readObject();
+
                 }//endWhile
 
             }//endElse
