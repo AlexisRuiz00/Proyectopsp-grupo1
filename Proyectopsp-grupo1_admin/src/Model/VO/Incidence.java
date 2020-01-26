@@ -1,6 +1,8 @@
-package Model;
+package Model.VO;
 
-public class Incidence {
+import java.io.Serializable;
+
+public class Incidence implements Serializable {
 
     private int id;
     private String incidenceAdmin;

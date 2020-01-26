@@ -32,4 +32,12 @@ public class Model {
         return repository.updateIncidence(incidence);
     }
 
+    public String getLogin(ArrayList<String> credentials) {
+        return repository.getLogin(credentials);
+    }
+
+    public ArrayList<Incidence> getAdminIncidences(String adminName){
+        return repository.getAdminIncidences(adminName);
+    }
+
 }

@@ -6,7 +6,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class ThreadIncidenceAdmin extends Thread {
+public class ThreadAdminLogin extends Thread {
 
     private ObjectInputStream objectInput;
     private ObjectOutputStream objectOutput;
@@ -17,11 +17,12 @@ public class ThreadIncidenceAdmin extends Thread {
     private Socket socket;
     private boolean running;
 
-    public ThreadIncidenceAdmin(Socket socket) {
+    public ThreadAdminLogin(Socket socket) {
+        this.s = Server.getServer();
         this.socket = socket;
-        s = Server.getServer();
 
         try {
+
             objectInput = new ObjectInputStream(socket.getInputStream());
             objectOutput = new ObjectOutputStream(socket.getOutputStream());
             dataInput = new DataInputStream(socket.getInputStream());
@@ -38,29 +39,16 @@ public class ThreadIncidenceAdmin extends Thread {
     public void run() {
 
         try {
-            String username = (String) objectInput.readObject();
 
-            ArrayList<Incidence> adminIncidence = s.getAdminIncidences(username);
+            ArrayList<String> credentials = (ArrayList<String>) objectInput.readObject();
+            String role = s.getLogin(credentials);
 
-        } catch (IOException e) {
+            objectOutput.writeObject(role);
+
+            socket.close();
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        while (running) {
-
-            try {
-
-                //SE LEE EL PRIMER BYTE QUE DETERMI1NA LA ACCIÓN A REALIZAR
-                byte action = dataInput.readByte();
-
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
-
 }

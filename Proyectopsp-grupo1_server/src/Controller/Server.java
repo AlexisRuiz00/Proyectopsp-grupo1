@@ -3,6 +3,7 @@ package Controller;
 
 import Model.Model;
 import Model.VO.Incidence;
+import org.omg.CORBA.StringHolder;
 
 import javax.swing.*;
 import java.io.DataInputStream;
@@ -174,22 +175,22 @@ public class Server extends JFrame {
                              break;
 
                 //Entra IncidenceAdmin
-                case 3:      s.admins.add(recieve);
+                case 21:      s.admins.add(recieve);
                              s.getLogArea().append(" - Conectando Administrador de Incidencias...\n");
                              ThreadIncidenceAdmin threadIncidenceAdmin = new ThreadIncidenceAdmin(recieve);
                              threadIncidenceAdmin.start();
-                             break;
-
-                //Cierra IncidenceAdmin
-                case 4:      s.removeAdmin(recieve.getInetAddress());
-                             s.direcciones.remove(recieve.getInetAddress().getHostName());
-                             s.getLogArea().append(" - Desconectando Administrador de Incidencias...\n");
                              break;
 
                 //Entra SysAdmin
                 case 5:     s.getLogArea().append(" - Conectando Administrador de Sistema...\n");
                             ThreadSystemAdmin threadSystemAdmin = new ThreadSystemAdmin(recieve);
                             threadSystemAdmin.start();
+
+                case 10:
+                    s.getLogArea().append("Conectando Administrador...");
+                    ThreadAdminLogin threadAdminLogin = new ThreadAdminLogin(recieve);
+                    threadAdminLogin.start();
+
 
                 default:
                     System.out.println(" - Sale");  break;
@@ -228,10 +229,13 @@ public class Server extends JFrame {
         return s.model.updateIncidence(i);
     }
 
+    public synchronized String getLogin(ArrayList<String> credentials) {
+        return s.model.getLogin(credentials);
+    }
 
-
-
-
+    public synchronized ArrayList<Incidence> getAdminIncidences(String adminName){
+        return s.model.getAdminIncidences(adminName);
+    }
 
 
     public static String getHour(){

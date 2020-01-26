@@ -1,5 +1,10 @@
 package View;
 
+import Model.VO.Incidence;
+
+import javax.swing.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author David and Alexis
@@ -9,13 +14,13 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     /**
      * Creates new form ViewIncidenceAdmin
      */
-    public ViewIncidenceAdmin() {
+    public ViewIncidenceAdmin(ArrayList<Incidence> incidences) {
         this.setTitle("Incidences");
-        initComponents();
+        initComponents(incidences);
         chargeLayout();
     }
 
-    private void initComponents() {
+    private void initComponents(ArrayList<Incidence> incidences) {
 
         panelUno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -46,17 +51,12 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        listIncidences.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        });
+        listModel = new DefaultListModel<Incidence>();
+        for(Incidence i : incidences){
+            listModel.addElement(i);
+        }
+        listIncidences.setModel(listModel);
+        listIncidences.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listIncidences);
 
         jLabel1.setText("List of incidences:");
@@ -214,7 +214,7 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> listIncidences;
+    private javax.swing.JList<Incidence> listIncidences;
     private javax.swing.JMenu menu;
     private javax.swing.JMenuBar menuBarUno;
     private javax.swing.JMenuItem menuItemChat;
@@ -230,5 +230,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     private javax.swing.JTextArea arenaRespuesta;
     private javax.swing.JTextArea areaChat;
     private javax.swing.JTextField chatField;
+    private DefaultListModel<Incidence>  listModel;
 
 }

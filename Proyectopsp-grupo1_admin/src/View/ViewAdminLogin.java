@@ -2,6 +2,8 @@ package View;
 
 import Controller.MainAdmin;
 
+import java.util.ArrayList;
+
 /**
  * @author David and Alexis
  */
@@ -35,6 +37,14 @@ public class ViewAdminLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         botonAceptar.addActionListener(MainAdmin.getAdminController());
+    }
+
+    public ArrayList<String> getCredentials() {
+        ArrayList<String> credentials = new ArrayList<String>();
+        credentials.add(usernameField.getText());
+        credentials.add(passwordField.getText());
+
+        return credentials;
     }
 
     public void chargeLayout() {

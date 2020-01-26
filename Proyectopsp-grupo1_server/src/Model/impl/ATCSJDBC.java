@@ -158,8 +158,30 @@ public class ATCSJDBC implements Repository {
         }
     }
 
+    @Override
+    public String getLogin(ArrayList<String> credentials) {
 
+        String role = "";
 
+        try {
+
+            Conection conn = new Conection();
+            Statement statement = conn.getConn().createStatement();
+
+            ResultSet result = statement.executeQuery("select role from administrador where username = '" + credentials.get(0) +"' and password = '" + credentials.get(1) +"'");
+
+            if(result.next()) {
+
+                role = result.getString(1);
+
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return role;
+    }
 
 
 }

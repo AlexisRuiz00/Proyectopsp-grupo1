@@ -1,6 +1,7 @@
 package Controller;
 
-import Model.Incidence;
+import Model.VO.Incidence;
+import Model.VO.IncidenceAdmin;
 import View.ViewAdminLogin;
 import View.ViewIncidenceAdmin;
 import View.ViewNewIncidenceAdmin;
@@ -46,7 +47,7 @@ public class MainAdmin implements ActionListener, WindowListener {
 
     public static MainAdmin getAdminController() {
 
-        if(controller == null) {
+        if (controller == null) {
             controller = new MainAdmin();
         }
         return controller;
@@ -57,9 +58,13 @@ public class MainAdmin implements ActionListener, WindowListener {
 
         switch (actionEvent.getActionCommand()) {
 
-            case "Login": startApp();break;
-            case "Chat": viewNewIncidenceAdmin.openChat();
-            case "Exit": viewNewIncidenceAdmin.dispose();
+            case "Login":
+                startApp();
+                break;
+            case "Chat":
+                viewNewIncidenceAdmin.openChat();
+            case "Exit":
+                viewNewIncidenceAdmin.dispose();
 
         }
     }
@@ -73,29 +78,51 @@ public class MainAdmin implements ActionListener, WindowListener {
             s = new Socket("localhost", puerto);
             DataOutputStream foutput = new DataOutputStream(s.getOutputStream());
 
-            ArrayList<Incidence>incidences;
-            foutput.write(1);
+            String role;
+            foutput.writeInt(10);
 
             oop = new ObjectOutputStream(s.getOutputStream());
-            Incidence incidence = new Incidence(1, "Prueba", "p@hotmail.com","Consult", "AAAAAA");
-            oop.writeObject(incidence);
+
+            ArrayList<String> credentials;
+            credentials = viewAdminLogin.getCredentials();
+
+            oop.reset();
+            oop.writeObject(credentials);
 
             try {
 
                 ObjectInputStream finput = new ObjectInputStream(s.getInputStream());
 
                 try {
-                    incidences = (ArrayList<Incidence>) finput.readObject();
+                    role = (String) finput.readObject();
 
-                    if(!(incidences == null)) {
+                    switch (role) {
+                        case "IncidenceAdmin":
 
-                        viewIncidenceAdmin = new ViewIncidenceAdmin();
-                        viewAdminLogin.dispose();
-                        viewIncidenceAdmin.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El usuario que has introducido es incorrecto, por favor comprueba los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                            s = new Socket("localhost", puerto);
+                            foutput = new DataOutputStream(s.getOutputStream());
+                            finput = new ObjectInputStream(s.getInputStream());
+
+                            foutput.writeInt(21);
+                            oop.writeObject(viewAdminLogin.getCredentials().get(1));
+
+                            ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
+                            viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
+                            viewAdminLogin.dispose();
+                            viewIncidenceAdmin.setVisible(true);
+
+                            break;
+                        case "SystemAdmin":
+                            viewSystemAdmin = new ViewSystemAdmin();
+                            viewAdminLogin.dispose();
+                            viewSystemAdmin.setVisible(true);
+                            break;
+                        case "":
+                            JOptionPane.showMessageDialog(null, "El usuario que has introducido es incorrecto, por favor comprueba los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                            break;
                     }
-                }catch (NullPointerException e) {
+
+                } catch (NullPointerException e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "El usuario que has introducido es incorrecto, por favor comprueba los datos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -122,7 +149,7 @@ public class MainAdmin implements ActionListener, WindowListener {
     public void windowClosing(WindowEvent windowEvent) {
         try {
             oop.writeObject(new Incidence(2, "", "", "", ""));
-            ((JFrame)windowEvent.getSource()).dispose();
+            ((JFrame) windowEvent.getSource()).dispose();
         } catch (IOException e) {
             e.printStackTrace();
         }

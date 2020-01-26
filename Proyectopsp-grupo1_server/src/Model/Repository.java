@@ -15,4 +15,6 @@ public interface Repository {
     public Incidence saveClientIncidence(Incidence incidence);
     public Incidence updateIncidence(Incidence incidence);
 
+    public String getLogin(ArrayList<String> credentials);
+
 }
