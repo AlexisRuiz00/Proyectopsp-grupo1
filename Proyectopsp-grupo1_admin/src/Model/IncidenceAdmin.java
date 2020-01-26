@@ -1,6 +1,5 @@
-package Model_Admin;
+package Model;
 
-import Model_Server.Administrator;
 
 public class IncidenceAdmin extends Administrator {
 

@@ -1,6 +1,4 @@
-package Model_Admin;
-
-import Model_Server.Administrator;
+package Model;
 
 public class SystemAdmin extends Administrator {
 
