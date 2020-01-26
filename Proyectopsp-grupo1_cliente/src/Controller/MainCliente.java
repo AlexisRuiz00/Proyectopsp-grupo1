@@ -3,8 +3,11 @@ package Controller;
 import Model.Incidence;
 import View.ViewClient;
 import View.ViewClientLogin;
+import View.WriteIncidence;
 
 import javax.swing.*;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
@@ -13,7 +16,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Esta clase arranca y controla la aplicación
@@ -23,29 +29,31 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     public static MainCliente controller;
     private ViewClientLogin viewClientLogin;
     private ViewClient viewClient;
+    private WriteIncidence writeIncidence;
+    private String mail;
+    private ArrayList<Incidence> incidences;
     private static Socket s = null;
-    ObjectOutputStream oop;
+    private ObjectOutputStream oop;
+    private ObjectInputStream oip;
 
     private MainCliente(){
     }
-
-    public static void main(String[] args) {
-        getClientController();
-
-        controller.viewClientLogin = new ViewClientLogin();
-        controller.viewClientLogin.chargeLayout();
-        controller.viewClientLogin.show();
-
-
-
-    }
-
     public static MainCliente getClientController() {
         if (controller == null) {
             controller = new MainCliente();
         }
         return controller;
     }
+
+    public static void main(String[] args) {
+        getClientController();
+
+        controller.viewClientLogin = new ViewClientLogin();
+        controller.viewClientLogin.show();
+    }
+
+
+
 
 
 
@@ -58,6 +66,12 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             case "Enter": startApp();break;
             case "openChat": viewClient.openChat();break;
             case "closeChat": viewClient.closeChat();break;
+            case "replyIncidence": this.replyIncidence();break;
+            case "newIncidence":
+                                writeIncidence = new WriteIncidence();
+                                writeIncidence.show();break;
+
+            case "sendNewIncidence": this.sendIncidence();break;
 
         }
 
@@ -66,33 +80,31 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
 
     private void startApp(){
 
-        System.out.println("Entra");
         int puerto = 13300;
         try {
+            //CREATE SOCKET AND SEND INT 1 TO SERVER
             s = new Socket("localhost",puerto);
             DataOutputStream foutput = new DataOutputStream(s.getOutputStream());
-            System.out.println("Entra2");
 
             ArrayList<Incidence> incidences;
             foutput.writeInt(1);
-            System.out.println("Entra3");
 
-
+            //CREATE OBJECTOUTPUT WRITER, SEND CONSULT INCIDENCE AND WAITS TO RECIEVE INCIDENCES RELATED
             oop = new ObjectOutputStream(s.getOutputStream());
-            Incidence incidence = new Incidence("p@hotmail.com","Consult");
+            Incidence incidence = new Incidence(viewClientLogin.getEmail(),"Consult");
             oop.writeObject(incidence);
 
             try {
-
-                ObjectInputStream finput = new ObjectInputStream(s.getInputStream());
+                oip = new ObjectInputStream(s.getInputStream());
 
                 try {
-                    incidences = (ArrayList<Incidence>) finput.readObject();
+                    incidences = (ArrayList<Incidence>) oip.readObject();
                     if (!(incidences == null)) {
 
                         viewClient = new ViewClient(incidences);
                         System.out.println(incidences.get(0).getType());
                         viewClientLogin.dispose();
+                        controller.incidences = incidences;
                         viewClient.resize(516,viewClient.getHeight());
                         viewClient.show();
                     }
@@ -119,13 +131,76 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
 
     }
 
+
+
+    private void replyIncidence(){
+        int idx = viewClient.getSelectedIncidenceListId();
+        if (idx == -1){
+            JOptionPane.showMessageDialog(null, "Select an incidence to reply\n",
+                    "<<MENSAJE DE ERROR:5>>", JOptionPane.ERROR_MESSAGE);
+        }else if(viewClient.getTextReplyToString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Insert a reply\n",
+                    "<<MENSAJE DE ERROR:4>>", JOptionPane.ERROR_MESSAGE);
+        }else {
+            Incidence tmpIncidence =
+                    incidences.get(idx-1);
+            tmpIncidence.setBody(tmpIncidence.getBody()+
+                    "\n<------------------ "+getHour()+" -------------------->\n"+
+                    viewClient.getTextReplyToString());
+            try {
+                incidences.set(incidences.indexOf(findById(tmpIncidence.getId())),tmpIncidence);
+                viewClient.updateElement(tmpIncidence,idx-1);
+                tmpIncidence.setType("answer");
+
+                System.out.println(tmpIncidence.getBody());
+                oop.reset();
+                oop.writeObject(tmpIncidence);
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error sending reply\n",
+                        "<<MENSAJE DE ERROR:6>>", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    private void sendIncidence(){
+        if (writeIncidence.getNewIncidenceBody().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Insert an incidence\n",
+                    "<<MENSAJE DE ERROR:8>>", JOptionPane.ERROR_MESSAGE);
+        }else {
+            Incidence tmpIncidence = new Incidence(this.mail,"new",writeIncidence.getNewIncidenceBody());
+            try {
+                oop.reset();
+                oop.writeObject(tmpIncidence);
+                tmpIncidence = (Incidence) oip.readObject();
+                incidences.add(tmpIncidence);
+                viewClient.addToList(tmpIncidence);
+                writeIncidence.dispose();
+
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, "Error sending incidence\n",
+                        "<<MENSAJE DE ERROR:6>>", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    public Incidence findById(int id){
+        return incidences.stream().filter(i -> i.getId() == id).findFirst().get();
+    }
+
+
+
+    public String getHour(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
+        Date date = new Date();
+        String hora = dateFormat.format(date);
+        return hora;
+    }
+
     @Override
     public void valueChanged(ListSelectionEvent e) {
         viewClient.setIncidencesDetail(((JList<Incidence>)e.getSource()).getSelectedValue().getBody());
     }
 
-
-
+    //Modify windonwClosing method for sending an int -1 to server before close it.
     @Override
     public void windowClosing(WindowEvent e) {
         try {
@@ -134,7 +209,6 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
     @Override
@@ -155,6 +229,5 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     @Override
     public void windowDeactivated(WindowEvent e) {
     }
-
 
 }

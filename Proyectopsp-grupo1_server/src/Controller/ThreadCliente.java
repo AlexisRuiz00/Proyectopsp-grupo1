@@ -39,7 +39,6 @@ public class ThreadCliente extends Thread{
     public void run() {
 
         try {
-            System.out.println("entra1");
             i = (Incidence) entradaIncidencia.readObject();
 
             if (s.getCola().contains(i.getMail())) {
@@ -54,19 +53,21 @@ public class ThreadCliente extends Thread{
                 this.email = i.getMail();
 
                 while (running) {
+                    System.out.println("ENTRA WHILE");
 
-                    System.out.println(i.getType());
-                    System.out.println("entra2");
-                    if (i.getType().equals("-1")) {
-                        socket.close();
-                        running = false;
-                        s.getCola().remove(email);
-                        s.writeCloseClient();
+                    switch (i.getType()){
 
-                    } else {
+                        case"-1" :
+                                try {
+                                    socket.close();
+                                } catch (IOException ex) {}
+                            running = false;
+                            s.getCola().remove(email);
+                            s.writeCloseClient();
+                            break;
+
                         //SI LA INCIDENCIA SE MARCA COMO SONSULTA
-                        if (i.getType().equalsIgnoreCase("Consult")) {
-                            System.out.println("ENTRA CONSULTA");
+                        case "Consult":
                             //SE GENERA UN ARRAYLIST QUE SE LLENARÁ CON UNA LISTA
                             //DEVUELTA POR LA BASE DE DATOS
                             ArrayList<Incidence> incidences = new ArrayList<>();
@@ -74,20 +75,27 @@ public class ThreadCliente extends Thread{
 
                             //CUADO SE GENERE, SE ENVÍA ESTE ARRAYLIST A TRAVÉS
                             //DE UN OBJECTOUPUTSTREAM AL CLIENTE DE ESTE HILO
-                            salidaIncidencia.writeObject(incidences);
-
+                                try {
+                                    salidaIncidencia.writeObject(incidences);
+                                } catch (IOException ex) {}
+                            break;
                             //SI LA INCIDENCIA SE MARCA COMO NUEVA
-                        } else if (i.getType().equals("Nuevo")) {
-                            s.put(i); // Da de alta la consulta que recibe en la base de datos
-                        }
-                        i = (Incidence) entradaIncidencia.readObject();
-                    }
+                        case "new":
+                            Incidence newIncidence =
+                                    s.put(i); // Da de alta la consulta que recibe en la base de datos
+                            salidaIncidencia.writeObject(newIncidence);
+                            break;
+
+                        case "answer":
+                            System.out.println(i.getBody());
+
+                            break;
+                        }//endSwitch
+                    i = (Incidence) entradaIncidencia.readObject();
 
 
-                }//endWhile
-
-            }//endElse
-        } catch (Exception e) {e.printStackTrace();}
+                    }//endWhile
+                }//endElse
+            } catch (Exception e) {e.printStackTrace();}
     }//endRun
-
 }

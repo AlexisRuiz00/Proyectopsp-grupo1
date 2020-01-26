@@ -16,9 +16,14 @@ public class Incidence implements Serializable {
         this.type = type;
     }
 
+    public Incidence(String mail, String type, String body) {
+        this.mail = mail;
+        this.type = type;
+        this.body = body;
+    }
 
 
-        public Incidence(int id, String IncidenceAdmin, String mail, String type, String body) {
+     public Incidence(int id, String IncidenceAdmin, String mail, String type, String body) {
         this.id = id;
         this.incidenceAdmin = IncidenceAdmin;
         this.mail = mail;
@@ -47,7 +52,6 @@ public class Incidence implements Serializable {
     public void setBody(String body) {
         this.body = body;
     }
-
 
     @Override
     public String toString() {

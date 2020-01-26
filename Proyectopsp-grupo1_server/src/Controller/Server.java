@@ -217,10 +217,11 @@ public class Server extends JFrame {
         // CONSULTA DE LA BASE DE DATOS PARA LLENAR LA LISTA DE INCIDENCIAS
         return incidences;
     }
-    public synchronized void put(Incidence i) {
+    public synchronized Incidence put(Incidence i) {
 
 
-        // INSERTA CONSULTA EN BASE DE DATOS
+        // INSERTA CONSULTA EN BASE DE DATOS  devuelve la incidencia insertada
+        return new Incidence(6,"","","","prueba de nueva incidencia");
     }
 
 

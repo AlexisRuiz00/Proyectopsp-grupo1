@@ -17,7 +17,11 @@ public class Incidence implements Serializable {
         this.type = type;
     }
 
-
+    public Incidence(String mail, String type, String body) {
+        this.mail = mail;
+        this.type = type;
+        this.body = body;
+    }
 
     public Incidence(int id, String IncidenceAdmin, String mail, String type, String body) {
         this.id = id;
