@@ -1,7 +1,8 @@
 package Controller;
 
 
-import Model.Incidence;
+import Model.Model;
+import Model.VO.Incidence;
 
 import javax.swing.*;
 import java.io.DataInputStream;
@@ -22,9 +23,12 @@ public class Server extends JFrame {
 
     private static Server s = null;
     private Stack<String> emailsAtendidos = new Stack<String>();
+
     private ArrayList<Socket> admins;
     private ArrayList<Integer>puertos;
     private ArrayList<String>direcciones;
+
+    private Model model;
 
     private Server() {
         setResizable(false);
@@ -32,6 +36,7 @@ public class Server extends JFrame {
         setTitle("Server");
         initComponents();
         chargeLayout();
+        model = new Model();
     }
 
 
@@ -131,7 +136,6 @@ public class Server extends JFrame {
         s = new Server();
         s.admins = new ArrayList<>();
 
-
         s.setVisible(true);
         s.getLogArea().append(s.getHour() + " - Servidor iniciado. \n");
         Thread.sleep(1000);
@@ -154,15 +158,17 @@ public class Server extends JFrame {
             System.out.println("Entra2 "+rol);
             switch (rol){
 
-                //Entra cliente
-                case 1:
+                //Client connects
+                case 31:
                              s.getLogArea().append(s.getHour()+" - Conectando cliente...\n");
                              ThreadCliente ThreadCliente = new ThreadCliente(recieve);
                              ThreadCliente.start();
                              break;
 
-                //Se abre chat
-                case 2:      ThreadConfChat tcc = new ThreadConfChat(recieve);
+
+                //Client opens chat
+                case 35:
+                             ThreadConfChat tcc = new ThreadConfChat(recieve);
                              tcc.start();
                              s.getLogArea().append(" - Configurando chat...\n");
                              break;
@@ -210,18 +216,16 @@ public class Server extends JFrame {
 
 
 
-    public synchronized ArrayList<Incidence> get() {
-        ArrayList<Incidence> incidences = new ArrayList<>();
-        incidences.add(new Incidence(1,"Juan","E@hotmail.com","Consult","PRUEBA\nMASCOSAS\nES UNA GRAN PRUEABA\nSI"));
-
+    public synchronized ArrayList<Incidence> get(String mail) {
         // CONSULTA DE LA BASE DE DATOS PARA LLENAR LA LISTA DE INCIDENCIAS
-        return incidences;
+        return s.model.getClientIncidences(mail);
     }
     public synchronized Incidence put(Incidence i) {
-
-
         // INSERTA CONSULTA EN BASE DE DATOS  devuelve la incidencia insertada
-        return new Incidence(6,"","","","prueba de nueva incidencia");
+        return s.model.saveIncidence(i);
+    }
+    public synchronized Incidence updateIncidence(Incidence i){
+        return s.model.updateIncidence(i);
     }
 
 
@@ -230,7 +234,7 @@ public class Server extends JFrame {
 
 
 
-    public String getHour(){
+    public static String getHour(){
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         String hora = dateFormat.format(date);

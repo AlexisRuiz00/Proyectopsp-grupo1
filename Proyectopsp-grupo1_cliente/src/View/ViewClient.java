@@ -1,7 +1,7 @@
 package View;
 
 import Controller.MainCliente;
-import Model.Incidence;
+import Model.VO.Incidence;
 
 import javax.swing.*;
 import java.awt.*;
@@ -238,7 +238,7 @@ public class ViewClient extends JFrame {
 
     public int getSelectedIncidenceListId(){
         if (jList1.getSelectedValue() != null) {
-            return jList1.getSelectedValue().getId();
+            return jList1.getSelectedIndex();
         }else
             return -1;
     }

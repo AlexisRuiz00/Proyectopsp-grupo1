@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Incidence;
+import Model.VO.Incidence;
 
 import java.io.*;
 import java.net.Socket;

@@ -1,13 +1,11 @@
 package Controller;
 
-import Model.Incidence;
+import Model.VO.Incidence;
 import View.ViewClient;
 import View.ViewClientLogin;
 import View.WriteIncidence;
 
 import javax.swing.*;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
@@ -87,26 +85,25 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             DataOutputStream foutput = new DataOutputStream(s.getOutputStream());
 
             ArrayList<Incidence> incidences;
-            foutput.writeInt(1);
+            foutput.writeInt(31);
 
             //CREATE OBJECTOUTPUT WRITER, SEND CONSULT INCIDENCE AND WAITS TO RECIEVE INCIDENCES RELATED
             oop = new ObjectOutputStream(s.getOutputStream());
-            Incidence incidence = new Incidence(viewClientLogin.getEmail(),"Consult");
+            Incidence incidence = new Incidence(controller.viewClientLogin.getEmail(),"Consult");
+
             oop.writeObject(incidence);
 
             try {
                 oip = new ObjectInputStream(s.getInputStream());
-
                 try {
                     incidences = (ArrayList<Incidence>) oip.readObject();
                     if (!(incidences == null)) {
-
-                        viewClient = new ViewClient(incidences);
-                        System.out.println(incidences.get(0).getType());
-                        viewClientLogin.dispose();
+                        controller.mail = controller.viewClientLogin.getEmail();
+                        controller.viewClient = new ViewClient(incidences);
+                        controller.viewClientLogin.dispose();
                         controller.incidences = incidences;
-                        viewClient.resize(516,viewClient.getHeight());
-                        viewClient.show();
+                        controller.viewClient.resize(516,viewClient.getHeight());
+                        controller.viewClient.show();
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "EL EMAIL INTRODUCIDO YA ESTÁ CONECTADO AL SERVIDOR\nPRUEBE A CONECTARSE MÁS TARDE\n",
@@ -143,13 +140,13 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
                     "<<MENSAJE DE ERROR:4>>", JOptionPane.ERROR_MESSAGE);
         }else {
             Incidence tmpIncidence =
-                    incidences.get(idx-1);
+                    incidences.get(idx);
             tmpIncidence.setBody(tmpIncidence.getBody()+
                     "\n<------------------ "+getHour()+" -------------------->\n"+
                     viewClient.getTextReplyToString());
             try {
                 incidences.set(incidences.indexOf(findById(tmpIncidence.getId())),tmpIncidence);
-                viewClient.updateElement(tmpIncidence,idx-1);
+                viewClient.updateElement(tmpIncidence,idx);
                 tmpIncidence.setType("answer");
 
                 System.out.println(tmpIncidence.getBody());
@@ -167,7 +164,7 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             JOptionPane.showMessageDialog(null, "Insert an incidence\n",
                     "<<MENSAJE DE ERROR:8>>", JOptionPane.ERROR_MESSAGE);
         }else {
-            Incidence tmpIncidence = new Incidence(this.mail,"new",writeIncidence.getNewIncidenceBody());
+            Incidence tmpIncidence = new Incidence(controller.mail,"new",writeIncidence.getNewIncidenceBody());
             try {
                 oop.reset();
                 oop.writeObject(tmpIncidence);
@@ -204,6 +201,7 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     @Override
     public void windowClosing(WindowEvent e) {
         try {
+            System.out.println("ENTRA");
             oop.writeObject(new Incidence("","-1"));
             ((JFrame)e.getSource()).dispose();
         } catch (IOException ex) {

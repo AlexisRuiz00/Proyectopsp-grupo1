@@ -1,5 +1,5 @@
 package Controller;
-import Model.Incidence;
+import Model.VO.Incidence;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -51,14 +51,16 @@ public class ThreadCliente extends Thread{
                 // Añadimos el email a la cola
                 s.getCola().add(i.getMail());
                 this.email = i.getMail();
+                System.out.println(email);
 
                 while (running) {
-                    System.out.println("ENTRA WHILE");
 
                     switch (i.getType()){
 
-                        case"-1" :
+                        case "-1" :
                                 try {
+                                    entradaIncidencia.close();
+                                    salidaIncidencia.close();
                                     socket.close();
                                 } catch (IOException ex) {}
                             running = false;
@@ -71,7 +73,7 @@ public class ThreadCliente extends Thread{
                             //SE GENERA UN ARRAYLIST QUE SE LLENARÁ CON UNA LISTA
                             //DEVUELTA POR LA BASE DE DATOS
                             ArrayList<Incidence> incidences = new ArrayList<>();
-                            incidences = s.get(); // Consulta a la base de datos
+                            incidences = s.get(email); // Consulta a la base de datos
 
                             //CUADO SE GENERE, SE ENVÍA ESTE ARRAYLIST A TRAVÉS
                             //DE UN OBJECTOUPUTSTREAM AL CLIENTE DE ESTE HILO
@@ -83,16 +85,17 @@ public class ThreadCliente extends Thread{
                         case "new":
                             Incidence newIncidence =
                                     s.put(i); // Da de alta la consulta que recibe en la base de datos
+
                             salidaIncidencia.writeObject(newIncidence);
                             break;
 
                         case "answer":
-                            System.out.println(i.getBody());
-
+                            s.updateIncidence(i);
                             break;
                         }//endSwitch
-                    i = (Incidence) entradaIncidencia.readObject();
 
+                    if (running)
+                    i = (Incidence) entradaIncidencia.readObject();
 
                     }//endWhile
                 }//endElse

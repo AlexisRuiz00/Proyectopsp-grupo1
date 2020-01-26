@@ -1,4 +1,4 @@
-package Model;
+package Model.VO;
 
 
 import java.io.Serializable;
@@ -37,7 +37,7 @@ public class Incidence implements Serializable {
     public String getMail() {
         return mail;
     }
-    public String getName() {
+    public String getIncidenceAdmin() {
         return incidenceAdmin;
     }
     public String getType() {
@@ -52,7 +52,12 @@ public class Incidence implements Serializable {
     public void setBody(String body) {
         this.body = body;
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setIncidenceAdmin(String incidenceAdmin) {
+        this.incidenceAdmin = incidenceAdmin;
+    }
 
     @Override
     public String toString() {

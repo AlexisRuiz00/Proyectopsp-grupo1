@@ -66,7 +66,7 @@ public class MainAdmin implements ActionListener, WindowListener {
 
     private void startApp() {
 
-        int puerto =14400;
+        int puerto = 13300;
 
         try {
 
@@ -76,7 +76,7 @@ public class MainAdmin implements ActionListener, WindowListener {
             ArrayList<Incidence>incidences;
             foutput.write(1);
 
-            oop =new ObjectOutputStream(s.getOutputStream());
+            oop = new ObjectOutputStream(s.getOutputStream());
             Incidence incidence = new Incidence(1, "Prueba", "p@hotmail.com","Consult", "AAAAAA");
             oop.writeObject(incidence);
 
@@ -85,7 +85,7 @@ public class MainAdmin implements ActionListener, WindowListener {
                 ObjectInputStream finput = new ObjectInputStream(s.getInputStream());
 
                 try {
-                    incidences =(ArrayList<Incidence>) finput.readObject();
+                    incidences = (ArrayList<Incidence>) finput.readObject();
 
                     if(!(incidences == null)) {
 

@@ -2,6 +2,8 @@ package View;
 
 import Controller.MainCliente;
 
+import javax.swing.*;
+
 /**
  * @author David and Alexis
  */
@@ -11,7 +13,7 @@ public class WriteIncidence extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea incidenceBody;
+    private javax.swing.JTextArea newIncidenceBody;
 
     public WriteIncidence() {
         setResizable(false);
@@ -27,19 +29,19 @@ public class WriteIncidence extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        incidenceBody = new javax.swing.JTextArea();
+        newIncidenceBody = new javax.swing.JTextArea();
         btnSendNewIncidence = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Incidence:");
 
-        incidenceBody.setColumns(20);
-        incidenceBody.setRows(5);
-        jScrollPane1.setViewportView(incidenceBody);
+        newIncidenceBody.setColumns(20);
+        newIncidenceBody.setRows(5);
+        jScrollPane1.setViewportView(newIncidenceBody);
 
-        btnSendNewIncidence.setActionCommand("sendNewIncidence");
         btnSendNewIncidence.setText("Send");
+        btnSendNewIncidence.setActionCommand("sendNewIncidence");
         btnSendNewIncidence.addActionListener(MainCliente.getClientController());
     }
 
@@ -86,8 +88,8 @@ public class WriteIncidence extends javax.swing.JFrame {
         pack();
     }
 
-    public String getNewIncidenceBody(){
-        return this.incidenceBody.getText();
-    }
 
+    public String getNewIncidenceBody() {
+        return newIncidenceBody.getText();
+    }
 }
