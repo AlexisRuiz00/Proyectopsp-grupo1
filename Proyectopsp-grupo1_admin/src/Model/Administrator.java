@@ -1,4 +1,4 @@
-package Model_Admin;
+package Model;
 
 public class Administrator {
 
