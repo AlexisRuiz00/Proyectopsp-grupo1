@@ -18,17 +18,17 @@
 </br>
 
 # <p align="center">Índice:</p>
-> **[1- Actividad 1 y 2: Definición y Requisitos.](#1)**
+> **[1- Activity 1 y 2: Definición y Requisitos.](#1)**
 >
-> **[2- Actividad 3: Análisis de requisitos funcionales.](#2)**
+> **[2- Activity 3: Análisis de requisitos funcionales.](#2)**
 >
-> **[3- Actividad 4: Modelo de objeto de negocios.](#3)**
+> **[3- Activity 4: Modelo de objeto de negocios.](#3)**
 >
-> **[4- Actividad 5: Interfaz de la aplicación.](#4)**
+> **[4- Activity 5: Interfaz de la aplicación.](#4)**
 >
-> **[5- Actividad 6: Hilos.](#5)**
+> **[5- Activity 6: Hilos.](#5)**
 >
-> **[6- Actividad 7: Diagramas de secuencia.](#6)**
+> **[6- Activity 7: Diagramas de secuencia.](#6)**
 
 
 </br>
@@ -42,7 +42,7 @@
 
 
 <a name="1"></a>
-# ACTIVIDAD 1 y 2, Definición y Requisitos
+# ACTIVITY 1 y 2, Definition and Requierements
 ### <b>TÍTULO:</b>
 *ATCS, Atención a clientes*
 
@@ -82,7 +82,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 <a name="2"></a>
-# ACTIVIDAD 3: Análisis de requisitos funcionales.
+# ACTIVITY 3: Análisis de requisitos funcionales.
 
 </br>
 </br>
@@ -767,7 +767,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 <a name="3"></a>
-# ACTIVIDAD 4: Modelo de objetos de negocio.
+# ACTIVITY 4: Modelo de objetos de negocio.
 
 ### Diagrama Entidad-Relacion
 
@@ -778,7 +778,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   </br>
   </br>
   
-### Diagrama de Clases
+### Class Diagrams
 
   <img src="/img/clases.jpg" height="500" width="800"/>
 </p>
@@ -795,7 +795,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 <a name="5"></a>
 
-# ACTIVIDAD 6: Hilos
+# ACTIVITY 6: Threads
 
 ### <p>Admin Aplication</p>
 <p><b>Threads:</b></p>
@@ -876,7 +876,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 <a name="6"></a>
 
-# ACTIVIDAD 7: Diagramas de secuencia
+# ACTIVITY 7: Sequence Diagrams
 </br>
 </br>
 
@@ -895,113 +895,4 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-## System Admin
 
-</br>
-
-### Insterts SQL Statement CU 1.1
-<p align="center">
-  <img src="/img/secuencia/sysAdmin/1.1.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-### Creates Table CU 1.2
-<p align="center">
-  <img src="/img/secuencia/sysAdmin/1.2.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-### Creates New Incidence Admin CU 1.3
-<p align="center">
-  <img src="/img/secuencia/sysAdmin/1.3.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-### Deletes Incidence Admin CU 1.4
-<p align="center">
-  <img src="/img/secuencia/sysAdmin/1.4.jpg" height="500" width="800"/>
-</p>
-
-
-</br>
-</br>
-
-## Incidence Admin
-
-</br>
-
-### Reads an Incidence CU 2.1
-<p align="center">
-  <img src="/img/secuencia/incidenceAdmin/2.1.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-### Close an Incidence CU 2.2
-<p align="center">
-  <img src="/img/secuencia/incidenceAdmin/2.2.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-### Assing an Incidence to Another Admin CU 2.3
-<p align="center">
-  <img src="/img/secuencia/incidenceAdmin/2.3.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-### Marks an Incidence as Pending CU 2.4
-<p align="center">
-  <img src="/img/secuencia/incidenceAdmin/2.4.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-</br>
-</br>
-
-## Client
-
-</br>
-</br>
-
-### ClientLogin CU 3.1
-
-</br>
-<p align="center">
-  <img src="/img/secuencia/client/3.1.jpg" height="500" width="800"/>
-</p>
-
-</br>
-
-### Creates New Incidence CU 3.2
-
-</br>
-<p align="center">
-  <img src="/img/secuencia/client/3.2.jpg" height="500" width="800"/>
-</p>
-
-### Reads an Incidence. CU 3.3
-
-</br>
-<p align="center">
-  <img src="/img/secuencia/client/3.3.jpg" height="500" width="800"/>
-</p>
-
-### Answer an Incidence CU 3.4
-
-</br>
-<p align="center">
-  <img src="/img/secuencia/client/3.4.jpg" height="500" width="800"/>
-</p>
-
-### Opens Support Chat CU 3.5
-
-</br>
-<p align="center">
-  <img src="/img/secuencia/client/3.5.jpg" height="500" width="800"/>
-</p>
