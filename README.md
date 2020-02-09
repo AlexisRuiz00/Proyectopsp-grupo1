@@ -779,10 +779,10 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   </br>
 </p>
 
-### Class Diagrams
+## Class Diagrams
 
 
-## Admin Application
+### Admin Application
 
 <p align="center">
   <img src="/img/adminClass.jpg" height="500" width="800"/>
@@ -791,7 +791,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-## Server Application
+### Server Application
 
 <p align="center">
   <img src="/img/serverClass.jpg" height="500" width="800"/>
@@ -800,7 +800,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-## Client Application
+### Client Application
 
 <p align="center">
   <img src="/img/clientClass.jpg" height="500" width="800"/>
@@ -811,7 +811,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 
-## Class Description
+### Class Description
 
 <table>
 	<tr>
