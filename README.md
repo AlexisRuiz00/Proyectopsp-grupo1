@@ -777,16 +777,72 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
   </br>
   </br>
   </br>
-  
+</p>
+
 ### Class Diagrams
 
+<p align="center">
   <img src="/img/clases.jpg" height="500" width="800"/>
 </p>
 
 
 
+</br>
+</br>
+</br>
 
+## Class Description
 
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>AdminLoginView</td>
+ 	</tr>	
+	<tr>
+		<td><b>getCredentials():</b></td>
+		<td>Recovers the username and password that the</br>
+		    user inserts. Creates an arraylist that contains</br>
+		    that data and returns it.</td>
+ 	</tr>
+		
+</table>
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>Server</td>
+ 	</tr>	
+	<tr>
+		<td><b>getLogin():</b></td>
+		<td>Returns the result of calling getLogin method from class Model.</td>
+ 	</tr>
+		
+</table>
+
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>Model</td>
+ 	</tr>	
+	<tr>
+		<td><b>getLogin():</b></td>
+		<td>Returns the result of calling getLogin method from class ATCSJDBC.</td>
+ 	</tr>
+		
+</table>
+
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>ATCSJDBC</td>
+ 	</tr>	
+	<tr>
+		<td><b>getLogin():</b></td>
+		<td>Executes a sql statement that looks for an Admin with </br>
+		    the credentials passed. If finds it, return the rol of the</br>
+		    admin finded, if not, returns an empty String.</td>
+ 	</tr>
+		
+</table>
 
 
 
