@@ -813,6 +813,75 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 ### Class Description
 
+
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>AdminLoginView</td>
+ 	</tr>	
+	<tr>
+		<td><b>Description:</b></td>
+		<td>Interface where aministrators login.</td>
+ 	</tr>
+		
+</table>
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>MainAdmin</td>
+ 	</tr>	
+	<tr>
+		<td><b>Description:</b></td>
+		<td>Class that act as controller for Admin application</td>
+ 	</tr>
+		
+</table>
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>Server</td>
+ 	</tr>	
+	<tr>
+		<td><b>Description:</b></td>
+		<td>Class that act as server, which recieves manage</br>
+		    messages from the Client and Admin applications.
+		</td>
+ 	</tr>
+		
+</table>
+
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>Model</td>
+ 	</tr>	
+	<tr>
+		<td><b>Description</b></td>
+		<td>Class that has the necessary methods to allow Server</br>
+		    interact with the database</td>
+ 	</tr>
+		
+</table>
+
+<table>
+	<tr>
+		<td><b>Class:</b></td>
+		<td>ATCSJDBC</td>
+ 	</tr>	
+	<tr>
+		<td><b>Description:</b></td>
+		<td>Class that has the necessary methods to interact with</br>
+		    the database</td>
+ 	</tr>
+		
+</table>
+
+
+
+
+
+## Methods Descriptions
+
 <table>
 	<tr>
 		<td><b>Class:</b></td>
