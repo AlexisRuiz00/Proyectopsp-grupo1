@@ -878,9 +878,12 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 
 
 
+</br> 
+</br> 
+</br> 
 
 
-## Methods Descriptions
+### Methods Descriptions
 
 <table>
 	<tr>
