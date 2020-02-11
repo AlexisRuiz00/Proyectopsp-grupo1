@@ -803,7 +803,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 ### Client Application
 
 <p align="center">
-  <img src="/img/clientClass.jpg" height="500" width="800"/>
+  <img src="/img/clientClass.jepg" height="500" width="800"/>
 </p>
 
 </br>
