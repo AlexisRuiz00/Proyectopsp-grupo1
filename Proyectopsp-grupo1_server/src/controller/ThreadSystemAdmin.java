@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Model.VO.Incidence;
+import model.VO.Incidence;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,7 +30,6 @@ public class ThreadSystemAdmin extends Thread {
             e.printStackTrace();
         }
 
-        run();
     }
 
     @Override

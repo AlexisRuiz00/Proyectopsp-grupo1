@@ -1,9 +1,8 @@
-package Controller;
+package controller;
 
 
-import Model.Model;
-import Model.VO.Incidence;
-import org.omg.CORBA.StringHolder;
+import model.Model;
+import model.VO.Incidence;
 
 import javax.swing.*;
 import java.io.DataInputStream;
@@ -154,7 +153,7 @@ public class Server extends JFrame {
             //INCIDENCE ADMIN, SI ES UNA CONEXIÓN, O CIERRE DE CONEXIÓN PORQUE
             // HAY QUE QUITARLOS DEL ARRAYLIST ADMIN.
 
-            System.out.println("Entra");
+            System.out.println("Entra en servidor ")    ;
             int rol = read.readInt();
             System.out.println("Entra2 "+rol);
             switch (rol){
@@ -171,25 +170,27 @@ public class Server extends JFrame {
                 case 35:
                              ThreadConfChat tcc = new ThreadConfChat(recieve);
                              tcc.start();
-                             s.getLogArea().append(" - Configurando chat...\n");
+                             s.getLogArea().append(s.getHour()+" - Configurando chat...\n");
                              break;
 
                 //Entra IncidenceAdmin
-                case 21:      s.admins.add(recieve);
-                             s.getLogArea().append(" - Conectando Administrador de Incidencias...\n");
+                case 21:
+                             s.admins.add(recieve);
+                             s.getLogArea().append(s.getHour()+" - Conectando Administrador de Incidencias...\n");
                              ThreadIncidenceAdmin threadIncidenceAdmin = new ThreadIncidenceAdmin(recieve);
                              threadIncidenceAdmin.start();
                              break;
 
                 //Entra SysAdmin
-                case 5:     s.getLogArea().append(" - Conectando Administrador de Sistema...\n");
+                case 5:     s.getLogArea().append(s.getHour()+" - Conectando Administrador de Sistema...\n");
                             ThreadSystemAdmin threadSystemAdmin = new ThreadSystemAdmin(recieve);
                             threadSystemAdmin.start();
 
                 case 10:
-                    s.getLogArea().append("Conectando Administrador...");
+                    s.getLogArea().append(s.getHour()+"- Conectando Administrador...\n");
                     ThreadAdminLogin threadAdminLogin = new ThreadAdminLogin(recieve);
                     threadAdminLogin.start();
+                    break;
 
 
                 default:

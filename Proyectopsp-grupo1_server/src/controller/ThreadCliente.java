@@ -1,5 +1,5 @@
-package Controller;
-import Model.VO.Incidence;
+package controller;
+import model.VO.Incidence;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -94,9 +94,9 @@ public class ThreadCliente extends Thread{
                             break;
                         }//endSwitch
 
-                    if (running)
-                    i = (Incidence) entradaIncidencia.readObject();
-
+                    if (running) {
+                        i = (Incidence) entradaIncidencia.readObject();
+                    }
                     }//endWhile
                 }//endElse
             } catch (Exception e) {e.printStackTrace();}

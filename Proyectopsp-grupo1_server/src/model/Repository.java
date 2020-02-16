@@ -1,7 +1,7 @@
-package Model;
+package model;
 
-import Model.VO.Incidence;
-import Model.VO.IncidenceAdmin;
+import model.VO.Incidence;
+import model.VO.IncidenceAdmin;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public interface Repository {
     public ArrayList<Incidence>getClientIncidences(String mail);
     public ArrayList<Incidence>getAdminIncidences(String adminName);
 
-    public Incidence saveClientIncidence(Incidence incidence);
+    public Incidence saveClientIncidence(Incidence incidence, IncidenceAdmin tmpAdmin);
     public Incidence updateIncidence(Incidence incidence);
 
     public String getLogin(ArrayList<String> credentials);

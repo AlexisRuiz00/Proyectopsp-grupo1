@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Model.VO.Incidence;
+import model.VO.Incidence;
 
 import java.io.*;
 import java.net.Socket;
@@ -22,39 +22,38 @@ public class ThreadIncidenceAdmin extends Thread {
         s = Server.getServer();
 
         try {
-            objectInput = new ObjectInputStream(socket.getInputStream());
             objectOutput = new ObjectOutputStream(socket.getOutputStream());
+            objectInput = new ObjectInputStream(socket.getInputStream());
             dataInput = new DataInputStream(socket.getInputStream());
             dataOutput = new DataOutputStream(socket.getOutputStream());
 
-        } catch (IOException e) {
+
+            //Get Incidence Administrator name
+            String username = (String) objectInput.readObject();
+            //Get Incidence linked to Incidence Administrator logged.
+            ArrayList<Incidence> adminIncidences = s.getAdminIncidences(username);
+            //Send Incidence to Administrator app
+            objectOutput.writeObject(adminIncidences);
+
+            //Start run method
+            running = true;
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        run();
     }
 
     @Override
     public void run() {
 
-        try {
-            String username = (String) objectInput.readObject();
-
-            ArrayList<Incidence> adminIncidence = s.getAdminIncidences(username);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         while (running) {
 
             try {
 
-                //SE LEE EL PRIMER BYTE QUE DETERMI1NA LA ACCIÓN A REALIZAR
-                byte action = dataInput.readByte();
-
+                //Read int
+                int action = dataInput.readInt();
 
 
             } catch (IOException e) {
@@ -62,5 +61,4 @@ public class ThreadIncidenceAdmin extends Thread {
             }
         }
     }
-
 }

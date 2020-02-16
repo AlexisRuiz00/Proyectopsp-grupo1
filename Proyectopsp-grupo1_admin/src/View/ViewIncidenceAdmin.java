@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Model.VO.Incidence;
+import model.VO.Incidence;
 
 import javax.swing.*;
 import java.util.ArrayList;

@@ -1,10 +1,9 @@
-package Model.impl;
+package model.impl;
 
-import Model.Conection;
-import Model.Model;
-import Model.Repository;
-import Model.VO.Incidence;
-import Model.VO.IncidenceAdmin;
+import model.Conection;
+import model.Repository;
+import model.VO.Incidence;
+import model.VO.IncidenceAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,12 +12,9 @@ import java.util.ArrayList;
 
 public class ATCSJDBC implements Repository {
 
-    private Model model;
-
-    public ATCSJDBC(Model model) {
+    public ATCSJDBC() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.model = model;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -116,13 +112,12 @@ public class ATCSJDBC implements Repository {
     }
 
     @Override
-    public Incidence saveClientIncidence(Incidence incidence) {
+    public Incidence saveClientIncidence(Incidence incidence, IncidenceAdmin tmpAdmin) {
         try {
             Conection conn = new Conection();
             Statement statement = conn.getConn().createStatement();
 
             incidence.setId((int) System.currentTimeMillis());
-            IncidenceAdmin tmpAdmin = model.getRandomIncidenceAdmin();
             incidence.setIncidenceAdmin(tmpAdmin.getUsername());
 
             System.out.println(incidence.getMail());

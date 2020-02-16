@@ -1,21 +1,17 @@
-package Controller;
+package controller;
 
-import Model.VO.Incidence;
-import Model.VO.IncidenceAdmin;
-import View.ViewAdminLogin;
-import View.ViewIncidenceAdmin;
-import View.ViewNewIncidenceAdmin;
-import View.ViewSystemAdmin;
+import model.VO.Incidence;
+import view.ViewAdminLogin;
+import view.ViewIncidenceAdmin;
+import view.ViewNewIncidenceAdmin;
+import view.ViewSystemAdmin;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -31,8 +27,9 @@ public class MainAdmin implements ActionListener, WindowListener {
     private ViewSystemAdmin viewSystemAdmin;
     private ViewIncidenceAdmin viewIncidenceAdmin;
     private static Socket s = null;
-    ObjectOutputStream oop;
-
+    private ObjectOutputStream oop;
+    private ObjectInputStream finput;
+    private DataOutputStream foutput;
     private MainAdmin() {
 
     }
@@ -76,22 +73,24 @@ public class MainAdmin implements ActionListener, WindowListener {
         try {
 
             s = new Socket("localhost", puerto);
-            DataOutputStream foutput = new DataOutputStream(s.getOutputStream());
+
 
             String role;
+            foutput = new DataOutputStream(s.getOutputStream());
             foutput.writeInt(10);
 
-            oop = new ObjectOutputStream(s.getOutputStream());
 
             ArrayList<String> credentials;
             credentials = viewAdminLogin.getCredentials();
 
-            oop.reset();
+            oop = new ObjectOutputStream(s.getOutputStream());
             oop.writeObject(credentials);
+
+
+            finput = new ObjectInputStream(s.getInputStream());
 
             try {
 
-                ObjectInputStream finput = new ObjectInputStream(s.getInputStream());
 
                 try {
                     role = (String) finput.readObject();
@@ -99,19 +98,33 @@ public class MainAdmin implements ActionListener, WindowListener {
                     switch (role) {
                         case "IncidenceAdmin":
 
-                            s = new Socket("localhost", puerto);
-                            foutput = new DataOutputStream(s.getOutputStream());
-                            finput = new ObjectInputStream(s.getInputStream());
 
+                            s = new Socket("localhost", puerto);
+
+                            /*Send int with value 21 to advertise server that an
+                            incidence admin is going to start a connection*/
+
+                            foutput = new DataOutputStream(s.getOutputStream());
                             foutput.writeInt(21);
+
+
+                            //SEND USERNAME FOR RECIEVING LINKED INCIDENCES
+                            oop = new ObjectOutputStream(s.getOutputStream());
                             oop.writeObject(viewAdminLogin.getCredentials().get(1));
 
+
+                            //RECIEVE INCIDENCES FROM SERVER
+                            finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
+
                             viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
                             viewAdminLogin.dispose();
                             viewIncidenceAdmin.setVisible(true);
 
                             break;
+
+
+
                         case "SystemAdmin":
                             viewSystemAdmin = new ViewSystemAdmin();
                             viewAdminLogin.dispose();
@@ -148,7 +161,7 @@ public class MainAdmin implements ActionListener, WindowListener {
     @Override
     public void windowClosing(WindowEvent windowEvent) {
         try {
-            oop.writeObject(new Incidence(2, "", "", "", ""));
+            oop.writeObject(new Incidence("","-1"));
             ((JFrame) windowEvent.getSource()).dispose();
         } catch (IOException e) {
             e.printStackTrace();

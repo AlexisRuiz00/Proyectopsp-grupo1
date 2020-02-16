@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Controller.MainAdmin;
+import controller.MainAdmin;
 
 import java.util.ArrayList;
 

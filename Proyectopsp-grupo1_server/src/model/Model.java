@@ -1,10 +1,9 @@
-package Model;
+package model;
 
-import Model.VO.Incidence;
-import Model.VO.IncidenceAdmin;
-import Model.impl.ATCSJDBC;
-
+import model.VO.Incidence;
+import model.VO.IncidenceAdmin;
 import java.util.ArrayList;
+import model.impl.ATCSJDBC;
 
 public class Model {
 
@@ -12,7 +11,7 @@ public class Model {
     ArrayList<IncidenceAdmin> incidenceAdmins;
 
     public Model(){
-        repository = new ATCSJDBC(this);
+        repository = new ATCSJDBC();
         incidenceAdmins = repository.getIncidenceAdmins();
     }
 
@@ -25,7 +24,7 @@ public class Model {
     }
 
     public Incidence saveIncidence(Incidence incidence){
-        return repository.saveClientIncidence(incidence);
+        return repository.saveClientIncidence(incidence,this.getRandomIncidenceAdmin());
     }
 
     public Incidence updateIncidence(Incidence incidence){

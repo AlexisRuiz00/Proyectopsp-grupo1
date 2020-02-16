@@ -90,7 +90,7 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             //CREATE OBJECTOUTPUT WRITER, SEND CONSULT INCIDENCE AND WAITS TO RECIEVE INCIDENCES RELATED
             oop = new ObjectOutputStream(s.getOutputStream());
             Incidence incidence = new Incidence(controller.viewClientLogin.getEmail(),"Consult");
-
+            oop.reset();
             oop.writeObject(incidence);
 
             try {

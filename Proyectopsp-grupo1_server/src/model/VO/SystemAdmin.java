@@ -1,4 +1,4 @@
-package Model.VO;
+package model.VO;
 
 public class SystemAdmin extends Administrator {
 
