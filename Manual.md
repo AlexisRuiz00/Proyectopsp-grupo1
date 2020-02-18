@@ -87,7 +87,7 @@ nuestra carpeta de OUT como ignore.</p>
 As” y seleccionados “Source root”.</p>
 
 <p align="center">
-  <img src="/img/manual/3.jpg"  height="600" width="800"/>
+  <img src="/img/manual/3.jpg"  height="600" width="500"/>
 </p>
 </br>
 
@@ -103,7 +103,7 @@ ejecutar antes que nada el “SERVIDOR”.</p>
 de lo que queramos utilizar.</p>
 
 <p align="center">
-  <img src="/img/manual/4.jpg"  height="600" width="800"/>
+  <img src="/img/manual/4.jpg"  height="600" width="500"/>
 </p>
 </br>
 
