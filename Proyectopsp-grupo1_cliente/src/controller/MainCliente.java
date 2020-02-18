@@ -50,12 +50,6 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
         controller.viewClientLogin.show();
     }
 
-
-
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
 

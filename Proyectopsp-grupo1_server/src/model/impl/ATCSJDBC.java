@@ -33,7 +33,7 @@ public class ATCSJDBC implements Repository {
             while (rs.next()) {
                 IncidenceAdmin incidenceAdmin = null;
 
-                incidenceAdmin = new IncidenceAdmin(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getString(7));
+                incidenceAdmin = new IncidenceAdmin(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
                 if (incidenceAdmin != null) {
                     incidenceAdmins.add(incidenceAdmin);
                 }
@@ -58,7 +58,7 @@ public class ATCSJDBC implements Repository {
         try {
             Conection conn = new Conection();
             Statement statement = conn.getConn().createStatement();
-            ResultSet rs = statement.executeQuery("Select * from incidencia where mail ='"+mail+"'");
+            ResultSet rs = statement.executeQuery("Select * from incidencia where mail ='" + mail + "'");
 
             while (rs.next()) {
                 Incidence incidence = null;
@@ -88,7 +88,7 @@ public class ATCSJDBC implements Repository {
         try {
             Conection conn = new Conection();
             Statement statement = conn.getConn().createStatement();
-            ResultSet rs = statement.executeQuery("Select * from incidencia where incidenceAdmin ='"+adminName+"'");
+            ResultSet rs = statement.executeQuery("Select * from incidencia where incidenceAdmin ='" + adminName + "'");
 
             while (rs.next()) {
                 Incidence incidence = null;
@@ -122,13 +122,13 @@ public class ATCSJDBC implements Repository {
 
             System.out.println(incidence.getMail());
 
-            statement.execute("INSERT into incidencia values ("+incidence.getId()+",'"+incidence.getIncidenceAdmin()+"','"+incidence.getMail()+"','"+incidence.getType()+"','"+incidence.getBody()+"')");
+            statement.execute("INSERT into incidencia values (" + incidence.getId() + ",'" + incidence.getIncidenceAdmin() + "','" + incidence.getMail() + "','" + incidence.getType() + "','" + incidence.getBody() + "')");
 
             //CLOSE
             statement.close();
             conn.Close();
             return incidence;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             //throw new MiExcepcion("Imposible to save to database");
             return null;
@@ -141,12 +141,12 @@ public class ATCSJDBC implements Repository {
             Conection conn = new Conection();
             Statement statement = conn.getConn().createStatement();
 
-            statement.executeUpdate("UPDATE incidencia set incidenceAdmin='"+incidence.getIncidenceAdmin()+"', mail='"+incidence.getMail()+"', body='"+incidence.getBody()+"' WHERE id='"+incidence.getId()+"'");
+            statement.executeUpdate("UPDATE incidencia set incidenceAdmin='" + incidence.getIncidenceAdmin() + "', mail='" + incidence.getMail() + "', body='" + incidence.getBody() + "' WHERE id='" + incidence.getId() + "'");
             //CLOSE
             statement.close();
             conn.Close();
             return incidence;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             //throw new MiExcepcion("Imposible to save to database");
             return null;
@@ -163,20 +163,21 @@ public class ATCSJDBC implements Repository {
             Conection conn = new Conection();
             Statement statement = conn.getConn().createStatement();
 
-            ResultSet result = statement.executeQuery("select role from administrador where username = '" + credentials.get(0) +"' and password = '" + credentials.get(1) +"'");
+            ResultSet result = statement.executeQuery("select role from administrador where username = '" + credentials.get(0) + "' and password = '" + credentials.get(1) + "'");
 
-            if(result.next()) {
+            if (result.next()) {
 
                 role = result.getString(1);
 
             }
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return role;
     }
+
 
 
 }

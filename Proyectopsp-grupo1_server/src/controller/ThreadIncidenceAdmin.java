@@ -47,12 +47,30 @@ public class ThreadIncidenceAdmin extends Thread {
     @Override
     public void run() {
 
-
         while (running) {
 
             try {
 
-                int action = dataInput.readInt();
+                //SE LEE EL PRIMER BYTE QUE DETERMINA LA ACCIÓN A REALIZAR
+                byte action = dataInput.readByte();
+
+                switch (action) {
+
+                    case 1:
+                        try {
+                            objectInput.close();
+                            objectOutput.close();
+                            socket.close();
+                        } catch (IOException ex) {}
+                        running = false;
+                        s.writeCloseAdmin();
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
