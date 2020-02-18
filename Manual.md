@@ -1,10 +1,6 @@
-<p align="center>
-
-
 ### CONFIGURACION DEL PROYECTO ATCS, ATENCION AL CLIENTE
 
 </br>
-
 <p align="center>
           
 <p>Bienvenido al configurador de nuestro proyecto, esto es un borrado sencillo para poder</br>
@@ -24,7 +20,7 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 
 </p>
 
-#### Paso 0:
+#### Paso 1:
 
 <p align="center>
           
