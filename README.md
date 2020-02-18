@@ -29,6 +29,8 @@
 > **[5- Activity 6: Hilos.](#5)**
 >
 > **[6- Activity 7: Diagramas de secuencia.](#6)**
+>
+> **[7- Manual](./manual.md)
 
 
 </br>
