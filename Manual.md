@@ -48,7 +48,7 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 
 
 
-#### Paso 2:
+#### Paso 3:
 <p align="center>
 
 <p>Una vez tengamos el proyecto completo, nos daremos cuenta de que este está dividido en 3</br>
