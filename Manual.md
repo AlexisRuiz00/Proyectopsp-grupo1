@@ -2,7 +2,6 @@
 ### CONFIGURACION DEL PROYECTO ATCS, ATENCION AL CLIENTE
 
 </br>
-<p align="center>
           
 <p>Bienvenido al configurador de nuestro proyecto, esto es un borrado sencillo para poder</br>
 ejecutar nuestro proyecto de una forma rápida y sencilla mientras trabajamos en un</br>
@@ -19,7 +18,6 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 </br>
 </br>
 
-</p>
 
 #### Paso 1:
 <p align="center>
