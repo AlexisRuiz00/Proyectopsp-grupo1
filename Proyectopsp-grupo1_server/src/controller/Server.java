@@ -1,9 +1,8 @@
-package Controller;
+package controller;
 
 
-import Model.Model;
-import Model.VO.Incidence;
-import org.omg.CORBA.StringHolder;
+import model.Model;
+import model.VO.Incidence;
 
 import javax.swing.*;
 import java.io.DataInputStream;
@@ -26,8 +25,8 @@ public class Server extends JFrame {
     private Stack<String> emailsAtendidos = new Stack<String>();
 
     private ArrayList<Socket> admins;
-    private ArrayList<Integer>puertos;
-    private ArrayList<String>direcciones;
+    private ArrayList<Integer> puertos;
+    private ArrayList<String> direcciones;
 
     private Model model;
 
@@ -53,6 +52,7 @@ public class Server extends JFrame {
         logArea.setRows(5);
         scrollPane1.setViewportView(logArea);
     }
+
     public void chargeLayout() {
         GroupLayout panel1Layout = new GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -79,24 +79,27 @@ public class Server extends JFrame {
         pack();
     }
 
-    public static Server getServer(){
+    public static Server getServer() {
         return s;
     }
-    public Stack getCola(){
+
+    public Stack getCola() {
         return emailsAtendidos;
     }
-    public synchronized void removeAdmin(InetAddress inetAddress){
-        for (Socket i : admins){
-            if (i.getInetAddress().equals(inetAddress)){
+
+    public synchronized void removeAdmin(InetAddress inetAddress) {
+        for (Socket i : admins) {
+            if (i.getInetAddress().equals(inetAddress)) {
                 admins.remove(i);
             }
         }
     }
+
     public synchronized int getPuerto() {
         boolean flag = true;
         int puerto = 0;
-        while (flag){
-            puerto = (int) (Math.random()*65000);
+        while (flag) {
+            puerto = (int) (Math.random() * 65000);
             if (!s.puertos.contains(puerto)) {
                 puertos.add(puerto);
                 flag = false;
@@ -104,33 +107,34 @@ public class Server extends JFrame {
         }
         return puerto;
     }
-    public synchronized String getDireccion(){
+
+    public synchronized String getDireccion() {
         String direccion = "0";
         boolean flag = true;
-        while (flag){
-           String c1 = String.valueOf((int)(Math.random()*15)+224);
-           String c2 = String.valueOf((int)(Math.random()*255));
-           String c3 = String.valueOf((int)(Math.random()*255));
-           String c4 = String.valueOf((int)(Math.random()*255));
+        while (flag) {
+            String c1 = String.valueOf((int) (Math.random() * 15) + 224);
+            String c2 = String.valueOf((int) (Math.random() * 255));
+            String c3 = String.valueOf((int) (Math.random() * 255));
+            String c4 = String.valueOf((int) (Math.random() * 255));
 
-           direccion = c1+"."+c2+"."+c3+"."+c4;
+            direccion = c1 + "." + c2 + "." + c3 + "." + c4;
 
-           if (!direcciones.contains(direccion)){
-               direcciones.add(direccion);
-               flag=false;
-           }
+            if (!direcciones.contains(direccion)) {
+                direcciones.add(direccion);
+                flag = false;
+            }
         }
 
         return direccion;
     }
-    public synchronized Socket getAdminForChat(){
 
-        int adminSelected = (int)(Math.random()*(admins.size()-1))+1;
+    public synchronized Socket getAdminForChat() {
+
+        int adminSelected = (int) (Math.random() * (admins.size() - 1)) + 1;
         Socket administratorSocket = admins.get(adminSelected);
         admins.remove(adminSelected);
         return administratorSocket;
     }
-
 
 
     public static void main(String args[]) throws InterruptedException, IOException {
@@ -138,9 +142,9 @@ public class Server extends JFrame {
         s.admins = new ArrayList<>();
 
         s.setVisible(true);
-        s.getLogArea().append(s.getHour() + " - Servidor iniciado. \n");
+        s.getLogArea().append(s.getHour() + " - Server online. \n");
         Thread.sleep(1000);
-        s.getLogArea().append(s.getHour() + " - Esperando respuesta... \n");
+        s.getLogArea().append(s.getHour() + " - Waiting response... \n");
 
         //SE CREA EL SOCKET PARA RECIVIR LAS INCIDENCIAS
         ServerSocket socket = new ServerSocket(13300);
@@ -154,52 +158,52 @@ public class Server extends JFrame {
             //INCIDENCE ADMIN, SI ES UNA CONEXIÓN, O CIERRE DE CONEXIÓN PORQUE
             // HAY QUE QUITARLOS DEL ARRAYLIST ADMIN.
 
-            System.out.println("Entra");
             int rol = read.readInt();
-            System.out.println("Entra2 "+rol);
-            switch (rol){
+
+            switch (rol) {
 
                 //Client connects
                 case 31:
-                             s.getLogArea().append(s.getHour()+" - Conectando cliente...\n");
-                             ThreadCliente ThreadCliente = new ThreadCliente(recieve);
-                             ThreadCliente.start();
-                             break;
+                    s.getLogArea().append(s.getHour() + " - Connecting cliente...\n");
+                    ThreadCliente ThreadCliente = new ThreadCliente(recieve);
+                    ThreadCliente.start();
+                    break;
 
 
                 //Client opens chat
                 case 35:
-                             ThreadConfChat tcc = new ThreadConfChat(recieve);
-                             tcc.start();
-                             s.getLogArea().append(" - Configurando chat...\n");
-                             break;
+                    ThreadConfChat tcc = new ThreadConfChat(recieve);
+                    tcc.start();
+                    s.getLogArea().append(" - Configurating chat...\n");
+                    break;
 
                 //Entra IncidenceAdmin
-                case 21:      s.admins.add(recieve);
-                             s.getLogArea().append(s.getHour() + " - Conectando Administrador de Incidencias...\n");
-                             ThreadIncidenceAdmin threadIncidenceAdmin = new ThreadIncidenceAdmin(recieve);
-                             threadIncidenceAdmin.start();
-                             break;
+                case 21:
+                    s.admins.add(recieve);
+                    s.getLogArea().append(s.getHour() + " - Incidence admin connected.\n");
+                    ThreadIncidenceAdmin threadIncidenceAdmin = new ThreadIncidenceAdmin(recieve);
+                    threadIncidenceAdmin.start();
+                    break;
 
                 //Entra SysAdmin
-                case 5:     s.getLogArea().append(s.getHour() + " - Conectando Administrador de Sistema...\n");
-                            ThreadSystemAdmin threadSystemAdmin = new ThreadSystemAdmin(recieve);
-                            threadSystemAdmin.start();
+                case 5:
+                    s.admins.add(recieve);
+                    s.getLogArea().append(s.getHour() + " - System admin connected.\n");
+                    ThreadSystemAdmin threadSystemAdmin = new ThreadSystemAdmin(recieve);
+                    threadSystemAdmin.start();
 
                 case 10:
-                    s.getLogArea().append(s.getHour() + " - Conectando Administrador...\n");
+                    s.getLogArea().append(s.getHour() + " - Connecting administrator...\n");
                     ThreadAdminLogin threadAdminLogin = new ThreadAdminLogin(recieve);
                     threadAdminLogin.start();
 
 
                 default:
-                    System.out.println(" - Sale");  break;
+                    System.out.println(" - Sale");
+                    break;
             }
         }
     }
-
-
-
 
 
     public JTextArea getLogArea() {
@@ -215,17 +219,17 @@ public class Server extends JFrame {
     private JTextArea logArea;
 
 
-
-
     public synchronized ArrayList<Incidence> get(String mail) {
         // CONSULTA DE LA BASE DE DATOS PARA LLENAR LA LISTA DE INCIDENCIAS
         return s.model.getClientIncidences(mail);
     }
+
     public synchronized Incidence put(Incidence i) {
         // INSERTA CONSULTA EN BASE DE DATOS  devuelve la incidencia insertada
         return s.model.saveIncidence(i);
     }
-    public synchronized Incidence updateIncidence(Incidence i){
+
+    public synchronized Incidence updateIncidence(Incidence i) {
         return s.model.updateIncidence(i);
     }
 
@@ -233,12 +237,12 @@ public class Server extends JFrame {
         return s.model.getLogin(credentials);
     }
 
-    public synchronized ArrayList<Incidence> getAdminIncidences(String adminName){
+    public synchronized ArrayList<Incidence> getAdminIncidences(String adminName) {
         return s.model.getAdminIncidences(adminName);
     }
 
 
-    public static String getHour(){
+    public static String getHour() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         String hora = dateFormat.format(date);
@@ -246,8 +250,8 @@ public class Server extends JFrame {
     }
 
 
-    public void writeCloseClient(){
-        s.getLogArea().append(getHour()+" - Cliente desconectado\n");
+    public void writeCloseClient() {
+        s.getLogArea().append(getHour() + " - Client disconnected\n");
     }
 
 

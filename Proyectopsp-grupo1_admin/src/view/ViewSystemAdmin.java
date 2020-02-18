@@ -10,6 +10,7 @@ public class ViewSystemAdmin extends javax.swing.JFrame {
      * Creates new form ViewSystemAdmin
      */
     public ViewSystemAdmin() {
+        this.setTitle("System administrator");
         initComponents();
         chargeLayout();
     }

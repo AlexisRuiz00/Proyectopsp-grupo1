@@ -1,6 +1,6 @@
 package View;
 
-import Controller.MainCliente;
+import controller.MainCliente;
 
 /**
  * @author usuario

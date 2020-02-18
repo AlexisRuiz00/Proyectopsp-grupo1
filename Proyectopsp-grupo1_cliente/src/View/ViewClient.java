@@ -1,7 +1,7 @@
 package View;
 
-import Controller.MainCliente;
-import Model.VO.Incidence;
+import controller.MainCliente;
+import model.VO.Incidence;
 
 import javax.swing.*;
 import java.awt.*;

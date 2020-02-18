@@ -10,6 +10,7 @@ public class ViewNewIncidenceAdmin extends javax.swing.JFrame {
      * Creates new form ViewNewIncidenceAdmin
      */
     public ViewNewIncidenceAdmin() {
+        this.setTitle("New incidence admin");
         initComponents();
         chargeLayout();
     }

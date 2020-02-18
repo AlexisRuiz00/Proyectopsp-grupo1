@@ -1,8 +1,6 @@
 package View;
 
-import Controller.MainCliente;
-
-import javax.swing.*;
+import controller.MainCliente;
 
 /**
  * @author David and Alexis

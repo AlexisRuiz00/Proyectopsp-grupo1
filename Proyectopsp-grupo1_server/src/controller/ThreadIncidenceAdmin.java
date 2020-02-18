@@ -52,9 +52,7 @@ public class ThreadIncidenceAdmin extends Thread {
 
             try {
 
-                //Read int
                 int action = dataInput.readInt();
-
 
             } catch (IOException e) {
                 e.printStackTrace();

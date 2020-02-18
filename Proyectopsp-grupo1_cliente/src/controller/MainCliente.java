@@ -1,6 +1,6 @@
-package Controller;
+package controller;
 
-import Model.VO.Incidence;
+import model.VO.Incidence;
 import View.ViewClient;
 import View.ViewClientLogin;
 import View.WriteIncidence;

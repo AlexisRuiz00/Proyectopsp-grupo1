@@ -123,25 +123,23 @@ public class MainAdmin implements ActionListener, WindowListener {
 
                             break;
 
-
-
                         case "SystemAdmin":
                             viewSystemAdmin = new ViewSystemAdmin();
                             viewAdminLogin.dispose();
                             viewSystemAdmin.setVisible(true);
                             break;
                         case "":
-                            JOptionPane.showMessageDialog(null, "El usuario que has introducido es incorrecto, por favor comprueba los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Invalid username / password", "Error", JOptionPane.ERROR_MESSAGE);
                             break;
                     }
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "El usuario que has introducido es incorrecto, por favor comprueba los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid username / password", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Imposible conectarse al servidor" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Connection refused, there has been a problem" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
             }
 
 
