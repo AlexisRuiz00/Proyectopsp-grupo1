@@ -1,3 +1,6 @@
+
+<p align="center>
+
 ### CONFIGURACION DEL PROYECTO ATCS, ATENCION AL CLIENTE
 
 </br>
@@ -87,7 +90,7 @@ nuestra carpeta de OUT como ignore.</p>
 As” y seleccionados “Source root”.</p>
 
 <p align="center">
-  <img src="/img/manual/3.jpg"  height="600" width="500"/>
+  <img src="/img/manual/3.jpg"  height="600" width="450"/>
 </p>
 </br>
 
@@ -102,8 +105,9 @@ ejecutar antes que nada el “SERVIDOR”.</p>
 <p>Una vez iniciado el servidor, ya podemos ejecutar el cliente, o el administrador, dependiente</br>
 de lo que queramos utilizar.</p>
 
+</br>
 <p align="center">
-  <img src="/img/manual/4.jpg"  height="600" width="500"/>
+  <img src="/img/manual/4.jpg"  height="600" width="400"/>
 </p>
 </br>
 
@@ -115,3 +119,4 @@ esta guía o en clase.</p>
 <p>Muchas gracias y disfrute de ATCS, ATENCION AL CLIENTE!!</p>
 
 
+</p>
