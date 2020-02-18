@@ -28,10 +28,10 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 </br>
 
 <p align="center">
-  <img src="/img/manual/0.jpg" height="300" width="600"/>
+  <img src="/img/manual/0.jpg" height="600" width="800"/>
 </p>
 <p align="center">
-  <img src="/img/manual/1.jpg" height="300" width="600"/>
+  <img src="/img/manual/1.jpg" height="100" width="300"/>
 </p>
 </br>
 
