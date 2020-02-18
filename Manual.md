@@ -20,8 +20,9 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 
 <p>Descargar el proyecto de GitHub actualizado de la rama “develop”.</p>
 </br>
-<p>Enlace del proyecto: [https://github.com/AlexisRuiz00/Proyectopsp-grupo1.git](https://github.com/AlexisRuiz00/Proyectopsp-grupo1.git)</p>
+<p>Enlace del proyecto: [https://github.com/AlexisRuiz00/Proyectopsp-grupo1.git]https://github.com/AlexisRuiz00/Proyectopsp-grupo1.git</p>
 </br>
+
 #### Paso 2:
 </br>
 <p>Una vez descargado nuestro proyecto, necesitamos importarlo en IntelliJ IDEA</p>
