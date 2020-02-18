@@ -30,7 +30,7 @@
 >
 > **[6- Activity 7: Diagramas de secuencia.](#6)**
 >
-> **[7- Manual](./manual.md)
+> **[7- Manual](./Manual.md)**
 
 
 </br>
