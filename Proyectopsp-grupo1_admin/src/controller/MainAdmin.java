@@ -7,6 +7,8 @@ import view.ViewNewIncidenceAdmin;
 import view.ViewSystemAdmin;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -14,18 +16,21 @@ import java.awt.event.WindowListener;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Clase que arranca y controla la aplicación
  */
-public class MainAdmin implements ActionListener, WindowListener {
+public class MainAdmin implements ActionListener, WindowListener, ListSelectionListener {
 
     private static MainAdmin controller;
     private ViewAdminLogin viewAdminLogin;
-    private ViewNewIncidenceAdmin viewNewIncidenceAdmin;
     private ViewSystemAdmin viewSystemAdmin;
     private ViewIncidenceAdmin viewIncidenceAdmin;
+    private ArrayList<Incidence> incidences;
     private static Socket s = null;
     private ObjectOutputStream oop;
     private ObjectInputStream finput;
@@ -59,9 +64,14 @@ public class MainAdmin implements ActionListener, WindowListener {
                 startApp();
                 break;
             case "Chat":
-                viewNewIncidenceAdmin.openChat();
+                viewIncidenceAdmin.openChat();
+                break;
             case "Exit":
-                viewNewIncidenceAdmin.dispose();
+                viewIncidenceAdmin.dispose();
+                break;
+            case "Accept":
+                this.replyIncidence();
+                break;
 
         }
     }
@@ -98,7 +108,7 @@ public class MainAdmin implements ActionListener, WindowListener {
                     switch (role) {
                         case "IncidenceAdmin":
 
-
+                            controller.incidences =incidences;
                             s = new Socket("localhost", puerto);
 
                             /*Send int with value 21 to advertise server that an
@@ -151,6 +161,49 @@ public class MainAdmin implements ActionListener, WindowListener {
 
     }
 
+    private void replyIncidence() {
+
+        int idx = viewIncidenceAdmin.getSelectedIncidenceListId();
+        if (idx == -1){
+            JOptionPane.showMessageDialog(null, "Select an incidence to reply\n",
+                    "<<MENSAJE DE ERROR:5>>", JOptionPane.ERROR_MESSAGE);
+        }else if(viewIncidenceAdmin.getTextReplyToString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Insert a reply\n",
+                    "<<MENSAJE DE ERROR:4>>", JOptionPane.ERROR_MESSAGE);
+        }else {
+            Incidence tmpIncidence =
+                    incidences.get(idx);
+            tmpIncidence.setBody(tmpIncidence.getBody()+
+                    "\n<------------------ "+getHour()+" -------------------->\n"+
+                    viewIncidenceAdmin.getTextReplyToString());
+            try {
+                incidences.set(incidences.indexOf(findById(tmpIncidence.getId())),tmpIncidence);
+                viewIncidenceAdmin.updateElement(tmpIncidence,idx);
+                tmpIncidence.setType("answer");
+
+                System.out.println(tmpIncidence.getBody());
+                oop.reset();
+                oop.writeObject(tmpIncidence);
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error sending reply\n",
+                        "<<MENSAJE DE ERROR:6>>", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }
+
+    public Incidence findById(int id){
+        return incidences.stream().filter(i -> i.getId() == id).findFirst().get();
+    }
+
+    public String getHour(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
+        Date date = new Date();
+        String hora = dateFormat.format(date);
+        return hora;
+    }
+
     @Override
     public void windowOpened(WindowEvent windowEvent) {
 
@@ -158,12 +211,7 @@ public class MainAdmin implements ActionListener, WindowListener {
 
     @Override
     public void windowClosing(WindowEvent windowEvent) {
-        try {
-            oop.writeObject(new Incidence("","-1"));
-            ((JFrame) windowEvent.getSource()).dispose();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
@@ -189,5 +237,10 @@ public class MainAdmin implements ActionListener, WindowListener {
     @Override
     public void windowDeactivated(WindowEvent windowEvent) {
 
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        viewIncidenceAdmin.setAreaDetail(((JList<Incidence>)e.getSource()).getSelectedValue().getBody());
     }
 }

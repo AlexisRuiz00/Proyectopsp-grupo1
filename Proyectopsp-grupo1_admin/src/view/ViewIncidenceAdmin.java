@@ -1,5 +1,6 @@
 package view;
 
+import controller.MainAdmin;
 import model.VO.Incidence;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     public ViewIncidenceAdmin(ArrayList<Incidence> incidences) {
         this.setTitle("Incidences");
         initComponents(incidences);
+        this.setResizable(false);
         chargeLayout();
     }
 
@@ -29,7 +31,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         areaDetail = new javax.swing.JTextArea();
-        botonLoad = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         arenaRespuesta = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
@@ -66,8 +67,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         areaDetail.setRows(5);
         jScrollPane2.setViewportView(areaDetail);
 
-        botonLoad.setText("Load");
-
         arenaRespuesta.setColumns(20);
         arenaRespuesta.setRows(5);
         jScrollPane3.setViewportView(arenaRespuesta);
@@ -81,6 +80,8 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         radioClose.setText("Close");
         radioPending.setText("Pending");
         jLabel9.setText("Actions");
+
+        areaDetail.setEditable(false);
 
         areaChat.setColumns(20);
         areaChat.setRows(5);
@@ -100,7 +101,42 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
         setJMenuBar(menuBarUno);
 
+        listIncidences.addListSelectionListener(MainAdmin.getAdminController());
+
+        menuItemChat.setActionCommand("openChat");
+        menuItemChat.addActionListener(MainAdmin.getAdminController());
+        botonAccept.addActionListener(MainAdmin.getAdminController());
+
     }
+
+    public JTextArea getAreaDetail() {
+        return areaDetail;
+    }
+
+    public void setAreaDetail(String areaDetail) {
+        this.areaDetail.setText(areaDetail);
+    }
+
+    public int getSelectedIncidenceListId(){
+        if (listIncidences.getSelectedValue() != null) {
+            return listIncidences.getSelectedIndex();
+        }else
+            return -1;
+    }
+
+    public String getTextReplyToString(){
+        return this.arenaRespuesta.getText();
+    }
+
+    public void updateElement(Incidence i, int id){
+        listModel.add(id,i);
+        listModel.remove(id);
+    }
+
+    public void openChat(){
+        this.resize(760,getHeight());
+    }
+
     public void chargeLayout() {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panelUno);
         panelUno.setLayout(jPanel1Layout);
@@ -119,8 +155,7 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
                                                 .addComponent(botonAccept))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(botonLoad))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -164,8 +199,7 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
                                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addGap(14, 14, 14)
-                                                                .addComponent(botonLoad))
+                                                                .addGap(14, 14, 14))
                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(jLabel7)))
@@ -205,7 +239,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
 
     private javax.swing.JButton botonSend;
-    private javax.swing.JButton botonLoad;
     private javax.swing.JButton botonAccept;
     private javax.swing.JComboBox<String> comboAdmins;
     private javax.swing.JLabel jLabel1;
