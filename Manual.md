@@ -20,7 +20,7 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 
 </p>
 
-#### Paso 1.
+#### Paso 0.
 
 <p align="center>
           
