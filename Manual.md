@@ -132,7 +132,7 @@ de lo que queramos utilizar.</p>
 
 </br>
 <p align="center">
-  <img src="/img/manual/4.jpg"  height="600" width="400"/>
+  <img src="/img/manual/4.jpg"  height="400" width="400"/>
 </p>
 </br>
 
