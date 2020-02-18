@@ -1,10 +1,11 @@
 
-<p align="center>
 
 ### CONFIGURACION DEL PROYECTO ATCS, ATENCION AL CLIENTE
 
 </br>
 
+<p align="center>
+          
 <p>Bienvenido al configurador de nuestro proyecto, esto es un borrado sencillo para poder</br>
 ejecutar nuestro proyecto de una forma rápida y sencilla mientras trabajamos en un</br>
 documento completo donde se explique definitivamente el funcionamiento completo y la</br>
@@ -18,14 +19,23 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 </br>
 <p>Comencemos con los pasos:</p>
 </br>
+</br>
+
+</p>
 
 #### Paso 1:
 
+<p align="center>
+          
 <p>Descargar el proyecto de GitHub actualizado de la rama “develop”.</p>
 </br>
 <p>Enlace del proyecto: https://github.com/AlexisRuiz00/Proyectopsp-grupo1.git</p>
 
+</p>
+
+
 #### Paso 2:
+<p align="center>
 </br>
 <p>Una vez descargado nuestro proyecto, necesitamos importarlo en IntelliJ IDEA</p>
 </br>
@@ -38,7 +48,12 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 </p>
 </br>
 
+</p>
+
+
+
 #### Paso 2:
+<p align="center>
 
 <p>Una vez tengamos el proyecto completo, nos daremos cuenta de que este está dividido en 3</br>
 subproyectos:</p>
@@ -53,16 +68,19 @@ desarrollo para evitar que los nombres de los paquetes entren en conflicto y a s
 nombre de las clases, ya que algunos de estos subproyectos comparten “la misma clase”.</p>
 </br>
 
-#### Paso 4:
+</p>
 
+
+
+#### Paso 4:
+<p align="center>
 <p>Una vez tenemos abierto en 3 ventanas diferentes nuestros tres subproyectos, pasaremos a</br>
 realizar la configuración de librerías y plugins de nuestro proyecto, a su vez indicado el</br>
 directorio de salida (creando este directorio llamado “out” si no existiera en cada SRC de</br>
 cada proyecto).</p>
 </br>
 
-<p>Podemos abrir la venta de configuración utilizando el siguiente comando: Alt + Ctrl + Shift +</br>
-S.</p>
+<p>Podemos abrir la venta de configuración utilizando el siguiente comando: Alt + Ctrl + Shift +S.</p>
 
 <p align="center">
   <img src="/img/manual/2.jpg"  height="600" width="800"/>
@@ -80,9 +98,12 @@ comentamos al principio.</p>
 
 <p>Y ya tendremos configurada quizás la parte más importante del proyecto. Lo siguiente es</br>
 indicar nuestra carpeta de SRC para que compile el proyecto.</p>
+</p>
+
+
 
 #### Paso 5: 
-
+<p align="center>
 <p>En este paso indicaremos en nuestra configuración del entorno, nuestro SRC como source y</br>
 nuestra carpeta de OUT como ignore.</p>
 
@@ -97,8 +118,12 @@ As” y seleccionados “Source root”.</p>
 <p>Realizamos el mismo paso pero para nuestras carpetas de “OUT” indicándolas en este caso</br>
 como “EXCLUDED”.</p>
 
-#### Paso 6:
+</p>
 
+
+
+#### Paso 6:
+<p align="center>
 <p>Por último, ya podemos ejecutar nuestro proyecto, para el cuál primero necesitaremos</br>
 ejecutar antes que nada el “SERVIDOR”.</p>
 
@@ -117,6 +142,4 @@ esta guía o en clase.</p>
 
 
 <p>Muchas gracias y disfrute de ATCS, ATENCION AL CLIENTE!!</p>
-
-
 </p>
