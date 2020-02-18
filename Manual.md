@@ -21,7 +21,6 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 </p>
 
 #### Paso 1:
-
 <p align="center>
           
 <p>Descargar el proyecto de GitHub actualizado de la rama “develop”.</p>
