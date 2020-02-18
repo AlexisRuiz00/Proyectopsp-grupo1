@@ -1,3 +1,4 @@
+
 ### CONFIGURACION DEL PROYECTO ATCS, ATENCION AL CLIENTE
 
 </br>
@@ -12,7 +13,7 @@ configuración detallada de nuestra aplicación.</p>
 nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 
 <p><b>Fundador:</b> David Camacho Encina (david.camachoencina@iesvalleinclan.es).</br>
-<b>Fundador:</b> Alexis Ruiz Gómez (alexis.ruizgomez@iesvalleinclan.es).</pr>
+<b>Fundador:</b> Alexis Ruiz Gómez (alexis.ruizgomez@iesvalleinclan.es).</p>
 </br>
 <p>Comencemos con los pasos:</p>
 </br>
