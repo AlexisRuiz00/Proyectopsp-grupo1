@@ -28,10 +28,10 @@ nos puede dejar un mensaje en nuestros correos de soporte al cliente:</p>
 </br>
 
 <p align="center">
-  <img src="/img/manual/1.jpg" height="300" width="600"/>
+  <img src="/img/manual/0.jpg" height="300" width="600"/>
 </p>
 <p align="center">
-  <img src="/img/manual/2.jpg" height="300" width="600"/>
+  <img src="/img/manual/1.jpg" height="300" width="600"/>
 </p>
 </br>
 
@@ -62,7 +62,7 @@ cada proyecto).</p>
 S.</p>
 
 <p align="center">
-  <img src="/img/manual/3.jpg" height="300" width="600"/>
+  <img src="/img/manual/2.jpg" height="300" width="600"/>
 </p>
 </br>
 
@@ -87,7 +87,7 @@ nuestra carpeta de OUT como ignore.</p>
 As” y seleccionados “Source root”.</p>
 
 <p align="center">
-  <img src="/img/manual/4.jpg" height="300" width="600"/>
+  <img src="/img/manual/3.jpg" height="300" width="600"/>
 </p>
 </br>
 
