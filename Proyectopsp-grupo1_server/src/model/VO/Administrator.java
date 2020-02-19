@@ -1,6 +1,10 @@
 package model.VO;
 
-public class Administrator {
+import java.io.Serializable;
+
+public class Administrator implements Serializable {
+
+    static final long serialVersionUID = 42L;
 
     private String name;
     private String apell;

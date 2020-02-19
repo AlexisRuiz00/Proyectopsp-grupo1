@@ -21,11 +21,12 @@ public class ThreadSystemAdmin extends Thread {
         this.socket = socket;
 
         try {
-            objectInput = new ObjectInputStream(socket.getInputStream());
-            objectOutput = new ObjectOutputStream(socket.getOutputStream());
-            dataInput = new DataInputStream(socket.getInputStream());
-            dataOutput = new DataOutputStream(socket.getOutputStream());
 
+            objectOutput = new ObjectOutputStream(socket.getOutputStream());
+            objectOutput.writeObject(s.getIncidenceAdmins());
+
+
+            running = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,6 +40,7 @@ public class ThreadSystemAdmin extends Thread {
             try {
 
                 //SE LEE EL PRIMER BYTE QUE DETERMINA LA ACCIÓN A REALIZAR
+                dataInput = new DataInputStream(socket.getInputStream());
                 byte action = dataInput.readByte();
 
                 switch (action) {

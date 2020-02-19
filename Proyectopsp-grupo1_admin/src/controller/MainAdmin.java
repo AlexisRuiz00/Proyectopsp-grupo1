@@ -1,10 +1,8 @@
 package controller;
 
 import model.VO.Incidence;
-import view.ViewAdminLogin;
-import view.ViewIncidenceAdmin;
-import view.ViewNewIncidenceAdmin;
-import view.ViewSystemAdmin;
+import model.VO.IncidenceAdmin;
+import view.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -30,6 +28,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     private ViewAdminLogin viewAdminLogin;
     private ViewSystemAdmin viewSystemAdmin;
     private ViewIncidenceAdmin viewIncidenceAdmin;
+    private ViewSystemAdminOverview viewSystemAdminOverview;
     private ArrayList<Incidence> incidences;
     private static Socket s = null;
     private ObjectOutputStream oop;
@@ -72,6 +71,23 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
             case "Accept":
                 this.replyIncidence();
                 break;
+
+            case "newIncidenceAdmin":
+
+                viewSystemAdminOverview =
+                        new ViewSystemAdminOverview(null);
+                viewSystemAdminOverview.setVisible(true);
+                break;
+
+            case "editIncidenceAdmin":
+
+                viewSystemAdminOverview =
+                        new ViewSystemAdminOverview(viewSystemAdmin.getSelectedAdmin());
+                viewSystemAdminOverview.setVisible(true);
+                break;
+
+
+
 
         }
     }
@@ -134,9 +150,23 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             break;
 
                         case "SystemAdmin":
-                            viewSystemAdmin = new ViewSystemAdmin();
+                            s = new Socket("localhost", puerto);
+
+                            /*Send int with value 11 to advertise server that a
+                            system admin is going to start a connection*/
+
+                            foutput = new DataOutputStream(s.getOutputStream());
+                            foutput.writeInt(11);
+
+                            //RECIEVE INCIDENCE ADMINISTRATORS
+                            finput = new ObjectInputStream(s.getInputStream());
+                            ArrayList<IncidenceAdmin> incidenceAdmins =
+                                    (ArrayList<IncidenceAdmin>) finput.readObject();
+
+                            viewSystemAdmin = new ViewSystemAdmin(incidenceAdmins);
                             viewAdminLogin.dispose();
                             viewSystemAdmin.setVisible(true);
+
                             break;
                         case "":
                             JOptionPane.showMessageDialog(null, "Invalid username / password", "Error", JOptionPane.ERROR_MESSAGE);
@@ -241,6 +271,6 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        viewIncidenceAdmin.setAreaDetail(((JList<Incidence>)e.getSource()).getSelectedValue().getBody());
+        viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>)e.getSource()).getSelectedValue());
     }
 }

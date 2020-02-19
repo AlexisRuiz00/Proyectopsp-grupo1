@@ -39,4 +39,8 @@ public class Model {
         return repository.getAdminIncidences(adminName);
     }
 
+
+    public ArrayList<IncidenceAdmin> getIncidenceAdmins(){
+        return repository.getIncidenceAdmins();
+    }
 }

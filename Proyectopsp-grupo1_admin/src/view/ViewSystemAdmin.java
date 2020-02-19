@@ -1,136 +1,217 @@
-package view;/*
+package view;
 
-/**
- *
- * @author David
- */
-public class ViewSystemAdmin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ViewSystemAdmin
-     */
-    public ViewSystemAdmin() {
-        this.setTitle("System administrator");
-        initComponents();
+import controller.MainAdmin;
+import model.VO.Incidence;
+import model.VO.IncidenceAdmin;
+
+import javax.swing.*;
+import java.util.ArrayList;
+
+public class ViewSystemAdmin extends JFrame {
+
+
+    private JButton btnDelete;
+    private JButton btnEdit;
+    private JButton btnNew;
+    private JTextField fieldMail;
+    private JTextField fieldName;
+    private JTextField fieldPhone;
+    private JTextField fieldSurname;
+    private JTextField fieldUsername;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JMenuBar jMenuBar1;
+    private JScrollPane jScrollPane1;
+    private JList<IncidenceAdmin> listAdmins;
+    private JMenu menu;
+    private JMenuItem menuFTP;
+    private DefaultListModel<IncidenceAdmin>  listModel;
+
+
+    public ViewSystemAdmin(ArrayList<IncidenceAdmin> incidenceAdmins) {
+        initComponents(incidenceAdmins);
+    }
+
+
+    private void initComponents(ArrayList<IncidenceAdmin> incidenceAdmins) {
+
+        jScrollPane1 = new JScrollPane();
+        listAdmins = new JList<>();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        jLabel4 = new JLabel();
+        jLabel5 = new JLabel();
+        fieldName = new JTextField();
+        fieldSurname = new JTextField();
+        fieldMail = new JTextField();
+        fieldPhone = new JTextField();
+        fieldUsername = new JTextField();
+        btnNew = new JButton();
+        btnDelete = new JButton();
+        btnEdit = new JButton();
+        jMenuBar1 = new JMenuBar();
+        menu = new JMenu();
+        menuFTP = new JMenuItem();
+
+        fieldName.setEditable(false);
+        fieldSurname.setEditable(false);
+        fieldMail.setEditable(false);
+        fieldPhone.setEditable(false);
+        fieldUsername.setEditable(false);
+
+        this.setResizable(false);
+
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        listModel = new DefaultListModel<IncidenceAdmin>();
+        for(IncidenceAdmin i : incidenceAdmins){
+            listModel.addElement(i);
+        }
+        listAdmins.setModel(listModel);
+        listAdmins.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listAdmins.addListSelectionListener(MainAdmin.getAdminController());
+
+        jScrollPane1.setViewportView(listAdmins);
+
+        jLabel1.setText("Name");
+        jLabel2.setText("Surname");
+        jLabel3.setText("Mail");
+        jLabel4.setText("Phone");
+        jLabel5.setText("Username");
+
+
+
+        btnNew.setText("New");
+        btnNew.setActionCommand("newIncidenceAdmin");
+        btnNew.addActionListener(MainAdmin.getAdminController());
+
+        btnDelete.setText("Delete");
+        btnDelete.setActionCommand("deleteIncidenceAdmin");
+        btnDelete.addActionListener(MainAdmin.getAdminController());
+
+        btnEdit.setText("Edit");
+        btnEdit.setActionCommand("editIncidenceAdmin");
+        btnEdit.addActionListener(MainAdmin.getAdminController());
+
+        jMenuBar1.add(menu);
+        menu.setText("File");
+        menuFTP.setText("FTP");
+        menu.add(menuFTP);
+
+        menuFTP.setActionCommand("FTP");
+        menuFTP.addActionListener(MainAdmin.getAdminController());
+
+        setJMenuBar(jMenuBar1);
+
         chargeLayout();
     }
+     public void chargeLayout(){
 
-
-    private void initComponents() {
-
-        panelUno = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaDev = new javax.swing.JList<>();
-        botonEdit = new javax.swing.JButton();
-        botonDelete = new javax.swing.JButton();
-        botonNew = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("List of incidence admins:");
-
-        listaDev.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
-            public int getSize() {
-                return strings.length;
-            }
-
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        });
-        jScrollPane1.setViewportView(listaDev);
-
-        botonEdit.setText("Edit");
-        botonDelete.setText("Delete");
-        botonNew.setText("New");
-        jLabel6.setText("Data base");
-        jLabel14.setText("Name: ATCS");
-        jLabel15.setText("Version: 0.0.1v");
-
-    }
-
-    public void chargeLayout() {
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panelUno);
-        panelUno.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel14)
-                                        .addComponent(jLabel15)
-                                        .addComponent(jLabel6))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(218, 218, 218)
-                                                .addComponent(botonNew)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(botonEdit)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(botonDelete))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(jLabel1)))
-                                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(40, 40, 40)
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel14)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel15))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(botonDelete, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(botonNew, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(botonEdit))
-                                .addGap(0, 18, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelUno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNew, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete)
+                .addGap(18, 18, 18)
+                .addComponent(btnEdit, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fieldUsername, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fieldPhone, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fieldMail, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fieldSurname, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(44, 44, 44)
+                        .addComponent(fieldName, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)))
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelUno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(fieldName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(fieldSurname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(fieldMail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(fieldPhone, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(fieldUsername, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)))
+                    .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnEdit)
+                    .addComponent(btnNew))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }
 
 
-    private javax.swing.JButton botonEdit;
-    private javax.swing.JButton botonDelete;
-    private javax.swing.JButton botonNew;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> listaDev;
-    private javax.swing.JPanel panelUno;
-    private javax.swing.JScrollPane jScrollPane1;
+
+    public void setAdminDetails(IncidenceAdmin incidenceAdmin){
+        this.fieldName.setText(incidenceAdmin.getName());
+        this.fieldSurname.setText(incidenceAdmin.getApell());
+        this.fieldMail.setText(incidenceAdmin.getMail());
+        this.fieldPhone.setText(incidenceAdmin.getPhone());
+        this.fieldUsername.setText(incidenceAdmin.getUsername());
+    }
+
+    public void addIncidenceAdmin(IncidenceAdmin incidenceAdmin){
+        this.listModel.addElement(incidenceAdmin);
+    }
+
+
+    public IncidenceAdmin getSelectedAdmin(){
+        return this.listAdmins.getSelectedValue();
+    }
+
+
 
 }

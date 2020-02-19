@@ -3,6 +3,7 @@ package controller;
 
 import model.Model;
 import model.VO.Incidence;
+import model.VO.IncidenceAdmin;
 
 import javax.swing.*;
 import java.io.DataInputStream;
@@ -186,17 +187,18 @@ public class Server extends JFrame {
                     break;
 
                 //Entra SysAdmin
-                case 5:
+                case 11:
                     s.admins.add(recieve);
                     s.getLogArea().append(s.getHour() + " - System admin connected.\n");
                     ThreadSystemAdmin threadSystemAdmin = new ThreadSystemAdmin(recieve);
                     threadSystemAdmin.start();
+                    break;
 
                 case 10:
                     s.getLogArea().append(s.getHour() + " - Connecting administrator...\n");
                     ThreadAdminLogin threadAdminLogin = new ThreadAdminLogin(recieve);
                     threadAdminLogin.start();
-
+                    break;
 
                 default:
                     System.out.println(" - Sale");
@@ -258,5 +260,7 @@ public class Server extends JFrame {
         s.getLogArea().append(getHour() + " - Incidence admin disconnected\n");
     }
 
-
+    public ArrayList<IncidenceAdmin>getIncidenceAdmins(){
+        return model.getIncidenceAdmins();
+    }
 }
