@@ -243,6 +243,9 @@ public class Server extends JFrame {
         return s.model.getAdminIncidences(adminName);
     }
 
+    public synchronized void saveIncidenceAdmin(IncidenceAdmin incidenceAdmin){
+        s.model.saveIncidenceAdmin(incidenceAdmin);
+    }
 
     public static String getHour() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -261,6 +264,6 @@ public class Server extends JFrame {
     }
 
     public ArrayList<IncidenceAdmin>getIncidenceAdmins(){
-        return model.getIncidenceAdmins();
+        return s.model.getIncidenceAdmins();
     }
 }

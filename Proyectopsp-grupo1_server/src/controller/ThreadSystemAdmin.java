@@ -1,6 +1,7 @@
 package controller;
 
 import model.VO.Incidence;
+import model.VO.IncidenceAdmin;
 
 import java.io.*;
 import java.net.Socket;
@@ -21,7 +22,6 @@ public class ThreadSystemAdmin extends Thread {
         this.socket = socket;
 
         try {
-
             objectOutput = new ObjectOutputStream(socket.getOutputStream());
             objectOutput.writeObject(s.getIncidenceAdmins());
 
@@ -41,23 +41,33 @@ public class ThreadSystemAdmin extends Thread {
 
                 //SE LEE EL PRIMER BYTE QUE DETERMINA LA ACCIÓN A REALIZAR
                 dataInput = new DataInputStream(socket.getInputStream());
-                byte action = dataInput.readByte();
+                int action = dataInput.readInt();
+                System.out.println(action);
 
                 switch (action) {
-
                     //Crete a new Incidence Admin
                     case 1:
+                        try {
 
+                            objectInput = new ObjectInputStream(socket.getInputStream());
+                            IncidenceAdmin incidenceAdmin =
+                                    (IncidenceAdmin) objectInput.readObject();
+                            s.saveIncidenceAdmin(incidenceAdmin);
 
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         break;
                     case 2:
                         break;
                     case 3:
                         break;
 
+                    default:
+                        System.out.println("SALE");
                 }
 
-            } catch (IOException e) {
+            } catch (IOException  e) {
                 e.printStackTrace();
             }
         }

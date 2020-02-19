@@ -52,6 +52,28 @@ public class ATCSJDBC implements Repository {
     }
 
     @Override
+    public void saveIncidenceAdmin(IncidenceAdmin incidenceAdmin) {
+        try {
+            Conection conn = new Conection();
+            Statement statement = conn.getConn().createStatement();
+
+
+            statement.execute("INSERT INTO administrador VALUES " +
+                    "('"+incidenceAdmin.getName()+"','"+incidenceAdmin.getApell()+
+                    "','"+incidenceAdmin.getMail()+"','"+incidenceAdmin.getPhone()+
+                    "','"+incidenceAdmin.getUsername()+"','"+incidenceAdmin.getPassword()+
+                    "','IncidenceAdmin')");
+
+            //CLOSE
+            statement.close();
+            conn.Close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //throw new MiExcepcion("Imposible to save to database");
+        }
+    }
+
+    @Override
     public ArrayList<Incidence> getClientIncidences(String mail) {
         ArrayList<Incidence> incidences = new ArrayList<>();
 
@@ -166,9 +188,7 @@ public class ATCSJDBC implements Repository {
             ResultSet result = statement.executeQuery("select role from administrador where username = '" + credentials.get(0) + "' and password = '" + credentials.get(1) + "'");
 
             if (result.next()) {
-
                 role = result.getString(1);
-
             }
 
         } catch (SQLException e) {

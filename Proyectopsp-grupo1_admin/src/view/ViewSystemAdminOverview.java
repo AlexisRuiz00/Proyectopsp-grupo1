@@ -169,7 +169,17 @@ public class ViewSystemAdminOverview extends JFrame {
     }
 
     public IncidenceAdmin getIncidenceAdmin(){
-        return null;
+        IncidenceAdmin incidenceAdmin = new IncidenceAdmin(
+          this.fieldName.getText(),
+          this.fieldSurname.getText(),
+          this.fieldMail.getText(),
+          this.fieldPhone.getText(),
+          this.fieldUsername.getText(),
+          this.fieldPassword.getPassword().toString(),
+          "IncidenceAdmin"
+        );
+
+        return incidenceAdmin;
     }
  
 }

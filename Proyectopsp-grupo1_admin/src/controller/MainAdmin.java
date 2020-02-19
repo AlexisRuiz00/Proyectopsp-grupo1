@@ -88,9 +88,18 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
 
             case "okOverview":
+                IncidenceAdmin incidenceAdmin
+                        = viewSystemAdminOverview.getIncidenceAdmin();
+                try {
+                    foutput.writeInt(1);
+                    oop = new ObjectOutputStream(s.getOutputStream());
+                    oop.writeObject(incidenceAdmin);
 
-                IncidenceAdmin incidenceAdmin;
-
+                    viewSystemAdminOverview.dispose();
+                } catch (IOException e) {
+                    viewSystemAdmin.dispose();
+                    e.printStackTrace();
+                }
 
 
                 break;

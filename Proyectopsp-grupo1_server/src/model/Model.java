@@ -40,6 +40,10 @@ public class Model {
     }
 
 
+    public void saveIncidenceAdmin(IncidenceAdmin incidenceAdmin){
+        repository.saveIncidenceAdmin(incidenceAdmin);
+    }
+
     public ArrayList<IncidenceAdmin> getIncidenceAdmins(){
         return repository.getIncidenceAdmins();
     }
