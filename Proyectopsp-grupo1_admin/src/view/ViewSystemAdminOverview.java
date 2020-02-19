@@ -2,6 +2,7 @@ package view;
 
 
 import controller.MainAdmin;
+import model.VO.Incidence;
 import model.VO.IncidenceAdmin;
 
 import javax.swing.*;
@@ -66,6 +67,11 @@ public class ViewSystemAdminOverview extends JFrame {
             this.fieldPhone.setText(incidenceAdmin.getPhone());
             this.fieldUsername.setText(incidenceAdmin.getUsername());
         }
+
+
+
+
+
 
         btnOk.setText("Ok");
         btnOk.setActionCommand("okOverview");
@@ -162,6 +168,8 @@ public class ViewSystemAdminOverview extends JFrame {
         pack();
     }
 
-
+    public IncidenceAdmin getIncidenceAdmin(){
+        return null;
+    }
  
 }

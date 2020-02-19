@@ -87,7 +87,13 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                 break;
 
 
+            case "okOverview":
 
+                IncidenceAdmin incidenceAdmin;
+
+
+
+                break;
 
         }
     }

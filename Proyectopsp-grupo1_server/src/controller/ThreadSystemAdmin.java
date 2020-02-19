@@ -45,7 +45,10 @@ public class ThreadSystemAdmin extends Thread {
 
                 switch (action) {
 
+                    //Crete a new Incidence Admin
                     case 1:
+
+
                         break;
                     case 2:
                         break;
