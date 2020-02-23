@@ -49,7 +49,7 @@ public class ViewSystemAdminOverview extends JFrame {
         btnOk = new JButton();
         btnCancel = new JButton();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Name");
         jLabel2.setText("Surname");
@@ -67,10 +67,6 @@ public class ViewSystemAdminOverview extends JFrame {
             this.fieldPhone.setText(incidenceAdmin.getPhone());
             this.fieldUsername.setText(incidenceAdmin.getUsername());
         }
-
-
-
-
 
 
         btnOk.setText("Ok");
@@ -168,6 +164,8 @@ public class ViewSystemAdminOverview extends JFrame {
         pack();
     }
 
+
+
     public IncidenceAdmin getIncidenceAdmin(){
         IncidenceAdmin incidenceAdmin = new IncidenceAdmin(
           this.fieldName.getText(),
@@ -175,11 +173,12 @@ public class ViewSystemAdminOverview extends JFrame {
           this.fieldMail.getText(),
           this.fieldPhone.getText(),
           this.fieldUsername.getText(),
-          this.fieldPassword.getPassword().toString(),
+          this.fieldPassword.getText(),
           "IncidenceAdmin"
         );
 
         return incidenceAdmin;
     }
+
  
 }

@@ -40,9 +40,14 @@ public class Model {
     }
 
 
-    public void saveIncidenceAdmin(IncidenceAdmin incidenceAdmin){
-        repository.saveIncidenceAdmin(incidenceAdmin);
+    public boolean saveIncidenceAdmin(IncidenceAdmin incidenceAdmin){
+        return repository.saveIncidenceAdmin(incidenceAdmin);
     }
+
+    public void removeIncidenceAdmin(IncidenceAdmin incidenceAdmin){
+        repository.removeIncidenceAdmin(incidenceAdmin);
+    }
+
 
     public ArrayList<IncidenceAdmin> getIncidenceAdmins(){
         return repository.getIncidenceAdmins();

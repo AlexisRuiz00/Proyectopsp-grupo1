@@ -2,11 +2,14 @@ package controller;
 
 import model.VO.Incidence;
 import model.VO.IncidenceAdmin;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import view.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -25,17 +28,28 @@ import java.util.Date;
 public class MainAdmin implements ActionListener, WindowListener, ListSelectionListener {
 
     private static MainAdmin controller;
-    private ViewAdminLogin viewAdminLogin;
-    private ViewSystemAdmin viewSystemAdmin;
-    private ViewIncidenceAdmin viewIncidenceAdmin;
-    private ViewSystemAdminOverview viewSystemAdminOverview;
-    private ArrayList<Incidence> incidences;
+
+    //Net objects
     private static Socket s = null;
     private ObjectOutputStream oop;
     private ObjectInputStream finput;
     private DataOutputStream foutput;
-    private MainAdmin() {
 
+    //View objects
+    private ViewAdminLogin viewAdminLogin;
+    private ViewSystemAdmin viewSystemAdmin;
+    private ViewIncidenceAdmin viewIncidenceAdmin;
+    private ViewFtp viewFtp;
+
+    //SystemAdmin objects
+    private ViewSystemAdminOverview viewSystemAdminOverview;
+    private FTPClient client;
+
+    //IncidenceAdmin objects
+    private ArrayList<Incidence> incidences;
+
+
+    private MainAdmin() {
     }
 
     public static void main(String[] args) {
@@ -88,6 +102,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
 
             case "okOverview":
+
                 IncidenceAdmin incidenceAdmin
                         = viewSystemAdminOverview.getIncidenceAdmin();
                 try {
@@ -95,14 +110,188 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                     oop = new ObjectOutputStream(s.getOutputStream());
                     oop.writeObject(incidenceAdmin);
 
+                    if ((boolean) finput.readObject())
+                        viewSystemAdmin.addIncidenceAdmin(incidenceAdmin);
+                    else
+                        viewSystemAdmin.updateSelectedAdmin(incidenceAdmin);
+
                     viewSystemAdminOverview.dispose();
-                } catch (IOException e) {
-                    viewSystemAdmin.dispose();
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
+                break;
 
+            case "deleteIncidenceAdmin":
+
+                try {
+                    foutput.writeInt(2);
+                    oop = new ObjectOutputStream(s.getOutputStream());
+                    oop.writeObject(viewSystemAdmin.getSelectedAdmin());
+
+                    viewSystemAdmin.removeSelectedAdmin();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+
+            case "FTP":
+                viewFtp = new ViewFtp();
+                viewFtp.setVisible(true);
 
                 break;
+
+
+
+            case "ftpUpload":
+
+                try {
+                    boolean login = false;
+
+
+                    client = new FTPClient();
+                    client.enterLocalPassiveMode();
+                    client.connect(viewFtp.getServer());
+
+
+                    client.setFileType(FTP.BINARY_FILE_TYPE);
+
+
+                    if (!viewFtp.isAnonymousModeOn())
+                        login = client.login(viewFtp.getUser(), viewFtp.getPassword());
+                    else
+                        login= client.login("anonymous","");
+
+
+                    if (login) {
+                        JFileChooser chooser = new JFileChooser();
+                        System.out.println();
+
+                        chooser.setCurrentDirectory(new File(client.printWorkingDirectory()));
+                        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                        chooser.showOpenDialog(new JFrame("Select a file"));
+
+
+                        File selectedFile = chooser.getSelectedFile();
+                        if (selectedFile == null) {
+                            JOptionPane.showMessageDialog(null,
+                                    "No file selected",
+                                    "Select a file",
+                                    JOptionPane.WARNING_MESSAGE);
+                        }else {
+
+                            try {
+
+                                BufferedInputStream in = new BufferedInputStream(new FileInputStream(selectedFile));
+                                if (client.storeFile(selectedFile.getName(), in)) {
+
+                                    JOptionPane.showMessageDialog(null,
+                                            "File uploaded successfuly",
+                                            "",
+                                            JOptionPane.WARNING_MESSAGE);
+                                } else {
+                                    JOptionPane.showMessageDialog(null,
+                                            "Error uploading",
+                                            "SERVER ERROR",
+                                            JOptionPane.WARNING_MESSAGE);                                }
+                                in.close();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "Error login into server",
+                                "SERVER ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,
+                            "Connection to server failed",
+                            "SERVER ERROR",
+                            JOptionPane.WARNING_MESSAGE);                }
+                break;
+
+            case "ftpDownload":
+
+                try {
+                    boolean login = false;
+
+
+                    client = new FTPClient();
+                    client.enterLocalPassiveMode();
+                    client.connect(viewFtp.getServer());
+
+
+                    client.setFileType(FTP.BINARY_FILE_TYPE);
+
+
+                    if (!viewFtp.isAnonymousModeOn())
+                        login = client.login(viewFtp.getUser(), viewFtp.getPassword());
+                    else
+                        login= client.login("anonymous","");
+
+
+                    if (login) {
+                        JFileChooser chooser = new JFileChooser();
+
+                        System.out.println();
+                        chooser.setCurrentDirectory(new File(client.printWorkingDirectory()));
+                        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                        chooser.showOpenDialog(new JFrame("Select a file"));
+
+
+                        File selectedFile = chooser.getSelectedFile();
+                        if (selectedFile == null) {
+                            JOptionPane.showMessageDialog(null,
+                                    "No file selected",
+                                    "Select a file",
+                                    JOptionPane.WARNING_MESSAGE);
+                        }else {
+
+                            try {
+
+                                BufferedOutputStream out = new BufferedOutputStream(
+                                        new FileOutputStream(selectedFile));
+                                if (client.retrieveFile(selectedFile.getName(),out)) {
+
+                                    JOptionPane.showMessageDialog(null,
+                                            "File downloaded successfuly",
+                                            "",
+                                            JOptionPane.WARNING_MESSAGE);
+                                } else {
+                                    JOptionPane.showMessageDialog(null,
+                                            "Error downloading",
+                                            "SERVER ERROR",
+                                            JOptionPane.WARNING_MESSAGE);                                }
+                                out.close();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "Error login into server",
+                                "SERVER ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,
+                            "Connection to server failed",
+                            "SERVER ERROR",
+                            JOptionPane.WARNING_MESSAGE);                }
+                break;
+
+
+
+
+
 
         }
     }
@@ -238,9 +427,12 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
     }
 
+
+
     public Incidence findById(int id){
         return incidences.stream().filter(i -> i.getId() == id).findFirst().get();
     }
+
 
     public String getHour(){
         DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
@@ -249,43 +441,44 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
         return hora;
     }
 
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (viewSystemAdmin != null && viewSystemAdmin.getSelectedAdmin()!= null)
+            viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>)e.getSource()).getSelectedValue());
+
+    }
+
+
     @Override
     public void windowOpened(WindowEvent windowEvent) {
 
     }
-
     @Override
     public void windowClosing(WindowEvent windowEvent) {
-
+        try {
+            foutput.writeInt(3);
+        } catch (IOException e) { }
     }
-
     @Override
     public void windowClosed(WindowEvent windowEvent) {
 
     }
-
     @Override
     public void windowIconified(WindowEvent windowEvent) {
 
     }
-
     @Override
     public void windowDeiconified(WindowEvent windowEvent) {
 
     }
-
     @Override
     public void windowActivated(WindowEvent windowEvent) {
 
     }
-
     @Override
     public void windowDeactivated(WindowEvent windowEvent) {
 
     }
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>)e.getSource()).getSelectedValue());
-    }
 }

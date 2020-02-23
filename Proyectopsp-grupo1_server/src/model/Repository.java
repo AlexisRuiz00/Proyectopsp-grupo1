@@ -8,7 +8,9 @@ import java.util.ArrayList;
 public interface Repository {
 
     public ArrayList<IncidenceAdmin> getIncidenceAdmins();
-    public void saveIncidenceAdmin(IncidenceAdmin incidenceAdmin);
+    public boolean saveIncidenceAdmin(IncidenceAdmin incidenceAdmin);
+
+    void removeIncidenceAdmin(IncidenceAdmin incidenceAdmin);
 
     public ArrayList<Incidence>getClientIncidences(String mail);
     public ArrayList<Incidence>getAdminIncidences(String adminName);

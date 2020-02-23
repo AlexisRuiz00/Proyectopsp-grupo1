@@ -42,7 +42,7 @@ public class ViewFtp extends JFrame {
         btnCreateFolder = new javax.swing.JButton();
         btnRemoveFolder = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Server: ");
         jTextField1.setText(" ");
@@ -153,6 +153,21 @@ public class ViewFtp extends JFrame {
     }
 
 
+    public String getServer(){
+        return jTextField1.getText().trim();
+    }
+
+    public String getUser(){
+        return jTextField2.getText().trim();
+    }
+
+    public String getPassword(){
+        return jPasswordField1.getText();
+    }
+
+    public boolean isAnonymousModeOn(){
+        return jToggleButton1.isSelected();
+    }
 
 
 }

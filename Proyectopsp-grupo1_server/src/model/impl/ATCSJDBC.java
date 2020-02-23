@@ -51,27 +51,72 @@ public class ATCSJDBC implements Repository {
         return incidenceAdmins;
     }
 
+    /**
+     * Inserts a new incidence admin if it doesn't exists in database, if it exists, updates its data.
+     * @param incidenceAdmin
+     * @return false if incidenceAdmin exists, true if not.
+     */
     @Override
-    public void saveIncidenceAdmin(IncidenceAdmin incidenceAdmin) {
+    public boolean saveIncidenceAdmin(IncidenceAdmin incidenceAdmin) {
         try {
             Conection conn = new Conection();
             Statement statement = conn.getConn().createStatement();
 
+            ResultSet rs =
+               statement.executeQuery("SELECT * FROM administrador WHERE username = '"+incidenceAdmin.getUsername()+"'");
 
-            statement.execute("INSERT INTO administrador VALUES " +
-                    "('"+incidenceAdmin.getName()+"','"+incidenceAdmin.getApell()+
-                    "','"+incidenceAdmin.getMail()+"','"+incidenceAdmin.getPhone()+
-                    "','"+incidenceAdmin.getUsername()+"','"+incidenceAdmin.getPassword()+
-                    "','IncidenceAdmin')");
+            //If there's an incidence admin with that username, update data, if not, insert a new username.
+            if (rs.next()){
+                statement.executeUpdate("UPDATE administrador set name = '"+incidenceAdmin.getName()+
+                "', apellidos = '"+incidenceAdmin.getApell()+"', mail = '"+incidenceAdmin.getMail()+
+                "', phone = '"+incidenceAdmin.getPhone()+"', password = '"+incidenceAdmin.getPassword()+"'" +
+                        "where username = '"+incidenceAdmin.getUsername()+"'");
 
-            //CLOSE
-            statement.close();
-            conn.Close();
+                //CLOSE
+                statement.close();
+                conn.Close();
+                return false;
+            }else {
+
+                statement.execute("INSERT INTO administrador VALUES " +
+                        "('" + incidenceAdmin.getName() + "','" + incidenceAdmin.getApell() +
+                        "','" + incidenceAdmin.getMail() + "','" + incidenceAdmin.getPhone() +
+                        "','" + incidenceAdmin.getUsername() + "','" + incidenceAdmin.getPassword() +
+                        "','IncidenceAdmin')");
+                //CLOSE
+                statement.close();
+                conn.Close();
+                return true;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+            //throw new MiExcepcion("Imposible to save to database");
+        }
+    }
+
+    @Override
+    public void removeIncidenceAdmin(IncidenceAdmin incidenceAdmin){
+        try {
+            Conection conn = new Conection();
+            Statement statement = conn.getConn().createStatement();
+
+            statement.execute("DELETE FROM administrador WHERE username = '"
+                    +incidenceAdmin.getUsername()+"'");
+
+                //CLOSE
+                statement.close();
+                conn.Close();
+
         } catch (SQLException e) {
             e.printStackTrace();
             //throw new MiExcepcion("Imposible to save to database");
         }
     }
+
+
 
     @Override
     public ArrayList<Incidence> getClientIncidences(String mail) {

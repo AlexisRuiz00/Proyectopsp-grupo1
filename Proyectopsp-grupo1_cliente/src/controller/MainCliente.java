@@ -195,7 +195,6 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     @Override
     public void windowClosing(WindowEvent e) {
         try {
-            System.out.println("ENTRA");
             oop.writeObject(new Incidence("","-1"));
             ((JFrame)e.getSource()).dispose();
         } catch (IOException ex) {

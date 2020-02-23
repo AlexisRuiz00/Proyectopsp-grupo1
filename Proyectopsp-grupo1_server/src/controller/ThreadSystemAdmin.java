@@ -52,19 +52,42 @@ public class ThreadSystemAdmin extends Thread {
                             objectInput = new ObjectInputStream(socket.getInputStream());
                             IncidenceAdmin incidenceAdmin =
                                     (IncidenceAdmin) objectInput.readObject();
-                            s.saveIncidenceAdmin(incidenceAdmin);
+
+                            objectOutput.writeObject(s.saveIncidenceAdmin(incidenceAdmin));
 
                         }catch (Exception e){
                             e.printStackTrace();
                         }
                         break;
                     case 2:
+                        //Deletes an Incidence Admin
+                        try {
+
+                            objectInput = new ObjectInputStream(socket.getInputStream());
+                            IncidenceAdmin incidenceAdmin =
+                                    (IncidenceAdmin) objectInput.readObject();
+
+                            s.removeIncidenceAdmin(incidenceAdmin);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         break;
+
+
                     case 3:
+                        running = false;
+
+                        try {
+                            objectOutput.close();
+                            objectInput.close();
+                            dataInput.close();
+                            dataOutput.close();
+                            socket.close();
+                        }catch (Exception e){}
                         break;
 
                     default:
-                        System.out.println("SALE");
+                        break;
                 }
 
             } catch (IOException  e) {

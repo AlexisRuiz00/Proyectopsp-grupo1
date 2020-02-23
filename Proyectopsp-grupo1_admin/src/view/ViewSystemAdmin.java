@@ -77,6 +77,8 @@ public class ViewSystemAdmin extends JFrame {
         listAdmins.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listAdmins.addListSelectionListener(MainAdmin.getAdminController());
 
+
+        addWindowListener(MainAdmin.getAdminController());
         jScrollPane1.setViewportView(listAdmins);
 
         jLabel1.setText("Name");
@@ -203,6 +205,15 @@ public class ViewSystemAdmin extends JFrame {
         this.fieldUsername.setText(incidenceAdmin.getUsername());
     }
 
+    public void setAdminDetailsEmpty(){
+        this.fieldName.setText("");
+        this.fieldSurname.setText("");
+        this.fieldMail.setText("");
+        this.fieldPhone.setText("");
+        this.fieldUsername.setText("");
+    }
+
+
     public void addIncidenceAdmin(IncidenceAdmin incidenceAdmin){
         this.listModel.addElement(incidenceAdmin);
     }
@@ -211,6 +222,17 @@ public class ViewSystemAdmin extends JFrame {
     public IncidenceAdmin getSelectedAdmin(){
         return this.listAdmins.getSelectedValue();
     }
+
+
+    public void removeSelectedAdmin(){
+        this.listModel.removeElementAt(listAdmins.getSelectedIndex());
+        this.setAdminDetailsEmpty();
+    }
+
+    public void updateSelectedAdmin(IncidenceAdmin incidenceAdmin){
+        this.listModel.setElementAt(incidenceAdmin,listAdmins.getSelectedIndex()    );
+    }
+
 
 
 
