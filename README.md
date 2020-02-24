@@ -7,7 +7,7 @@
 
 
 #### Author
-&nbsp;&nbsp;&nbsp;  This proyect has been produced by <b>David Camacho</b> y <b>Alexis Ruiz</b> with the license Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
+&nbsp;&nbsp;&nbsp;  This proyect has been produced by <b>David Camacho</b> and <b>Alexis Ruiz</b> with the license Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
 
 </br>
 </br>
