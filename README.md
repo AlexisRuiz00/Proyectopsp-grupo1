@@ -44,7 +44,7 @@
 
 
 <a name="1"></a>
-# ACTIVITY 1 y 2, Definition and Requierements
+# ACTIVITY 1 and 2, Definition and Requierements
 ### <b>TITLE:</b>
 *ATCS, Atención a clientes*
 
