@@ -85,7 +85,7 @@ For the last, all this things stay in the cloud, to could realize reports in the
 
 <a name="2"></a>
 
-# ACTIVITY 3: Análisis de requisitos funcionales.
+# ACTIVITY 3: Analisys of functional requierements.
 
 </br>
 </br>
