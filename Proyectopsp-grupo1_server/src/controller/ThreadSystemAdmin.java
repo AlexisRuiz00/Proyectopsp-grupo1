@@ -76,14 +76,17 @@ public class ThreadSystemAdmin extends Thread {
 
                     case 3:
                         running = false;
+                        s.writeCloseSystemAdmin();
 
                         try {
+
                             objectOutput.close();
                             objectInput.close();
                             dataInput.close();
                             dataOutput.close();
                             socket.close();
-                        }catch (Exception e){}
+                        }catch (Exception e){
+                        }
                         break;
 
                     default:

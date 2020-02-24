@@ -328,7 +328,6 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                     switch (role) {
                         case "IncidenceAdmin":
 
-                            controller.incidences =incidences;
                             s = new Socket("localhost", puerto);
 
                             /*Send int with value 21 to advertise server that an
@@ -336,7 +335,6 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
                             foutput = new DataOutputStream(s.getOutputStream());
                             foutput.writeInt(21);
-
 
                             //SEND USERNAME FOR RECIEVING LINKED INCIDENCES
                             oop = new ObjectOutputStream(s.getOutputStream());
@@ -346,6 +344,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             //RECIEVE INCIDENCES FROM SERVER
                             finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
+                            incidences = adminIncidence;
 
                             viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
                             viewAdminLogin.dispose();
@@ -446,6 +445,9 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     public void valueChanged(ListSelectionEvent e) {
         if (viewSystemAdmin != null && viewSystemAdmin.getSelectedAdmin()!= null)
             viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>)e.getSource()).getSelectedValue());
+        else {
+            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>)e.getSource()).getSelectedValue().getBody());
+        }
 
     }
 

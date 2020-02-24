@@ -164,7 +164,7 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
                 oop.writeObject(tmpIncidence);
                 tmpIncidence = (Incidence) oip.readObject();
                 incidences.add(tmpIncidence);
-                viewClient.addToList(tmpIncidence);
+                viewClient..addToList(tmpIncidence);
                 writeIncidence.dispose();
 
             }catch (Exception ex){

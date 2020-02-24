@@ -264,8 +264,11 @@ public class Server extends JFrame {
         s.getLogArea().append(getHour() + " - Client disconnected\n");
     }
 
-    public void writeCloseAdmin() {
+    public void writeCloseIncidenceAdmin() {
         s.getLogArea().append(getHour() + " - Incidence admin disconnected\n");
+    }
+    public void writeCloseSystemAdmin() {
+        s.getLogArea().append(getHour() + " - System admin disconnected\n");
     }
 
     public ArrayList<IncidenceAdmin>getIncidenceAdmins(){

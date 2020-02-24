@@ -85,6 +85,7 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
         areaChat.setColumns(20);
         areaChat.setRows(5);
+        areaChat.setEditable(false);
         jScrollPane4.setViewportView(areaChat);
 
         botonSend.setText("Send");
