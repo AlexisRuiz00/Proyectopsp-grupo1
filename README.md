@@ -18,7 +18,7 @@
 </br>
 
 # <p align="center">Índice:</p>
-> **[1- Activity 1 y 2: Definitions and Requirements.](#1)**
+> **[1- Activity 1 and 2: Definitions and Requirements.](#1)**
 >
 > **[2- Activity 3: Analysis of functional requirements.](#2)**
 >
