@@ -7,7 +7,7 @@
 
 
 #### Author
-&nbsp;&nbsp;&nbsp;  Este material ha sido producido por <b>David Camacho</b> y <b>Alexis Ruiz</b> bajo licencia Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
+&nbsp;&nbsp;&nbsp;  This proyect has been produced by <b>David Camacho</b> y <b>Alexis Ruiz</b> with the license Creative Commons:  <img src="/img/Licencia-Tipo2.png" height="25" width="75"/>  
 
 </br>
 </br>
@@ -18,17 +18,17 @@
 </br>
 
 # <p align="center">Índice:</p>
-> **[1- Activity 1 y 2: Definición y Requisitos.](#1)**
+> **[1- Activity 1 y 2: Definitions y Requirements.](#1)**
 >
-> **[2- Activity 3: Análisis de requisitos funcionales.](#2)**
+> **[2- Activity 3: Analysis of functional requirements.](#2)**
 >
-> **[3- Activity 4: Modelo de objeto de negocios.](#3)**
+> **[3- Activity 4: Business Object Model.](#3)**
 >
-> **[4- Activity 5: Interfaz de la aplicación.](#4)**
+> **[4- Activity 5: Interface of Application.](#4)**
 >
-> **[5- Activity 6: Hilos.](#5)**
+> **[5- Activity 6: Threads.](#5)**
 >
-> **[6- Activity 7: Diagramas de secuencia.](#6)**
+> **[6- Activity 7: Sequence Diagram.](#6)**
 >
 > **[7- Manual](./Manual.md)**
 
@@ -45,35 +45,35 @@
 
 <a name="1"></a>
 # ACTIVITY 1 y 2, Definition and Requierements
-### <b>TÍTULO:</b>
+### <b>TITLE:</b>
 *ATCS, Atención a clientes*
 
-### <b> RESUMEN: </b>
-Nuestra idea se basa en desarrollar un programa que permite a X clientes solicitar cualquier tipo de información que este requiera.
+### <b> SUMMARY: </b>
+Our idea is based on developing a program that allows X clients to request any type of information that this requires.
 
-Este programa estará compuesto y envolverá las siguientes funcionalidades a realizar durante el período del curso:
+This program will be compose and developer the next funcionalities to realize in all course:
 
-1. <b>Hilos:</b> Se usarán hilos para representar al cliente, para la interfaz gráfica y para conectarse a la red a través de un canal UDP / TCP.
-2. <b>Sockets:</b> Nuestra aplicación contendrá un servidor (realizado mediante protocolo UDP / TCP) que conectará nuestro hilo cliente con nuestros administradores encargados de atender a estas personas.
-3. Dispondremos de <b>protocolos</b> estándares como TCP para utilizar el correo corporativo como posible medio de comunicación.
-4. Implementaremos <b>seguridad</b>, acceso y roles distintos para los tipos de administradores.
-5. Desarrollaremos <b>microservicios</b> en la nube, para poder recopilar y almacenar la información de nuestros clientes, así como realizar encuestas para conocer la opinión de los mismos.
+1. <b>Threads:</b> We use the threads for represent the client, for the graphic interface and connect the red using two channel protocol, UDP / TCP.
+2. <b>Sockets:</b> Our application will have a server (realized with protocol UDP / TCP) and have our thread client with our administrators attends this clients.
+3. We have <b>standard protocols</b> as TCP to use corporative mail as possible community channel.
+4. We'll implement <b>security</b>, access and diferent roles for kind of administrators.
+5. We'll developer <b>microservices</b> in the cloud, for take and to stock the information of us clients, as well as realized surveys.
 
 
 
-La idea del proyecto es:
+The proyect idea is:
 
-Existen 3 posturas (Cliente, Servidor, Administrador) donde nuestros clientes, abrirán una serie de consultas y estas serán enviadas a través de hilos al servidor, que será el encargado de almacenarlas en una base de datos.
+We have three classes (Client, Service, Administradtor) where us clients, open consults and this will be send to the server using threads, and this thread will be put the information in a database.
 
-Una vez almacenadas en la base de datos, el servidor se encarga de comunicarse con los distintos administradores, los cuales, serán los encargados de solucionar el problema del cliente. De esta forma, podremos utilizar la técnica de “Productor-Consumidor” donde nuestro producto serán los clientes, la cola el servidor y nuestros consumidores los administradores.
+One time the information will be in a database, the server communicate with the administrators, and this provide a solution to the clients. Using this form, we can use the "Product-Consumer" technique where us product will be the clients, the queue is the server and the administrator be consumers.
 
-Una vez el administrador gestione la consulta del cliente, esta se envía de nuevo al servidor, donde se encarga de realizar las modificaciones oportunas en la base de datos, como por ejemplo, (consulta cerrada, consulta pendiente, a la espera de administrador). 
+One the administrator manage the tickets, this send to the server, where he realized the changes in the database, example: (close ticket, and choose ticket as pending of the administrator).
 
-No todas las consultas, las podrá resolver un administrador, se trata de implementar “roles” donde cada administrador podrá visualizar X tipo de consulta y de X rango.
+Not all the tickets, can be solve for the administrator, we implements roles where each administrator can visualez X kind of tickets and X range.
 
-Una vez el administrador haya enviado la información necesaria al servidor y este lo haya modificado en la base de datos, se le notificará al cliente el resultado de su consulta, así como a poder ser enviar un formulario de satisfacción al correo que proporciona el mismo cliente.
+One time the administrator send the informationto the server and this modified in the database, we communicate to the client the information of ticket, As well as send mail the satisfation poll.
 
-Por último, todo esto se almacenará en la nube, para poder realizar informes semanales en un futuro.
+For the last, all this things stay in the cloud, to could realize reports in the future.
 
 
 </br>
@@ -90,7 +90,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-### Diagrama de casos de usos
+### Use case diagrams:
 <p align="center">
   <p>Client</p>
   <img src="/img/CasoDeUsoClient.jpg" height="400" width="600"/>
@@ -108,7 +108,7 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 </br>
 
-### Descripcion de casos de usos
+### Description use case:
 <p align="center">
 	
 <table>
@@ -770,9 +770,9 @@ Por último, todo esto se almacenará en la nube, para poder realizar informes s
 </br>
 
 <a name="3"></a>
-# ACTIVITY 4: Modelo de objetos de negocio.
+# ACTIVITY 4: Business Object Model.
 
-### Diagrama Entidad-Relacion
+### Entity Relationship diagrams:
 
 <p align="center">
   <img src="/img/entidad.jpg" height="400" width="800"/>
