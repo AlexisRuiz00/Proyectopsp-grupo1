@@ -63,7 +63,7 @@ This program will be compose and developer the next funcionalities to realize in
 
 The proyect idea is:
 
-We have three classes (Client, Service, Administradtor) where us clients, open consults and this will be send to the server using threads, and this thread will be put the information in a database.
+We have three classes (Client, Service, Administrator) where us clients, open consults and this will be send to the server using threads, and this thread will be put the information in a database.
 
 One time the information will be in a database, the server communicate with the administrators, and this provide a solution to the clients. Using this form, we can use the "Product-Consumer" technique where us product will be the clients, the queue is the server and the administrator be consumers.
 
