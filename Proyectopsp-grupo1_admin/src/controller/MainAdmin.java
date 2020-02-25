@@ -40,6 +40,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     private ViewSystemAdmin viewSystemAdmin;
     private ViewIncidenceAdmin viewIncidenceAdmin;
     private ViewFtp viewFtp;
+    private ViewFtpLog viewFtpLog;
 
     //SystemAdmin objects
     private ViewSystemAdminOverview viewSystemAdminOverview;
@@ -134,72 +135,33 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                 }
                 break;
 
-
             case "FTP":
-                viewFtp = new ViewFtp();
-                viewFtp.setVisible(true);
-
+                viewFtpLog = new ViewFtpLog();
+                viewFtpLog.setVisible(true);
+                viewFtp.setResizable(false);
                 break;
 
-
-
-            case "ftpUpload":
-
+            case "ftpConnect":
                 try {
+                    client = new FTPClient();
                     boolean login = false;
-
 
                     client = new FTPClient();
                     client.enterLocalPassiveMode();
-                    client.connect(viewFtp.getServer());
-
+                    client.connect(viewFtpLog.getServer());
 
                     client.setFileType(FTP.BINARY_FILE_TYPE);
 
-
-                    if (!viewFtp.isAnonymousModeOn())
-                        login = client.login(viewFtp.getUser(), viewFtp.getPassword());
+                    if (!viewFtpLog.isAnonymousModeOn())
+                        login = client.login(viewFtpLog.getUser(), viewFtpLog.getPassword());
                     else
-                        login= client.login("anonymous","");
+                        login = client.login("anonymous", "");
 
 
                     if (login) {
-                        JFileChooser chooser = new JFileChooser();
-                        System.out.println();
-
-                        chooser.setCurrentDirectory(new File(client.printWorkingDirectory()));
-                        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                        chooser.showOpenDialog(new JFrame("Select a file"));
-
-
-                        File selectedFile = chooser.getSelectedFile();
-                        if (selectedFile == null) {
-                            JOptionPane.showMessageDialog(null,
-                                    "No file selected",
-                                    "Select a file",
-                                    JOptionPane.WARNING_MESSAGE);
-                        }else {
-
-                            try {
-
-                                BufferedInputStream in = new BufferedInputStream(new FileInputStream(selectedFile));
-                                if (client.storeFile(selectedFile.getName(), in)) {
-
-                                    JOptionPane.showMessageDialog(null,
-                                            "File uploaded successfuly",
-                                            "",
-                                            JOptionPane.WARNING_MESSAGE);
-                                } else {
-                                    JOptionPane.showMessageDialog(null,
-                                            "Error uploading",
-                                            "SERVER ERROR",
-                                            JOptionPane.WARNING_MESSAGE);                                }
-                                in.close();
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
+                        viewFtp = new ViewFtp(client.listFiles("."));
+                        viewFtp.setResizable(false);
+                        viewFtp.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "Error login into server",
@@ -207,86 +169,153 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                                 JOptionPane.WARNING_MESSAGE);
                     }
 
-                } catch (IOException e) {
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case "ftpUpload":
+
+                try {
+
+                    JFileChooser chooser = new JFileChooser();
+
+                    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    chooser.showOpenDialog(new JFrame("Select a file"));
+
+
+                    File selectedFile = chooser.getSelectedFile();
+                    if (selectedFile == null) {
+                        JOptionPane.showMessageDialog(null,
+                                "No file selected",
+                                "Select a file",
+                                JOptionPane.WARNING_MESSAGE);
+                    } else {
+
+                        try {
+
+                            BufferedInputStream in = new BufferedInputStream(new FileInputStream(selectedFile));
+                            if (client.storeFile(selectedFile.getName(), in)) {
+
+                                JOptionPane.showMessageDialog(null,
+                                        "File uploaded successfuly",
+                                        "",
+                                        JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null,
+                                        "Error uploading",
+                                        "SERVER ERROR",
+                                        JOptionPane.WARNING_MESSAGE);
+                            }
+                            in.close();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null,
                             "Connection to server failed",
                             "SERVER ERROR",
-                            JOptionPane.WARNING_MESSAGE);                }
+                            JOptionPane.WARNING_MESSAGE);
+                }
                 break;
 
             case "ftpDownload":
 
                 try {
-                    boolean login = false;
+                    File file = new File(viewFtp.getSelectedFile());
+                    BufferedOutputStream out = new BufferedOutputStream(
+                            new FileOutputStream(file));
 
-
-                    client = new FTPClient();
-                    client.enterLocalPassiveMode();
-                    client.connect(viewFtp.getServer());
-
-
-                    client.setFileType(FTP.BINARY_FILE_TYPE);
-
-
-                    if (!viewFtp.isAnonymousModeOn())
-                        login = client.login(viewFtp.getUser(), viewFtp.getPassword());
-                    else
-                        login= client.login("anonymous","");
-
-
-                    if (login) {
-                        JFileChooser chooser = new JFileChooser();
-
-                        System.out.println();
-                        chooser.setCurrentDirectory(new File(client.printWorkingDirectory()));
-                        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                        chooser.showOpenDialog(new JFrame("Select a file"));
-
-
-                        File selectedFile = chooser.getSelectedFile();
-                        if (selectedFile == null) {
-                            JOptionPane.showMessageDialog(null,
-                                    "No file selected",
-                                    "Select a file",
-                                    JOptionPane.WARNING_MESSAGE);
-                        }else {
-
-                            try {
-
-                                BufferedOutputStream out = new BufferedOutputStream(
-                                        new FileOutputStream(selectedFile));
-                                if (client.retrieveFile(selectedFile.getName(),out)) {
-
-                                    JOptionPane.showMessageDialog(null,
-                                            "File downloaded successfuly",
-                                            "",
-                                            JOptionPane.WARNING_MESSAGE);
-                                } else {
-                                    JOptionPane.showMessageDialog(null,
-                                            "Error downloading",
-                                            "SERVER ERROR",
-                                            JOptionPane.WARNING_MESSAGE);                                }
-                                out.close();
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } else {
+                    if (client.retrieveFile(viewFtp.getSelectedFile(),out)){
                         JOptionPane.showMessageDialog(null,
-                                "Error login into server",
-                                "SERVER ERROR",
+                                "File downloaded successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error downloading file",
+                                "ERROR",
                                 JOptionPane.WARNING_MESSAGE);
                     }
+                    out.close();
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null,
-                            "Connection to server failed",
-                            "SERVER ERROR",
-                            JOptionPane.WARNING_MESSAGE);                }
+                }
+
                 break;
+
+
+            case "ftpRemoveFile":
+                try {
+
+                    if (client.deleteFile(viewFtp.getSelectedFile())){
+                        JOptionPane.showMessageDialog(null,
+                                "File removed successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error removing file",
+                                "ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case "ftpRemoveFolder":
+                try {
+
+                    if (client.removeDirectory(viewFtp.getSelectedFile())){
+                        JOptionPane.showMessageDialog(null,
+                                "File removed successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error removing file",
+                                "ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+
+            case "ftpCreateFolder":
+
+                String folder = JOptionPane.showInputDialog("Folder Name");
+
+                try {
+
+                    if (client.makeDirectory(folder)){
+                        JOptionPane.showMessageDialog(null,
+                                "Folder created successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error creating foler",
+                                "ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+
 
 
 
@@ -328,6 +357,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                     switch (role) {
                         case "IncidenceAdmin":
 
+                            controller.incidences =incidences;
                             s = new Socket("localhost", puerto);
 
                             /*Send int with value 21 to advertise server that an
@@ -335,6 +365,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
                             foutput = new DataOutputStream(s.getOutputStream());
                             foutput.writeInt(21);
+
 
                             //SEND USERNAME FOR RECIEVING LINKED INCIDENCES
                             oop = new ObjectOutputStream(s.getOutputStream());
@@ -344,11 +375,11 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             //RECIEVE INCIDENCES FROM SERVER
                             finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
-                            incidences = adminIncidence;
 
                             viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
                             viewAdminLogin.dispose();
                             viewIncidenceAdmin.setVisible(true);
+                            viewIncidenceAdmin.setResizable(false);
 
                             break;
 
@@ -369,6 +400,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             viewSystemAdmin = new ViewSystemAdmin(incidenceAdmins);
                             viewAdminLogin.dispose();
                             viewSystemAdmin.setVisible(true);
+                            viewSystemAdmin.setResizable(false);
 
                             break;
                         case "":
@@ -443,14 +475,23 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (viewSystemAdmin != null && viewSystemAdmin.getSelectedAdmin()!= null)
-            viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>)e.getSource()).getSelectedValue());
+        if (viewSystemAdmin != null && viewSystemAdmin.getSelectedAdmin() != null)
+            viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>) e.getSource()).getSelectedValue());
         else {
-            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>)e.getSource()).getSelectedValue().getBody());
+            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>) e.getSource()).getSelectedValue().getBody());
         }
 
-    }
+        if (((JList) e.getSource()).getName() == "fileList") {
+            String tmp = ((JList<String>) e.getSource()).getSelectedValue();
+            tmp = tmp.substring(7);
 
+            try {
+                viewFtp.chargeDetailList(client.listFiles(tmp));
+            } catch (IOException ex) {
+            }
+
+        }
+    }
 
     @Override
     public void windowOpened(WindowEvent windowEvent) {

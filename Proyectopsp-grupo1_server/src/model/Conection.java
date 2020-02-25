@@ -11,7 +11,7 @@ public class Conection {
         public Conection()  {
             try {
 
-                conn = DriverManager.getConnection("jdbc:mysql://192.168.64.2/atcs?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "monty", "admin");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/atcs?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
 
 
             } catch (SQLException e) {
