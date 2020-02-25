@@ -42,7 +42,6 @@ public class ThreadSystemAdmin extends Thread {
                 //SE LEE EL PRIMER BYTE QUE DETERMINA LA ACCIÓN A REALIZAR
                 dataInput = new DataInputStream(socket.getInputStream());
                 int action = dataInput.readInt();
-                System.out.println(action);
 
                 switch (action) {
                     //Crete a new Incidence Admin

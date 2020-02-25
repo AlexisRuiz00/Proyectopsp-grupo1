@@ -138,7 +138,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
             case "FTP":
                 viewFtpLog = new ViewFtpLog();
                 viewFtpLog.setVisible(true);
-                viewFtp.setResizable(false);
+                viewFtpLog.setResizable(false);
                 break;
 
             case "ftpConnect":
