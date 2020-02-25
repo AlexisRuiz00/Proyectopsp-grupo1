@@ -2,6 +2,7 @@ package view;
 
 import controller.MainAdmin;
 import model.VO.Incidence;
+import model.VO.IncidenceAdmin;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -15,14 +16,16 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     /**
      * Creates new form ViewIncidenceAdmin
      */
-    public ViewIncidenceAdmin(ArrayList<Incidence> incidences) {
+
+    public ViewIncidenceAdmin(ArrayList<Incidence> incidences, ArrayList<IncidenceAdmin> incidenceAdmins) {
         this.setTitle("Incidences");
-        initComponents(incidences);
+        System.out.println("ENTRA");
+        initComponents(incidences, incidenceAdmins);
         this.setResizable(false);
         chargeLayout();
     }
 
-    private void initComponents(ArrayList<Incidence> incidences) {
+    private void initComponents(ArrayList<Incidence> incidences, ArrayList<IncidenceAdmin> incidenceAdminsDos) {
 
         panelUno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -60,6 +63,14 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         listIncidences.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listIncidences);
 
+
+        listModelDos = new DefaultComboBoxModel<String>();
+        for(IncidenceAdmin i : incidenceAdminsDos){
+            listModelDos.addElement(i.getName());
+        }
+        comboAdmins.setModel(listModelDos);
+
+
         jLabel1.setText("List of incidences:");
         jLabel4.setText("Detail:");
 
@@ -74,8 +85,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         jLabel7.setText("Respuesta:");
         botonAccept.setText("Accept");
         jLabel8.setText("Assign to:");
-
-        comboAdmins.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         ButtonGroup grupoBotones = new ButtonGroup();
         grupoBotones.add(radioClose);
@@ -271,5 +280,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     private javax.swing.JTextArea areaChat;
     private javax.swing.JTextField chatField;
     private DefaultListModel<Incidence>  listModel;
+    private DefaultComboBoxModel<String> listModelDos;
 
 }

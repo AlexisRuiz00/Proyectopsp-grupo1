@@ -138,7 +138,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
             case "FTP":
                 viewFtpLog = new ViewFtpLog();
                 viewFtpLog.setVisible(true);
-                viewFtpLog.setResizable(false);
+                viewFtp.setResizable(false);
                 break;
 
             case "ftpConnect":
@@ -375,9 +375,15 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             //RECIEVE INCIDENCES FROM SERVER
                             finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
+                            ArrayList<IncidenceAdmin> incidenceAdminsDos = (ArrayList<IncidenceAdmin>) finput.readObject();
+
                             incidences = adminIncidence;
 
-                            viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
+                            //LOAD INCIDENCE ADMIN FROM SERVER
+                            //RECIEVE INCIDENCE ADMINISTRATORS
+                            finput = new ObjectInputStream(s.getInputStream());
+
+                            viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence, incidenceAdminsDos);
                             viewAdminLogin.dispose();
                             viewIncidenceAdmin.setVisible(true);
                             viewIncidenceAdmin.setResizable(false);

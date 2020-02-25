@@ -67,15 +67,14 @@ public class ThreadIncidenceAdmin extends Thread {
                     case 2:
                         break;
                     case 3:
-
                         running = false;
-                        s.writeCloseIncidenceAdmin();
+                        s.writeCloseSystemAdmin();
 
                         try {
 
-                            dataInput.close();
                             objectOutput.close();
                             objectInput.close();
+                            dataInput.close();
                             dataOutput.close();
                             socket.close();
                         }catch (Exception e){
