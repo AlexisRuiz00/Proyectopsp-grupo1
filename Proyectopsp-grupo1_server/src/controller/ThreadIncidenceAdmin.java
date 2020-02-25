@@ -32,6 +32,8 @@ public class ThreadIncidenceAdmin extends Thread {
             String username = (String) objectInput.readObject();
             //Get Incidence linked to Incidence Administrator logged.
             ArrayList<Incidence> adminIncidences = s.getAdminIncidences(username);
+            // GET INCIDENCE
+            i = adminIncidences.get(0);
             //Send Incidence to Administrator app
             objectOutput.writeObject(adminIncidences);
 
@@ -52,22 +54,31 @@ public class ThreadIncidenceAdmin extends Thread {
             try {
 
                 //SE LEE EL PRIMER BYTE QUE DETERMINA LA ACCIÓN A REALIZAR
-                byte action = dataInput.readByte();
+                dataInput = new DataInputStream(socket.getInputStream());
+                int action = dataInput.readInt();
+                System.out.println(action);
 
                 switch (action) {
 
                     case 1:
-                        try {
-                            objectInput.close();
-                            objectOutput.close();
-                            socket.close();
-                        } catch (IOException ex) {}
-                        running = false;
-                        s.writeCloseIncidenceAdmin();
+                        // Update the incidence
+                        s.updateIncidence(i);
                         break;
                     case 2:
                         break;
                     case 3:
+                        running = false;
+                        s.writeCloseSystemAdmin();
+
+                        try {
+
+                            objectOutput.close();
+                            objectInput.close();
+                            dataInput.close();
+                            dataOutput.close();
+                            socket.close();
+                        }catch (Exception e){
+                        }
                         break;
 
                 }

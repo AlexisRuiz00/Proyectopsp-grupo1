@@ -170,7 +170,10 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,
+                            "Error login into server",
+                            "SERVER ERROR",
+                            JOptionPane.WARNING_MESSAGE);
                 }
 
                 break;
@@ -228,10 +231,17 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
                 try {
                     File file = new File(viewFtp.getSelectedFile());
+
+                    if (file.getParentFile() != null) {
+                        if (!file.getParentFile().exists())
+                            file.getParentFile().mkdir();
+
+                            client.changeWorkingDirectory(file.getParent());
+                    }
                     BufferedOutputStream out = new BufferedOutputStream(
                             new FileOutputStream(file));
 
-                    if (client.retrieveFile(viewFtp.getSelectedFile(),out)){
+                    if (client.retrieveFile(file.getName(),out)){
                         JOptionPane.showMessageDialog(null,
                                 "File downloaded successfuly",
                                 "",
@@ -245,7 +255,10 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                     out.close();
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,
+                            "Error downloading file",
+                            "ERROR",
+                            JOptionPane.WARNING_MESSAGE);
                 }
 
                 break;
@@ -375,8 +388,15 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             //RECIEVE INCIDENCES FROM SERVER
                             finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
+                            ArrayList<IncidenceAdmin> incidenceAdminsDos = (ArrayList<IncidenceAdmin>) finput.readObject();
 
-                            viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
+                            incidences = adminIncidence;
+
+                            //LOAD INCIDENCE ADMIN FROM SERVER
+                            //RECIEVE INCIDENCE ADMINISTRATORS
+                            finput = new ObjectInputStream(s.getInputStream());
+
+                            viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence, incidenceAdminsDos);
                             viewAdminLogin.dispose();
                             viewIncidenceAdmin.setVisible(true);
                             viewIncidenceAdmin.setResizable(false);
@@ -475,13 +495,17 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (viewSystemAdmin != null && viewSystemAdmin.getSelectedAdmin() != null)
-            viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>) e.getSource()).getSelectedValue());
-        else {
-            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>) e.getSource()).getSelectedValue().getBody());
-        }
+        switch (((JList) e.getSource()).getName()){
+            case "listSystemAdmin":
+                viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>) e.getSource()).getSelectedValue());
+            break;
 
-        if (((JList) e.getSource()).getName() == "fileList") {
+
+            case "listIncidences":
+            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>) e.getSource()).getSelectedValue().getBody());
+            break;
+
+            case "fileList":
             String tmp = ((JList<String>) e.getSource()).getSelectedValue();
             tmp = tmp.substring(7);
 
@@ -489,7 +513,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                 viewFtp.chargeDetailList(client.listFiles(tmp));
             } catch (IOException ex) {
             }
-
+            break;
         }
     }
 

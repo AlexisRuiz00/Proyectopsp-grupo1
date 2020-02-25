@@ -76,7 +76,7 @@ public class ViewSystemAdmin extends JFrame {
         listAdmins.setModel(listModel);
         listAdmins.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listAdmins.addListSelectionListener(MainAdmin.getAdminController());
-
+        listAdmins.setName("listSystemAdmin");
 
         addWindowListener(MainAdmin.getAdminController());
         jScrollPane1.setViewportView(listAdmins);

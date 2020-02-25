@@ -158,13 +158,20 @@ public class ViewFtp extends javax.swing.JFrame {
     }
 
     public String getSelectedFile(){
-        String file = "";
+        String file = null;
 
-        if (fileList.getSelectedValue().substring(1,5).equals("Dir")){
-            file = fileDetail.getSelectedValue().substring(7);
+        try {
+
+        if (fileList.getSelectedValue().substring(1,5).equals("Dir ")){
+            if (fileDetail.getSelectedValue()!=null)
+            file =  fileList.getSelectedValue().substring(7)+"/"+fileDetail.getSelectedValue().substring(7);
+
         }else
-            file = fileList.getSelectedValue().substring(7);
+                file = fileList.getSelectedValue().substring(7);
 
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         return file;
     }
 
