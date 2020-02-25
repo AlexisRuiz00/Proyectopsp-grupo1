@@ -375,6 +375,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             //RECIEVE INCIDENCES FROM SERVER
                             finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
+                            incidences = adminIncidence;
 
                             viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
                             viewAdminLogin.dispose();

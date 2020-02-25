@@ -77,6 +77,10 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
         comboAdmins.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
+        ButtonGroup grupoBotones = new ButtonGroup();
+        grupoBotones.add(radioClose);
+        grupoBotones.add(radioPending);
+
         radioClose.setText("Close");
         radioPending.setText("Pending");
         jLabel9.setText("Actions");
@@ -107,6 +111,8 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         menuItemChat.setActionCommand("openChat");
         menuItemChat.addActionListener(MainAdmin.getAdminController());
         botonAccept.addActionListener(MainAdmin.getAdminController());
+
+        addWindowListener(MainAdmin.getAdminController());
 
     }
 
