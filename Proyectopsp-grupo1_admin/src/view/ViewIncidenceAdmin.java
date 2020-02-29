@@ -2,7 +2,6 @@ package view;
 
 import controller.MainAdmin;
 import model.VO.Incidence;
-import model.VO.IncidenceAdmin;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -16,16 +15,14 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     /**
      * Creates new form ViewIncidenceAdmin
      */
-
-    public ViewIncidenceAdmin(ArrayList<Incidence> incidences, ArrayList<IncidenceAdmin> incidenceAdmins) {
+    public ViewIncidenceAdmin(ArrayList<Incidence> incidences) {
         this.setTitle("Incidences");
-        System.out.println("ENTRA");
-        initComponents(incidences, incidenceAdmins);
+        initComponents(incidences);
         this.setResizable(false);
         chargeLayout();
     }
 
-    private void initComponents(ArrayList<Incidence> incidences, ArrayList<IncidenceAdmin> incidenceAdminsDos) {
+    private void initComponents(ArrayList<Incidence> incidences) {
 
         panelUno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,14 +60,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         listIncidences.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listIncidences);
 
-
-        listModelDos = new DefaultComboBoxModel<String>();
-        for(IncidenceAdmin i : incidenceAdminsDos){
-            listModelDos.addElement(i.getName());
-        }
-        comboAdmins.setModel(listModelDos);
-
-
         jLabel1.setText("List of incidences:");
         jLabel4.setText("Detail:");
 
@@ -86,9 +75,7 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         botonAccept.setText("Accept");
         jLabel8.setText("Assign to:");
 
-        ButtonGroup grupoBotones = new ButtonGroup();
-        grupoBotones.add(radioClose);
-        grupoBotones.add(radioPending);
+        comboAdmins.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         radioClose.setText("Close");
         radioPending.setText("Pending");
@@ -98,7 +85,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
         areaChat.setColumns(20);
         areaChat.setRows(5);
-        areaChat.setEditable(false);
         jScrollPane4.setViewportView(areaChat);
 
         botonSend.setText("Send");
@@ -120,8 +106,6 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         menuItemChat.setActionCommand("openChat");
         menuItemChat.addActionListener(MainAdmin.getAdminController());
         botonAccept.addActionListener(MainAdmin.getAdminController());
-
-        addWindowListener(MainAdmin.getAdminController());
 
     }
 
@@ -280,6 +264,5 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     private javax.swing.JTextArea areaChat;
     private javax.swing.JTextField chatField;
     private DefaultListModel<Incidence>  listModel;
-    private DefaultComboBoxModel<String> listModelDos;
 
 }
