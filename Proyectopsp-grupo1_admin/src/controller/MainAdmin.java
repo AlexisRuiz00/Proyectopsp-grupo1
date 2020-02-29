@@ -1,15 +1,19 @@
 package controller;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import model.VO.Incidence;
 import model.VO.IncidenceAdmin;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import view.*;
 
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -21,6 +25,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * Clase que arranca y controla la aplicación
@@ -40,6 +45,8 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     private ViewSystemAdmin viewSystemAdmin;
     private ViewIncidenceAdmin viewIncidenceAdmin;
     private ViewFtp viewFtp;
+    private ViewFtpLog viewFtpLog;
+    private mainMail mail;
 
     //SystemAdmin objects
     private ViewSystemAdminOverview viewSystemAdminOverview;
@@ -84,6 +91,16 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                 break;
             case "Accept":
                 this.replyIncidence();
+                break;
+
+            case "Correo":
+                mail = new mainMail();
+                mail.setVisible(true);
+                break;
+
+            case "Enviar":
+                this.enviarConGMail(mail.getTxtDestinatario(), mail.getTxtAsunto(), mail.getTxtMensaje());
+                this.recibirCorreo();
                 break;
 
             case "newIncidenceAdmin":
@@ -134,72 +151,33 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                 }
                 break;
 
-
             case "FTP":
-                viewFtp = new ViewFtp();
-                viewFtp.setVisible(true);
-
+                viewFtpLog = new ViewFtpLog();
+                viewFtpLog.setVisible(true);
+                viewFtp.setResizable(false);
                 break;
 
-
-
-            case "ftpUpload":
-
+            case "ftpConnect":
                 try {
+                    client = new FTPClient();
                     boolean login = false;
-
 
                     client = new FTPClient();
                     client.enterLocalPassiveMode();
-                    client.connect(viewFtp.getServer());
-
+                    client.connect(viewFtpLog.getServer());
 
                     client.setFileType(FTP.BINARY_FILE_TYPE);
 
-
-                    if (!viewFtp.isAnonymousModeOn())
-                        login = client.login(viewFtp.getUser(), viewFtp.getPassword());
+                    if (!viewFtpLog.isAnonymousModeOn())
+                        login = client.login(viewFtpLog.getUser(), viewFtpLog.getPassword());
                     else
-                        login= client.login("anonymous","");
+                        login = client.login("anonymous", "");
 
 
                     if (login) {
-                        JFileChooser chooser = new JFileChooser();
-                        System.out.println();
-
-                        chooser.setCurrentDirectory(new File(client.printWorkingDirectory()));
-                        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                        chooser.showOpenDialog(new JFrame("Select a file"));
-
-
-                        File selectedFile = chooser.getSelectedFile();
-                        if (selectedFile == null) {
-                            JOptionPane.showMessageDialog(null,
-                                    "No file selected",
-                                    "Select a file",
-                                    JOptionPane.WARNING_MESSAGE);
-                        }else {
-
-                            try {
-
-                                BufferedInputStream in = new BufferedInputStream(new FileInputStream(selectedFile));
-                                if (client.storeFile(selectedFile.getName(), in)) {
-
-                                    JOptionPane.showMessageDialog(null,
-                                            "File uploaded successfuly",
-                                            "",
-                                            JOptionPane.WARNING_MESSAGE);
-                                } else {
-                                    JOptionPane.showMessageDialog(null,
-                                            "Error uploading",
-                                            "SERVER ERROR",
-                                            JOptionPane.WARNING_MESSAGE);                                }
-                                in.close();
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
+                        viewFtp = new ViewFtp(client.listFiles("."));
+                        viewFtp.setResizable(false);
+                        viewFtp.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "Error login into server",
@@ -207,86 +185,153 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                                 JOptionPane.WARNING_MESSAGE);
                     }
 
-                } catch (IOException e) {
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case "ftpUpload":
+
+                try {
+
+                    JFileChooser chooser = new JFileChooser();
+
+                    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    chooser.showOpenDialog(new JFrame("Select a file"));
+
+
+                    File selectedFile = chooser.getSelectedFile();
+                    if (selectedFile == null) {
+                        JOptionPane.showMessageDialog(null,
+                                "No file selected",
+                                "Select a file",
+                                JOptionPane.WARNING_MESSAGE);
+                    } else {
+
+                        try {
+
+                            BufferedInputStream in = new BufferedInputStream(new FileInputStream(selectedFile));
+                            if (client.storeFile(selectedFile.getName(), in)) {
+
+                                JOptionPane.showMessageDialog(null,
+                                        "File uploaded successfuly",
+                                        "",
+                                        JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null,
+                                        "Error uploading",
+                                        "SERVER ERROR",
+                                        JOptionPane.WARNING_MESSAGE);
+                            }
+                            in.close();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null,
                             "Connection to server failed",
                             "SERVER ERROR",
-                            JOptionPane.WARNING_MESSAGE);                }
+                            JOptionPane.WARNING_MESSAGE);
+                }
                 break;
 
             case "ftpDownload":
 
                 try {
-                    boolean login = false;
+                    File file = new File(viewFtp.getSelectedFile());
+                    BufferedOutputStream out = new BufferedOutputStream(
+                            new FileOutputStream(file));
 
-
-                    client = new FTPClient();
-                    client.enterLocalPassiveMode();
-                    client.connect(viewFtp.getServer());
-
-
-                    client.setFileType(FTP.BINARY_FILE_TYPE);
-
-
-                    if (!viewFtp.isAnonymousModeOn())
-                        login = client.login(viewFtp.getUser(), viewFtp.getPassword());
-                    else
-                        login= client.login("anonymous","");
-
-
-                    if (login) {
-                        JFileChooser chooser = new JFileChooser();
-
-                        System.out.println();
-                        chooser.setCurrentDirectory(new File(client.printWorkingDirectory()));
-                        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                        chooser.showOpenDialog(new JFrame("Select a file"));
-
-
-                        File selectedFile = chooser.getSelectedFile();
-                        if (selectedFile == null) {
-                            JOptionPane.showMessageDialog(null,
-                                    "No file selected",
-                                    "Select a file",
-                                    JOptionPane.WARNING_MESSAGE);
-                        }else {
-
-                            try {
-
-                                BufferedOutputStream out = new BufferedOutputStream(
-                                        new FileOutputStream(selectedFile));
-                                if (client.retrieveFile(selectedFile.getName(),out)) {
-
-                                    JOptionPane.showMessageDialog(null,
-                                            "File downloaded successfuly",
-                                            "",
-                                            JOptionPane.WARNING_MESSAGE);
-                                } else {
-                                    JOptionPane.showMessageDialog(null,
-                                            "Error downloading",
-                                            "SERVER ERROR",
-                                            JOptionPane.WARNING_MESSAGE);                                }
-                                out.close();
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } else {
+                    if (client.retrieveFile(viewFtp.getSelectedFile(),out)){
                         JOptionPane.showMessageDialog(null,
-                                "Error login into server",
-                                "SERVER ERROR",
+                                "File downloaded successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error downloading file",
+                                "ERROR",
                                 JOptionPane.WARNING_MESSAGE);
                     }
+                    out.close();
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null,
-                            "Connection to server failed",
-                            "SERVER ERROR",
-                            JOptionPane.WARNING_MESSAGE);                }
+                }
+
                 break;
+
+
+            case "ftpRemoveFile":
+                try {
+
+                    if (client.deleteFile(viewFtp.getSelectedFile())){
+                        JOptionPane.showMessageDialog(null,
+                                "File removed successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error removing file",
+                                "ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case "ftpRemoveFolder":
+                try {
+
+                    if (client.removeDirectory(viewFtp.getSelectedFile())){
+                        JOptionPane.showMessageDialog(null,
+                                "File removed successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error removing file",
+                                "ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+
+            case "ftpCreateFolder":
+
+                String folder = JOptionPane.showInputDialog("Folder Name");
+
+                try {
+
+                    if (client.makeDirectory(folder)){
+                        JOptionPane.showMessageDialog(null,
+                                "Folder created successfuly",
+                                "",
+                                JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,
+                                "Error creating foler",
+                                "ERROR",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+
 
 
 
@@ -328,6 +373,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                     switch (role) {
                         case "IncidenceAdmin":
 
+                            controller.incidences =incidences;
                             s = new Socket("localhost", puerto);
 
                             /*Send int with value 21 to advertise server that an
@@ -335,6 +381,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
                             foutput = new DataOutputStream(s.getOutputStream());
                             foutput.writeInt(21);
+
 
                             //SEND USERNAME FOR RECIEVING LINKED INCIDENCES
                             oop = new ObjectOutputStream(s.getOutputStream());
@@ -344,11 +391,11 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             //RECIEVE INCIDENCES FROM SERVER
                             finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
-                            incidences = adminIncidence;
 
                             viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
                             viewAdminLogin.dispose();
                             viewIncidenceAdmin.setVisible(true);
+                            viewIncidenceAdmin.setResizable(false);
 
                             break;
 
@@ -369,6 +416,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             viewSystemAdmin = new ViewSystemAdmin(incidenceAdmins);
                             viewAdminLogin.dispose();
                             viewSystemAdmin.setVisible(true);
+                            viewSystemAdmin.setResizable(false);
 
                             break;
                         case "":
@@ -440,47 +488,139 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
         return hora;
     }
 
-
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (viewSystemAdmin != null && viewSystemAdmin.getSelectedAdmin()!= null)
-            viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>)e.getSource()).getSelectedValue());
+        if (viewSystemAdmin != null && viewSystemAdmin.getSelectedAdmin() != null)
+            viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>) e.getSource()).getSelectedValue());
         else {
-            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>)e.getSource()).getSelectedValue().getBody());
+            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>) e.getSource()).getSelectedValue().getBody());
         }
 
+        if (((JList) e.getSource()).getName() == "fileList") {
+            String tmp = ((JList<String>) e.getSource()).getSelectedValue();
+            tmp = tmp.substring(7);
+
+            try {
+                viewFtp.chargeDetailList(client.listFiles(tmp));
+            } catch (IOException ex) {
+            }
+
+        }
     }
 
 
-    @Override
-    public void windowOpened(WindowEvent windowEvent) {
-
-    }
     @Override
     public void windowClosing(WindowEvent windowEvent) {
         try {
             foutput.writeInt(3);
         } catch (IOException e) { }
     }
-    @Override
-    public void windowClosed(WindowEvent windowEvent) {
 
-    }
-    @Override
-    public void windowIconified(WindowEvent windowEvent) {
 
-    }
-    @Override
-    public void windowDeiconified(WindowEvent windowEvent) {
 
-    }
-    @Override
-    public void windowActivated(WindowEvent windowEvent) {
 
-    }
-    @Override
-    public void windowDeactivated(WindowEvent windowEvent) {
+    private void enviarConGMail(String destinatario, String asunto, String cuerpo) {
 
+        // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el
+        // remitente también.
+        String remitente = "pruebamailpsp@gmail.com"; // Para la dirección nomcuenta@gmail.com
+
+        Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
+        props.put("mail.smtp.user", remitente);
+        props.put("mail.smtp.clave", "1234567psp"); // La clave de la cuenta
+        props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
+        props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
+        props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
+
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            message.setFrom(new InternetAddress(remitente));
+            message.addRecipients(Message.RecipientType.TO, destinatario); // Se podrían añadir varios de la misma manera
+            message.setSubject(asunto);
+            message.setText(cuerpo);
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", remitente, "1234567psp");
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (javax.mail.MessagingException e) {
+            e.printStackTrace();
+        }
     }
+
+    private void recibirCorreo() {
+        Properties prop = new Properties();
+
+        // Deshabilitamos TLS
+        prop.setProperty("mail.pop3.starttls.enable", "false");
+
+        // Hay que usar SSL
+        prop.setProperty("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.setProperty("mail.pop3.socketFactory.fallback", "false");
+
+        // Puerto 995 para conectarse.
+        prop.setProperty("mail.pop3.port", "995");
+        prop.setProperty("mail.pop3.socketFactory.port", "995");
+
+        Session sesion = Session.getInstance(prop);
+        sesion.setDebug(true);
+
+        Store store = null;
+        try {
+
+            store = sesion.getStore("pop3");
+            store.connect("pop.gmail.com", "pruebamailpsp@gmail.com", "1234567psp");
+            Folder folder = store.getFolder("INBOX");
+            folder.open(Folder.READ_ONLY);
+
+            Message[] mensajes = folder.getMessages();
+            for (int i = 0; i < mensajes.length; i++) {
+                System.out.println("From:" + mensajes[i].getFrom()[0].toString());
+                System.out.println("Subject:" + mensajes[i].getSubject());
+            }
+
+            for (int i = 0; i < mensajes.length; i++) {
+                if (mensajes[i].isMimeType("text/*")) {
+                    System.out.println(mensajes[i].getContent());
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (javax.mail.MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    //Unused methods
+    @Override
+    public void windowOpened(WindowEvent windowEvent) { }
+    @Override
+    public void windowClosed(WindowEvent windowEvent) { }
+    @Override
+    public void windowIconified(WindowEvent windowEvent) {   }
+    @Override
+    public void windowDeiconified(WindowEvent windowEvent) {   }
+    @Override
+    public void windowActivated(WindowEvent windowEvent) {   }
+    @Override
+    public void windowDeactivated(WindowEvent windowEvent) {  }
 
 }

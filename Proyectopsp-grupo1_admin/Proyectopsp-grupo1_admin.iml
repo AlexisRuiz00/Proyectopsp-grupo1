@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/vfsjfilechooser2-0.2.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/javax.mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
