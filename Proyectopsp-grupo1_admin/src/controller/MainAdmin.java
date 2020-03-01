@@ -19,8 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,12 +32,14 @@ import java.util.Properties;
 public class MainAdmin implements ActionListener, WindowListener, ListSelectionListener {
 
     private static MainAdmin controller;
+    private String username;
 
     //Net objects
     private static Socket s = null;
     private ObjectOutputStream oop;
     private ObjectInputStream finput;
     private DataOutputStream foutput;
+    private MulticastSocket ms;
 
     //View objects
     private ViewAdminLogin viewAdminLogin;
@@ -46,6 +47,12 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     private ViewIncidenceAdmin viewIncidenceAdmin;
     private ViewFtp viewFtp;
     private ViewFtpLog viewFtpLog;
+
+    //Chat net objects
+    private String address;
+    private int port;
+
+    //Mail objects
     private mainMail mail;
 
     //SystemAdmin objects
@@ -101,6 +108,20 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
             case "Enviar":
                 this.enviarConGMail(mail.getTxtDestinatario(), mail.getTxtAsunto(), mail.getTxtMensaje());
                 this.recibirCorreo();
+                break;
+
+
+            case "SendChat":
+                try {
+
+                    String message = "\n"+username+": "+viewIncidenceAdmin.getChatMessage();
+
+                    DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                            message.length(), InetAddress.getByName(address), port);
+                    ms.send(paquete);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 break;
 
             case "newIncidenceAdmin":
@@ -352,6 +373,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
             String role;
             foutput = new DataOutputStream(s.getOutputStream());
+
             foutput.writeInt(10);
 
 
@@ -360,7 +382,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
             oop = new ObjectOutputStream(s.getOutputStream());
             oop.writeObject(credentials);
-
+            this.username = credentials.get(1);
 
             finput = new ObjectInputStream(s.getInputStream());
 
@@ -392,10 +414,14 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             finput = new ObjectInputStream(s.getInputStream());
                             ArrayList<Incidence> adminIncidence = (ArrayList<Incidence>) finput.readObject();
 
+
+
                             viewIncidenceAdmin = new ViewIncidenceAdmin(adminIncidence);
                             viewAdminLogin.dispose();
                             viewIncidenceAdmin.setVisible(true);
                             viewIncidenceAdmin.setResizable(false);
+                            ThreadAdminChat threadAdminChat = new ThreadAdminChat(s,viewIncidenceAdmin);
+                            threadAdminChat.start();
 
                             break;
 
@@ -475,7 +501,6 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     }
 
 
-
     public Incidence findById(int id){
         return incidences.stream().filter(i -> i.getId() == id).findFirst().get();
     }
@@ -515,8 +540,6 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
             foutput.writeInt(3);
         } catch (IOException e) { }
     }
-
-
 
 
     private void enviarConGMail(String destinatario, String asunto, String cuerpo) {
@@ -601,13 +624,19 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     }
 
 
+    public void setMs(MulticastSocket ms) {
+        this.ms = ms;
+    }
+
+    public void confChatSocket(String address, int port){
+        this.port = port;
+        this.address = address;
+    }
 
 
-
-
-
-
-
+    public String getUsername() {
+        return username;
+    }
 
     //Unused methods
     @Override

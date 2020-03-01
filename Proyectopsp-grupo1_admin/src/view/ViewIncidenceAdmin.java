@@ -12,6 +12,34 @@ import java.util.ArrayList;
  */
 public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
+    private javax.swing.JButton botonSend;
+    private javax.swing.JButton botonAccept;
+    private javax.swing.JComboBox<String> comboAdmins;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<Incidence> listIncidences;
+    private javax.swing.JMenu menu;
+    private javax.swing.JMenuBar menuBarUno;
+    private javax.swing.JMenuItem menuItemChat;
+    private javax.swing.JMenuItem manuItemSalir;
+    private javax.swing.JPanel panelUno;
+    private javax.swing.JRadioButton radioClose;
+    private javax.swing.JRadioButton radioPending;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea areaDetail;
+    private javax.swing.JTextArea arenaRespuesta;
+    private javax.swing.JTextArea areaChat;
+    private javax.swing.JTextField chatField;
+    private DefaultListModel<Incidence>  listModel;
+
+
     /**
      * Creates new form ViewIncidenceAdmin
      */
@@ -88,6 +116,8 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         jScrollPane4.setViewportView(areaChat);
 
         botonSend.setText("Send");
+        botonSend.setActionCommand("SendChat");
+        botonSend.addActionListener(MainAdmin.getAdminController());
         jLabel2.setText("Chat");
         menu.setText("Options");
 
@@ -238,31 +268,12 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
     }
 
 
-    private javax.swing.JButton botonSend;
-    private javax.swing.JButton botonAccept;
-    private javax.swing.JComboBox<String> comboAdmins;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<Incidence> listIncidences;
-    private javax.swing.JMenu menu;
-    private javax.swing.JMenuBar menuBarUno;
-    private javax.swing.JMenuItem menuItemChat;
-    private javax.swing.JMenuItem manuItemSalir;
-    private javax.swing.JPanel panelUno;
-    private javax.swing.JRadioButton radioClose;
-    private javax.swing.JRadioButton radioPending;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea areaDetail;
-    private javax.swing.JTextArea arenaRespuesta;
-    private javax.swing.JTextArea areaChat;
-    private javax.swing.JTextField chatField;
-    private DefaultListModel<Incidence>  listModel;
+    public String getChatMessage(){
+        return this.chatField.getText();
+    }
+
+    public void writeInChat(String message){
+        this.areaChat.append(message);
+    }
 
 }

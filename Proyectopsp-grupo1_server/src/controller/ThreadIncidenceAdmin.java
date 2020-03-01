@@ -11,7 +11,6 @@ public class ThreadIncidenceAdmin extends Thread {
     private ObjectInputStream objectInput;
     private ObjectOutputStream objectOutput;
     private DataInputStream dataInput;
-    private DataOutputStream dataOutput;
     private Server s;
     private Incidence i;
     private Socket socket;
@@ -22,21 +21,26 @@ public class ThreadIncidenceAdmin extends Thread {
         s = Server.getServer();
 
         try {
+            System.out.println("0");
             objectOutput = new ObjectOutputStream(socket.getOutputStream());
             objectInput = new ObjectInputStream(socket.getInputStream());
-            dataInput = new DataInputStream(socket.getInputStream());
-            dataOutput = new DataOutputStream(socket.getOutputStream());
 
 
+            System.out.println("1");
             //Get Incidence Administrator name
             String username = (String) objectInput.readObject();
             //Get Incidence linked to Incidence Administrator logged.
+            System.out.println("2 "+username);
             ArrayList<Incidence> adminIncidences = s.getAdminIncidences(username);
             // GET INCIDENCE
             i = adminIncidences.get(0);
             //Send Incidence to Administrator app
+
+            System.out.println("3");
+            System.out.println("Escribe incidencias");
             objectOutput.writeObject(adminIncidences);
 
+            System.out.println("Incidencias enviadas");
             //Start run method
             running = true;
 
@@ -52,6 +56,8 @@ public class ThreadIncidenceAdmin extends Thread {
         while (running) {
 
             try {
+                s.addIncidenceAdminToList(socket);
+
 
                 //SE LEE EL PRIMER BYTE QUE DETERMINA LA ACCIÓN A REALIZAR
                 dataInput = new DataInputStream(socket.getInputStream());
@@ -65,6 +71,7 @@ public class ThreadIncidenceAdmin extends Thread {
                         s.updateIncidence(i);
                         break;
                     case 2:
+
                         break;
                     case 3:
                         running = false;
@@ -75,7 +82,6 @@ public class ThreadIncidenceAdmin extends Thread {
                             objectOutput.close();
                             objectInput.close();
                             dataInput.close();
-                            dataOutput.close();
                             socket.close();
                         }catch (Exception e){
                         }

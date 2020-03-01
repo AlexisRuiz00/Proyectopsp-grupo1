@@ -41,8 +41,9 @@ public class ViewClient extends JFrame {
      * Creates new form ClientView
      */
     public ViewClient(ArrayList<Incidence> incidences) {
+        this.setTitle("ATCS - Client");
         initComponents(incidences);
-    }
+}
 
 
     private void initComponents(ArrayList<Incidence> incidences) {
@@ -265,6 +266,15 @@ public class ViewClient extends JFrame {
     public void updateElement(Incidence i, int id){
         listModel.add(id,i);
         listModel.remove(id);
+    }
+
+
+    public void writeInChat(String string){
+        this.txtChat.append(string);
+    }
+
+    public String getChatMessage(){
+        return this.jTextArea1.getText();
     }
 
     public void openChat(){

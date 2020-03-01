@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,18 +27,34 @@ import java.util.Date;
  */
 public class MainCliente implements ActionListener, ListSelectionListener, WindowListener {
 
+    //Main class
     public static MainCliente controller;
+
+    //Views
     private ViewClientLogin viewClientLogin;
     private ViewClient viewClient;
     private WriteIncidence writeIncidence;
-    private String mail;
-    private ArrayList<Incidence> incidences;
+
+    //Net objects
     private static Socket s = null;
     private ObjectOutputStream oop;
     private ObjectInputStream oip;
+    private DataOutputStream foutput;
+    private MulticastSocket ms;
+
+    //Other objects
+    private ArrayList<Incidence> incidences;
+    private String mail;
+    int puerto = 13300;
+    int chatPort;
+    String chatAdress;
+
+
 
     private MainCliente(){
     }
+
+
     public static MainCliente getClientController() {
         if (controller == null) {
             controller = new MainCliente();
@@ -50,13 +69,45 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
         controller.viewClientLogin.show();
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         switch (e.getActionCommand()){
 
             case "Enter": startApp();break;
-            case "openChat": viewClient.openChat();break;
+            case "openChat":
+                try {
+                    Socket tmpSocket = new Socket("localhost",puerto);
+                    foutput = new DataOutputStream(tmpSocket.getOutputStream());
+                    foutput.writeInt(35);
+                    ChatThread chatThread =
+                            new ChatThread(tmpSocket, viewClient);
+
+                    chatThread.start();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                viewClient.openChat();
+                viewClient.writeInChat("Connecting...");
+                            break;
+
+
+            case "sendChat":
+                try {
+
+                    String message = "\n"+mail+": "+viewClient.getChatMessage();
+
+                    DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                            message.length(), InetAddress.getByName(controller.chatAdress), controller.chatPort);
+
+                    ms.send(paquete);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+
+
             case "closeChat": viewClient.closeChat();break;
             case "replyIncidence": this.replyIncidence();break;
             case "newIncidence":
@@ -72,11 +123,10 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
 
     private void startApp(){
 
-        int puerto = 13300;
         try {
             //CREATE SOCKET AND SEND INT 1 TO SERVER
             s = new Socket("localhost",puerto);
-            DataOutputStream foutput = new DataOutputStream(s.getOutputStream());
+            foutput = new DataOutputStream(s.getOutputStream());
 
             ArrayList<Incidence> incidences;
             foutput.writeInt(31);
@@ -123,6 +173,14 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     }
 
 
+    public void setMs(MulticastSocket ms) {
+        controller.ms = ms;
+    }
+
+    public void confChatVariables(String address, int port){
+        this.chatAdress = address;
+        this.chatPort = port;
+    }
 
     private void replyIncidence(){
         int idx = viewClient.getSelectedIncidenceListId();
@@ -176,9 +234,6 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     public Incidence findById(int id){
         return incidences.stream().filter(i -> i.getId() == id).findFirst().get();
     }
-
-
-
     public String getHour(){
         DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
         Date date = new Date();
@@ -202,6 +257,18 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    //Unused methods
     @Override
     public void windowOpened(WindowEvent e) {
     }
