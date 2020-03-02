@@ -137,6 +137,8 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
         menuItemChat.addActionListener(MainAdmin.getAdminController());
         botonAccept.addActionListener(MainAdmin.getAdminController());
 
+
+        this.addWindowListener(MainAdmin.getAdminController());
     }
 
     public JTextArea getAreaDetail() {
@@ -274,6 +276,10 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
     public void writeInChat(String message){
         this.areaChat.append(message);
+    }
+
+    public void cleanChat(){
+        this.areaChat.setText("");
     }
 
 }

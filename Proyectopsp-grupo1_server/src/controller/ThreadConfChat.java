@@ -48,7 +48,6 @@ public class ThreadConfChat extends Thread{
 
             adminOutput.writeObject(address);
             adminOutput.writeObject(port);
-             //ENVIAR AL ADMIN
 
             } catch (IOException e) {
                 e.printStackTrace();

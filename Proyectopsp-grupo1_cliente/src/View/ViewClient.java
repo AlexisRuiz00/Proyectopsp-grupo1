@@ -132,7 +132,7 @@ public class ViewClient extends JFrame {
         txtChat.setRows(5);
         txtChat.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTextArea1.setColumns(20);
+        jTextArea1.setColumns(15);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -271,6 +271,9 @@ public class ViewClient extends JFrame {
 
     public void writeInChat(String string){
         this.txtChat.append(string);
+    }
+    public void cleanChat(){
+        this.txtChat.setText("");
     }
 
     public String getChatMessage(){

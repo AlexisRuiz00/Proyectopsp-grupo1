@@ -2,12 +2,10 @@ package controller;
 
 import View.ViewClient;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.Socket;
+import java.net.*;
 
 /**
  * This thread will manage the receivement of chat messages in the client's view
@@ -20,8 +18,9 @@ public class ChatThread extends Thread{
     private DatagramPacket recibo;
     private MulticastSocket ms;
     private ObjectInputStream oip;
-    private String chat = "";
+    private String message = "";
     private boolean running = true;
+    private boolean reading = true;
 
     public ChatThread(Socket socket, ViewClient viewClient){
 
@@ -39,41 +38,63 @@ public class ChatThread extends Thread{
     @Override
     public void run(){
 
+     while (running) {
+
+         try {
+             String address = (String) oip.readObject();
+             int port = (int) oip.readObject();
+
+             ms = new MulticastSocket(port);
+             ms.joinGroup(InetAddress.getByName(address));
+
+             MainCliente.getClientController().setMs(ms);
+             MainCliente.getClientController().confChatVariables(address, port);
+
+
+             String message = "\nClient connected";
+             DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                     message.length(), InetAddress.getByName(address), port);
+             ms.send(paquete);
+
+             running = true;
+         } catch (IOException e) {
+             e.printStackTrace();
+         } catch (ClassNotFoundException e) {
+             e.printStackTrace();
+         }
+
+
+         while (reading) {
+
+             try {
+                 recibo = new DatagramPacket(buf, buf.length);
+                 ms.receive(recibo);
+                 message = new String(recibo.getData(), 0, recibo.getLength());
+
+                 if (message.equalsIgnoreCase("disconnect")) {
+                     viewClient.writeInChat("\nAdmin "+message+"\n");
+                     reading = false;
+                 }else
+                 viewClient.writeInChat(message);
+
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
+         }
+     }
+  }
+
+
+    public void finish(){
+        this.running = false;
+        this.reading = false;
         try {
-            String address = (String) oip.readObject();
-            int port = (int) oip.readObject();
-
-            ms = new MulticastSocket(port);
-            ms.joinGroup(InetAddress.getByName(address));
-
-            MainCliente.getClientController().setMs(ms);
-            MainCliente.getClientController().confChatVariables(address,port);
-            viewClient.writeInChat("\nConected\n");
-
-            running = true;
-        } catch (IOException e) {
+            ms.setSoTimeout(0);
+            ms.close();
+        } catch (SocketException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-        while (running){
-
-            try {
-                recibo = new DatagramPacket(buf, buf.length);
-                ms.receive(recibo);
-                chat = new String(recibo.getData(), 0, recibo.getLength());
-
-                //PINTAR MENSAJE EN EL CHAT
-                viewClient.writeInChat(chat);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
-
 
 
 }

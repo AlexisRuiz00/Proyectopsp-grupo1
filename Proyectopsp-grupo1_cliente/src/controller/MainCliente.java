@@ -40,14 +40,17 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     private ObjectOutputStream oop;
     private ObjectInputStream oip;
     private DataOutputStream foutput;
+
+    //Chat objects
+    ChatThread chatThread;
     private MulticastSocket ms;
+    private int puerto = 13300;
+    private int chatPort;
+    private String chatAdress;
 
     //Other objects
     private ArrayList<Incidence> incidences;
     private String mail;
-    int puerto = 13300;
-    int chatPort;
-    String chatAdress;
 
 
 
@@ -78,10 +81,19 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             case "Enter": startApp();break;
             case "openChat":
                 try {
+
+                    if (ms!=null) {
+
+                        String message = "disconnect";
+                        DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                                message.length(), InetAddress.getByName(chatAdress), chatPort);
+                        ms.send(paquete);
+                    }
+
                     Socket tmpSocket = new Socket("localhost",puerto);
                     foutput = new DataOutputStream(tmpSocket.getOutputStream());
                     foutput.writeInt(35);
-                    ChatThread chatThread =
+                    chatThread =
                             new ChatThread(tmpSocket, viewClient);
 
                     chatThread.start();
@@ -89,6 +101,7 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
                     ex.printStackTrace();
                 }
                 viewClient.openChat();
+                viewClient.cleanChat();
                 viewClient.writeInChat("Connecting...");
                             break;
 
@@ -108,7 +121,20 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
                 break;
 
 
-            case "closeChat": viewClient.closeChat();break;
+            case "closeChat": viewClient.closeChat();
+                try {
+
+                    String message = "disconnect";
+                    DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                            message.length(), InetAddress.getByName(chatAdress), chatPort);
+                    ms.send(paquete);
+
+                    chatThread.finish();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+
             case "replyIncidence": this.replyIncidence();break;
             case "newIncidence":
                                 writeIncidence = new WriteIncidence();
@@ -252,6 +278,13 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
         try {
             oop.writeObject(new Incidence("","-1"));
             ((JFrame)e.getSource()).dispose();
+
+            String message = "disconnect";
+            DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                    message.length(), InetAddress.getByName(chatAdress), chatPort);
+            ms.send(paquete);
+            chatThread.finish();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }

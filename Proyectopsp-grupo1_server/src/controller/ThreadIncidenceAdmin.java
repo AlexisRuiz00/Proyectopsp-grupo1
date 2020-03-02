@@ -21,26 +21,21 @@ public class ThreadIncidenceAdmin extends Thread {
         s = Server.getServer();
 
         try {
-            System.out.println("0");
             objectOutput = new ObjectOutputStream(socket.getOutputStream());
             objectInput = new ObjectInputStream(socket.getInputStream());
 
-
-            System.out.println("1");
             //Get Incidence Administrator name
             String username = (String) objectInput.readObject();
-            //Get Incidence linked to Incidence Administrator logged.
-            System.out.println("2 "+username);
-            ArrayList<Incidence> adminIncidences = s.getAdminIncidences(username);
-            // GET INCIDENCE
-            i = adminIncidences.get(0);
-            //Send Incidence to Administrator app
 
-            System.out.println("3");
-            System.out.println("Escribe incidencias");
+            //Get Incidence linked to Incidence Administrator logged.
+            ArrayList<Incidence> adminIncidences = s.getAdminIncidences(username);
+
+            // GET INCIDENCE
+            //i = adminIncidences.get(0);
+
+            //Send Incidence to Administrator app
             objectOutput.writeObject(adminIncidences);
 
-            System.out.println("Incidencias enviadas");
             //Start run method
             running = true;
 
@@ -62,7 +57,6 @@ public class ThreadIncidenceAdmin extends Thread {
                 //SE LEE EL PRIMER BYTE QUE DETERMINA LA ACCIÓN A REALIZAR
                 dataInput = new DataInputStream(socket.getInputStream());
                 int action = dataInput.readInt();
-                System.out.println(action);
 
                 switch (action) {
 
@@ -70,15 +64,18 @@ public class ThreadIncidenceAdmin extends Thread {
                         // Update the incidence
                         s.updateIncidence(i);
                         break;
-                    case 2:
 
+                    case 2:
+                        s.addIncidenceAdminToList(socket);
                         break;
+
                     case 3:
                         running = false;
-                        s.writeCloseSystemAdmin();
+                        s.writeCloseIncidenceAdmin();
 
                         try {
 
+                            s.removeIncidenceAdminFromList(socket);
                             objectOutput.close();
                             objectInput.close();
                             dataInput.close();

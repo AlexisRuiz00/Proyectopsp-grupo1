@@ -2,6 +2,8 @@ package View;
 
 import controller.MainCliente;
 
+import javax.swing.*;
+
 /**
  * @author David and Alexis
  */
@@ -30,7 +32,7 @@ public class WriteIncidence extends javax.swing.JFrame {
         newIncidenceBody = new javax.swing.JTextArea();
         btnSendNewIncidence = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Incidence:");
 

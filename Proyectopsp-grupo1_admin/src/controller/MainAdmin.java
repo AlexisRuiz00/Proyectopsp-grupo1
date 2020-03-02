@@ -51,6 +51,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     //Chat net objects
     private String address;
     private int port;
+    ThreadAdminChat threadAdminChat;
 
     //Mail objects
     private mainMail mail;
@@ -420,7 +421,8 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             viewAdminLogin.dispose();
                             viewIncidenceAdmin.setVisible(true);
                             viewIncidenceAdmin.setResizable(false);
-                            ThreadAdminChat threadAdminChat = new ThreadAdminChat(s,viewIncidenceAdmin);
+
+                            threadAdminChat = new ThreadAdminChat(s,viewIncidenceAdmin);
                             threadAdminChat.start();
 
                             break;
@@ -537,8 +539,19 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     @Override
     public void windowClosing(WindowEvent windowEvent) {
         try {
+            threadAdminChat.finishThread();
             foutput.writeInt(3);
-        } catch (IOException e) { }
+            //viewIncidenceAdmin.dispose();
+
+
+            String message = "disconnect";
+            DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                    message.length(), InetAddress.getByName(address), port);
+            ms.send(paquete);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -627,6 +640,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     public void setMs(MulticastSocket ms) {
         this.ms = ms;
     }
+
 
     public void confChatSocket(String address, int port){
         this.port = port;

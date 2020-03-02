@@ -101,7 +101,6 @@ public class Server extends JFrame {
         ServerSocket socket = new ServerSocket(13300);
 
         while (true) {
-            System.out.println("Lee");
             Socket recieve = socket.accept();
             DataInputStream read = new DataInputStream(recieve.getInputStream());
 
@@ -111,7 +110,6 @@ public class Server extends JFrame {
             // HAY QUE QUITARLOS DEL ARRAYLIST ADMIN.
 
             int rol = read.readInt();
-            System.out.println("Lee "+rol);
 
             switch (rol) {
 
@@ -125,7 +123,7 @@ public class Server extends JFrame {
 
                 //Client opens chat
                 case 35:
-                    s.getLogArea().append(" - Configurating chat...\n");
+                    s.getLogArea().append(s.getHour() + " - Configurating chat...\n");
                     ThreadConfChat tcc = new ThreadConfChat(recieve);
                     tcc.start();
                     break;
@@ -168,6 +166,11 @@ public class Server extends JFrame {
         s.admins.add(admin);
         notifyAll();
     }
+
+    public synchronized void removeIncidenceAdminFromList(Socket admin){
+        s.admins.remove(admin);
+    }
+
 
     public synchronized ArrayList<Incidence> get(String mail) {
         // CONSULTA DE LA BASE DE DATOS PARA LLENAR LA LISTA DE INCIDENCIAS
@@ -288,6 +291,7 @@ public class Server extends JFrame {
     public void writeCloseSystemAdmin() {
         s.getLogArea().append(getHour() + " - System admin disconnected\n");
     }
+
 
     public ArrayList<IncidenceAdmin>getIncidenceAdmins(){
         return s.model.getIncidenceAdmins();
