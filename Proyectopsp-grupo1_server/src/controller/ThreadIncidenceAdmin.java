@@ -31,7 +31,7 @@ public class ThreadIncidenceAdmin extends Thread {
             ArrayList<Incidence> adminIncidences = s.getAdminIncidences(username);
 
             // GET INCIDENCE
-            //i = adminIncidences.get(0);
+
 
             //Send Incidence to Administrator app
             objectOutput.writeObject(adminIncidences);

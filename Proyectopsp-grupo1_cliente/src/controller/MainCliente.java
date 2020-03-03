@@ -286,7 +286,7 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             chatThread.finish();
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
     }
 

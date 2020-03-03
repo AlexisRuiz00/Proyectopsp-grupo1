@@ -2,10 +2,7 @@ package controller;
 
 import view.ViewIncidenceAdmin;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.*;
 
 /**
@@ -27,31 +24,31 @@ public class ThreadAdminChat extends Thread {
     private int port;
 
 
-    public ThreadAdminChat(Socket socket,ViewIncidenceAdmin viewIncidenceAdmin){
+    public ThreadAdminChat(Socket socket, ViewIncidenceAdmin viewIncidenceAdmin) {
         this.socket = socket;
         this.viewIncidenceAdmin = viewIncidenceAdmin;
-        recibo  = new DatagramPacket(recibidos,recibidos.length);
+        recibo = new DatagramPacket(recibidos, recibidos.length);
     }
 
 
     @Override
-    public void run(){
-        while (running){
+    public void run() {
+        while (running) {
             try {
-                ois =  new ObjectInputStream(socket.getInputStream());
+                ois = new ObjectInputStream(socket.getInputStream());
                 foutput = new DataOutputStream(socket.getOutputStream());
 
                 address = (String) ois.readObject();
                 port = (int) ois.readObject();
 
 
-                ms= new MulticastSocket(port);
+                ms = new MulticastSocket(port);
                 ms.joinGroup(InetAddress.getByName(address));
                 MainAdmin.getAdminController().setMs(ms);
-                MainAdmin.getAdminController().confChatSocket(address,port);
+                MainAdmin.getAdminController().confChatSocket(address, port);
 
 
-                String message = "\nAdmin " +MainAdmin.getAdminController().getUsername()+ " Connected";
+                String message = "\nAdmin " + MainAdmin.getAdminController().getUsername() + " Connected";
                 DatagramPacket paquete = new DatagramPacket(message.getBytes(),
                         message.length(), InetAddress.getByName(address), port);
                 ms.send(paquete);
@@ -65,37 +62,32 @@ public class ThreadAdminChat extends Thread {
                     message = new String(recibo.getData(), 0, recibo.getLength());
 
                     if (message.equalsIgnoreCase("disconnect")) {
-                        viewIncidenceAdmin.writeInChat("\nClient "+message+"\n");
+                        viewIncidenceAdmin.writeInChat("\nClient " + message + "\n");
                         foutput.writeInt(2);
                         reading = false;
 
-                    }else
-                    viewIncidenceAdmin.writeInChat(message);
+                    } else
+                        viewIncidenceAdmin.writeInChat(message);
                 }
 
-                ms.close();
 
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+            } catch (IOException | ClassNotFoundException eof) {
+
             }
         }
 
-            try {
-                foutput.flush();
-                foutput.close();
-                ois.close();
-                ms.setSoTimeout(0);
-                ms.close();
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
     }
 
 
-    public void finishThread(){
+    public void finishThread() {
         this.running = false;
         this.reading = false;
+
+        try {
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

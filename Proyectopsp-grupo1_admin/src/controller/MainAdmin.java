@@ -556,18 +556,25 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
     @Override
     public void windowClosing(WindowEvent windowEvent) {
         try {
-            threadAdminChat.finishThread();
-            foutput.writeInt(3);
-            //viewIncidenceAdmin.dispose();
 
-
-            String message = "disconnect";
-            DatagramPacket paquete = new DatagramPacket(message.getBytes(),
-                    message.length(), InetAddress.getByName(address), port);
-            ms.send(paquete);
-
-        } catch (IOException e) {
+            if (ms!=null) {
+                String message = "disconnect";
+                DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                        message.length(), InetAddress.getByName(address), port);
+                ms.send(paquete);
+            }
+        } catch (IOException  e) {
             e.printStackTrace();
+        }
+
+        try {
+            threadAdminChat.finishThread();
+
+            foutput.writeInt(3);
+            s.close();
+            ms.close();
+        }catch (Exception e){
+
         }
     }
 

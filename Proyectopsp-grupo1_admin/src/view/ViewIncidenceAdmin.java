@@ -131,6 +131,8 @@ public class ViewIncidenceAdmin extends javax.swing.JFrame {
 
         setJMenuBar(menuBarUno);
 
+
+        listIncidences.setName("listIncidences");
         listIncidences.addListSelectionListener(MainAdmin.getAdminController());
 
         menuItemChat.setActionCommand("openChat");

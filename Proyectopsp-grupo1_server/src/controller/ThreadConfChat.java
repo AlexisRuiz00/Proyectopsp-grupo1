@@ -11,7 +11,6 @@ import java.net.Socket;
 public class ThreadConfChat extends Thread{
 
     private Server s;
-    private boolean running;
 
     private String address;
     private int port;
