@@ -237,7 +237,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                         try {
 
                             BufferedInputStream in = new BufferedInputStream(new FileInputStream(selectedFile));
-                            if (client.storeFile(selectedFile.getName(), in)) {
+                            if (client.storeFile(viewFtp.getSelectedDirectory()+selectedFile.getName(), in)) {
 
                                 JOptionPane.showMessageDialog(null,
                                         "File uploaded successfuly",
@@ -255,6 +255,8 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                             e.printStackTrace();
                         }
                     }
+
+                    viewFtp.chargeFileList(client.listFiles("."));
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -316,6 +318,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                                 "ERROR",
                                 JOptionPane.WARNING_MESSAGE);
                     }
+                    viewFtp.chargeFileList(client.listFiles("."));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -336,6 +339,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                                 "ERROR",
                                 JOptionPane.WARNING_MESSAGE);
                     }
+                    viewFtp.chargeFileList(client.listFiles("."));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -360,6 +364,7 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
                                 "ERROR",
                                 JOptionPane.WARNING_MESSAGE);
                     }
+                    viewFtp.chargeFileList(client.listFiles("."));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -530,25 +535,28 @@ public class MainAdmin implements ActionListener, WindowListener, ListSelectionL
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        switch (((JList) e.getSource()).getName()){
-            case "listSystemAdmin":
-                viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>) e.getSource()).getSelectedValue());
-            break;
+        if(!((JList) e.getSource()).isSelectionEmpty()) {
+
+            switch (((JList) e.getSource()).getName()) {
+                case "listSystemAdmin":
+                    viewSystemAdmin.setAdminDetails(((JList<IncidenceAdmin>) e.getSource()).getSelectedValue());
+                    break;
 
 
-            case "listIncidences":
-            viewIncidenceAdmin.setAreaDetail(((JList<Incidence>) e.getSource()).getSelectedValue().getBody());
-            break;
+                case "listIncidences":
+                    viewIncidenceAdmin.setAreaDetail(((JList<Incidence>) e.getSource()).getSelectedValue().getBody());
+                    break;
 
-            case "fileList":
-            String tmp = ((JList<String>) e.getSource()).getSelectedValue();
-            tmp = tmp.substring(7);
+                case "fileList":
+                    String tmp = ((JList<String>) e.getSource()).getSelectedValue();
+                    tmp = tmp.substring(7);
 
-            try {
-                viewFtp.chargeDetailList(client.listFiles(tmp));
-            } catch (IOException ex) {
+                    try {
+                        viewFtp.chargeDetailList(client.listFiles(tmp));
+                    } catch (IOException ex) {
+                    }
+                    break;
             }
-            break;
         }
     }
 

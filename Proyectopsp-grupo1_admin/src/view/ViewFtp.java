@@ -157,6 +157,22 @@ public class ViewFtp extends javax.swing.JFrame {
         }
     }
 
+    public void chargeFileList(FTPFile[] files){
+
+        fileList.clearSelection();
+        listModel.removeAllElements();
+
+        for (FTPFile f : files) {
+            String type;
+            if (f.getType() == 1) {
+                type = "(Dir ) ";
+            } else
+                type = "(File) ";
+
+            listModel.addElement(type + f.getName());
+        }
+    }
+
     public String getSelectedFile(){
         String file = null;
 
@@ -175,6 +191,16 @@ public class ViewFtp extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         return file;
+    }
+
+
+    public String getSelectedDirectory() {
+        String dir = "/";
+
+        if (fileList.getSelectedValue().substring(1, 5).equals("Dir "))
+            dir = fileList.getSelectedValue().substring(7) + "/";
+
+        return dir;
     }
 
 }
