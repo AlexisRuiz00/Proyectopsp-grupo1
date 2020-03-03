@@ -164,7 +164,9 @@ public class ViewFtp extends javax.swing.JFrame {
 
         if (fileList.getSelectedValue().substring(1,5).equals("Dir ")){
             if (fileDetail.getSelectedValue()!=null)
-            file =  fileList.getSelectedValue().substring(7)+"/"+fileDetail.getSelectedValue().substring(7);
+                file =  fileList.getSelectedValue().substring(7)+"/"+fileDetail.getSelectedValue().substring(7);
+            else
+                file = fileList.getSelectedValue().substring(7);
 
         }else
                 file = fileList.getSelectedValue().substring(7);
