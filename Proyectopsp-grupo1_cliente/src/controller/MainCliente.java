@@ -84,10 +84,12 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
 
                     if (ms!=null) {
 
-                        String message = "disconnect";
-                        DatagramPacket paquete = new DatagramPacket(message.getBytes(),
-                                message.length(), InetAddress.getByName(chatAdress), chatPort);
-                        ms.send(paquete);
+                        if (!ms.isClosed()) {
+                            String message = "disconnect";
+                            DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                                    message.length(), InetAddress.getByName(chatAdress), chatPort);
+                            ms.send(paquete);
+                        }
                     }
 
                     Socket tmpSocket = new Socket("localhost",puerto);
@@ -127,6 +129,7 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
                     String message = "disconnect";
                     DatagramPacket paquete = new DatagramPacket(message.getBytes(),
                             message.length(), InetAddress.getByName(chatAdress), chatPort);
+                    if (!ms.isClosed())
                     ms.send(paquete);
 
                     chatThread.finish();
