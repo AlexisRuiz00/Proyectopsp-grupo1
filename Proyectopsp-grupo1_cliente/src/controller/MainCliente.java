@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,18 +27,37 @@ import java.util.Date;
  */
 public class MainCliente implements ActionListener, ListSelectionListener, WindowListener {
 
+    //Main class
     public static MainCliente controller;
+
+    //Views
     private ViewClientLogin viewClientLogin;
     private ViewClient viewClient;
     private WriteIncidence writeIncidence;
-    private String mail;
-    private ArrayList<Incidence> incidences;
+
+    //Net objects
     private static Socket s = null;
     private ObjectOutputStream oop;
     private ObjectInputStream oip;
+    private DataOutputStream foutput;
+
+    //Chat objects
+    ChatThread chatThread;
+    private MulticastSocket ms;
+    private int puerto = 13300;
+    private int chatPort;
+    private String chatAdress;
+
+    //Other objects
+    private ArrayList<Incidence> incidences;
+    private String mail;
+
+
 
     private MainCliente(){
     }
+
+
     public static MainCliente getClientController() {
         if (controller == null) {
             controller = new MainCliente();
@@ -50,14 +72,69 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
         controller.viewClientLogin.show();
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         switch (e.getActionCommand()){
 
             case "Enter": startApp();break;
-            case "openChat": viewClient.openChat();break;
-            case "closeChat": viewClient.closeChat();break;
+            case "openChat":
+                try {
+
+                    if (ms!=null) {
+
+                        String message = "disconnect";
+                        DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                                message.length(), InetAddress.getByName(chatAdress), chatPort);
+                        ms.send(paquete);
+                    }
+
+                    Socket tmpSocket = new Socket("localhost",puerto);
+                    foutput = new DataOutputStream(tmpSocket.getOutputStream());
+                    foutput.writeInt(35);
+                    chatThread =
+                            new ChatThread(tmpSocket, viewClient);
+
+                    chatThread.start();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                viewClient.openChat();
+                viewClient.cleanChat();
+                viewClient.writeInChat("Connecting...");
+                            break;
+
+
+            case "sendChat":
+                try {
+
+                    String message = "\n"+mail+": "+viewClient.getChatMessage();
+
+                    DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                            message.length(), InetAddress.getByName(controller.chatAdress), controller.chatPort);
+
+                    ms.send(paquete);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+
+
+            case "closeChat": viewClient.closeChat();
+                try {
+
+                    String message = "disconnect";
+                    DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                            message.length(), InetAddress.getByName(chatAdress), chatPort);
+                    ms.send(paquete);
+
+                    chatThread.finish();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+
             case "replyIncidence": this.replyIncidence();break;
             case "newIncidence":
                                 writeIncidence = new WriteIncidence();
@@ -72,11 +149,10 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
 
     private void startApp(){
 
-        int puerto = 13300;
         try {
             //CREATE SOCKET AND SEND INT 1 TO SERVER
             s = new Socket("localhost",puerto);
-            DataOutputStream foutput = new DataOutputStream(s.getOutputStream());
+            foutput = new DataOutputStream(s.getOutputStream());
 
             ArrayList<Incidence> incidences;
             foutput.writeInt(31);
@@ -123,6 +199,14 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     }
 
 
+    public void setMs(MulticastSocket ms) {
+        controller.ms = ms;
+    }
+
+    public void confChatVariables(String address, int port){
+        this.chatAdress = address;
+        this.chatPort = port;
+    }
 
     private void replyIncidence(){
         int idx = viewClient.getSelectedIncidenceListId();
@@ -176,9 +260,6 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
     public Incidence findById(int id){
         return incidences.stream().filter(i -> i.getId() == id).findFirst().get();
     }
-
-
-
     public String getHour(){
         DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
         Date date = new Date();
@@ -197,11 +278,30 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
         try {
             oop.writeObject(new Incidence("","-1"));
             ((JFrame)e.getSource()).dispose();
+
+            String message = "disconnect";
+            DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                    message.length(), InetAddress.getByName(chatAdress), chatPort);
+            ms.send(paquete);
+            chatThread.finish();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    //Unused methods
     @Override
     public void windowOpened(WindowEvent e) {
     }

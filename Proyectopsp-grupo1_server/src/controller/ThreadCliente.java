@@ -51,10 +51,9 @@ public class ThreadCliente extends Thread{
                 // Añadimos el email a la cola
                 s.getCola().add(i.getMail());
                 this.email = i.getMail();
-                System.out.println(email);
+
 
                 while (running) {
-
                     switch (i.getType()){
 
                         case "-1" :

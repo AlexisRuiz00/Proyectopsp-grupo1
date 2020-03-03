@@ -2,7 +2,6 @@ package controller;
 
 import java.io.*;
 import java.net.InetAddress;
-import java.net.MulticastSocket;
 import java.net.Socket;
 
 /**
@@ -14,27 +13,18 @@ public class ThreadConfChat extends Thread{
     private Server s;
     private boolean running;
 
-    private MulticastSocket socketPactado;
-    private InetAddress grupo;
-    private int puerto;
-    private Socket cliente;
-    private ObjectOutputStream salidaCliente;
-    private ObjectOutputStream salidaAdmin;
+    private String address;
+    private int port;
+    private Socket client;
+
+    private ObjectOutputStream clientOutput;
+    private ObjectOutputStream adminOutput;
 
 
 
     public ThreadConfChat(Socket cliente) {
         s = Server.getServer();
-        this.cliente = cliente;
-
-        try {
-            salidaCliente = new ObjectOutputStream(cliente.getOutputStream());
-            salidaAdmin = new ObjectOutputStream(s.getAdminForChat().getOutputStream());
-            run();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.client = cliente;
     }
 
 
@@ -45,13 +35,19 @@ public class ThreadConfChat extends Thread{
      */
     public void run() {
          try {
-            grupo = InetAddress.getByName(s.getDireccion());
-            puerto = s.getPuerto();
-            MulticastSocket ms = new MulticastSocket(puerto);
-            ms.joinGroup(grupo);
 
-            salidaAdmin.writeObject(ms);
-            salidaCliente.writeObject(ms);
+            clientOutput = new ObjectOutputStream(client.getOutputStream());
+            Socket admin = s.getAdminForChat();
+            adminOutput = new ObjectOutputStream(admin.getOutputStream());
+
+            address = s.getDireccion();
+            port = s.getPuerto();
+
+            clientOutput.writeObject(address);
+            clientOutput.writeObject(port);
+
+            adminOutput.writeObject(address);
+            adminOutput.writeObject(port);
 
             } catch (IOException e) {
                 e.printStackTrace();

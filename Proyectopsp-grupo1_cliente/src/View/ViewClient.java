@@ -41,8 +41,9 @@ public class ViewClient extends JFrame {
      * Creates new form ClientView
      */
     public ViewClient(ArrayList<Incidence> incidences) {
+        this.setTitle("ATCS - Client");
         initComponents(incidences);
-    }
+}
 
 
     private void initComponents(ArrayList<Incidence> incidences) {
@@ -131,7 +132,7 @@ public class ViewClient extends JFrame {
         txtChat.setRows(5);
         txtChat.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTextArea1.setColumns(20);
+        jTextArea1.setColumns(15);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -265,6 +266,18 @@ public class ViewClient extends JFrame {
     public void updateElement(Incidence i, int id){
         listModel.add(id,i);
         listModel.remove(id);
+    }
+
+
+    public void writeInChat(String string){
+        this.txtChat.append(string);
+    }
+    public void cleanChat(){
+        this.txtChat.setText("");
+    }
+
+    public String getChatMessage(){
+        return this.jTextArea1.getText();
     }
 
     public void openChat(){

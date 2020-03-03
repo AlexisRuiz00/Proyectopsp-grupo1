@@ -30,6 +30,7 @@ public class ViewSystemAdmin extends JFrame {
     private JMenu menu;
     private JMenuItem menuFTP;
     private DefaultListModel<IncidenceAdmin>  listModel;
+    private JMenuItem menuCorreo;
 
 
     public ViewSystemAdmin(ArrayList<IncidenceAdmin> incidenceAdmins) {
@@ -63,6 +64,7 @@ public class ViewSystemAdmin extends JFrame {
         fieldMail.setEditable(false);
         fieldPhone.setEditable(false);
         fieldUsername.setEditable(false);
+        menuCorreo = new JMenuItem();
 
         this.setResizable(false);
 
@@ -104,10 +106,16 @@ public class ViewSystemAdmin extends JFrame {
         jMenuBar1.add(menu);
         menu.setText("File");
         menuFTP.setText("FTP");
+        menuCorreo.setText("Correo");
         menu.add(menuFTP);
+        menu.add(menuCorreo);
 
         menuFTP.setActionCommand("FTP");
         menuFTP.addActionListener(MainAdmin.getAdminController());
+
+        menuCorreo.setActionCommand("Correo");
+        menuCorreo.addActionListener(MainAdmin.getAdminController());
+
 
         setJMenuBar(jMenuBar1);
 
