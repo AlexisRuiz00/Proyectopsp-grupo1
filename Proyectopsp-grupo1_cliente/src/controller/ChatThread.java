@@ -89,8 +89,12 @@ public class ChatThread extends Thread{
         this.running = false;
         this.reading = false;
         try {
-            ms.setSoTimeout(0);
-            ms.close();
+            if (ms!=null) {
+                if (!ms.isClosed()) {
+                    ms.setSoTimeout(0);
+                    ms.close();
+                }
+            }
         } catch (SocketException e) {
             e.printStackTrace();
         }

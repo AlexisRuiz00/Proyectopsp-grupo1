@@ -307,12 +307,6 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
 
 
 
-
-
-
-
-
-
     //Unused methods
     @Override
     public void windowOpened(WindowEvent e) {
