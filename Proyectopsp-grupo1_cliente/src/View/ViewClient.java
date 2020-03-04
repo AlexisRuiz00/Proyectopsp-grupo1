@@ -284,6 +284,6 @@ public class ViewClient extends JFrame {
         this.resize(760,getHeight());
     }
     public void closeChat(){
-        this.resize(516,getHeight());
+        this.resize(511,getHeight());
     }
 }

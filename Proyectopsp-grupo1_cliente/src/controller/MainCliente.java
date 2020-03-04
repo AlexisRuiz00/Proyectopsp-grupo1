@@ -126,11 +126,15 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             case "closeChat": viewClient.closeChat();
                 try {
 
-                    String message = "disconnect";
-                    DatagramPacket paquete = new DatagramPacket(message.getBytes(),
-                            message.length(), InetAddress.getByName(chatAdress), chatPort);
-                    if (!ms.isClosed())
-                    ms.send(paquete);
+                    if (ms!=null) {
+                        if (!ms.isClosed()) {
+                            String message = "disconnect";
+                            DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                                    message.length(), InetAddress.getByName(chatAdress), chatPort);
+
+                            ms.send(paquete);
+                        }
+                    }
 
                     chatThread.finish();
                 } catch (IOException e1) {
@@ -282,11 +286,16 @@ public class MainCliente implements ActionListener, ListSelectionListener, Windo
             oop.writeObject(new Incidence("","-1"));
             ((JFrame)e.getSource()).dispose();
 
-            String message = "disconnect";
-            DatagramPacket paquete = new DatagramPacket(message.getBytes(),
-                    message.length(), InetAddress.getByName(chatAdress), chatPort);
-            ms.send(paquete);
-            chatThread.finish();
+            if (ms!=null) {
+                if (!ms.isClosed()) {
+                    String message = "disconnect";
+                    DatagramPacket paquete = new DatagramPacket(message.getBytes(),
+                            message.length(), InetAddress.getByName(chatAdress), chatPort);
+                    ms.send(paquete);
+                }
+            }
+                if (chatThread!=null)
+                chatThread.finish();
 
         } catch (IOException ex) {
 
